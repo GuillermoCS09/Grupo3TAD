@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'barra_inferior.dart';
 
-//Proyecto Grupo 3 - Desarrollo Movil
+//Proyecto Grupo 3 - Taller de Desarrollo Movil
 
 void main() {
   runApp(const LoginApp());
