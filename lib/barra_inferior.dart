@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
           centerTitle: true,
-          backgroundColor: Color(0xFF6C181B),
+          backgroundColor: const Color(0xFF6C181B),
         ),
         body: paginas[paginaActual],
         bottomNavigationBar: BottomNavigationBar(
@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
             });
           },
           currentIndex: paginaActual,
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Inicio',
@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
               label: 'Perfil',
             ),
           ],
-          selectedItemColor: Color(0xFF6C181B),
+          selectedItemColor: const Color(0xFF6C181B),
         ),
       ),
     );

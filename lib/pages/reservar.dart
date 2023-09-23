@@ -41,17 +41,17 @@ Widget salones(context){
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
           buildCenteredContainer(
               'Aula 101\nNuevo Pabellón\n8:00 - 10:00 AM\nDisponible',
               'images/salon1.jpg', context
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           buildCenteredContainer(
               'Aula 102\nNuevo Pabellón\n8:00 - 10:00 AM\nDisponible',
               'images/salon4.jpg', context
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           buildCenteredContainer(
               'Aula 103\nNuevo Pabellón\n8:00 - 10:00 AM\nDisponible',
               'images/salon4.jpg', context
@@ -86,7 +86,7 @@ Widget buildCenteredContainer(String text, String url, context) {
             child: Text(
               text,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14.0,
                 color: Colors.black,
               ),
@@ -94,7 +94,7 @@ Widget buildCenteredContainer(String text, String url, context) {
           ),
         ),
         Container(
-          margin: EdgeInsets.only(right: 30, top: 10), // Ajusta los valores de left y top según tus necesidades
+          margin: const EdgeInsets.only(right: 30, top: 10), // Ajusta los valores de left y top según tus necesidades
           child: ElevatedButton(
             onPressed: () {
               _showPopup(context);
@@ -115,17 +115,17 @@ void _showPopup(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('PROCESO TERMINADO',style: TextStyle(
+        title: const Text('PROCESO TERMINADO',style: TextStyle(
           color: Colors.red,),),
 
 
-        content: Text('Su reserva ha sido procesada con éxito'),
+        content: const Text('Su reserva ha sido procesada con éxito'),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text(
+            child: const Text(
               'Listo',
               style: TextStyle(
                 color: Colors.red, // Color rojo para el texto del botón

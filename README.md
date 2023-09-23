@@ -2,6 +2,13 @@
 
 A new Flutter project.
 
+Grupo 3
+Integrantes:
+- Cuentas Santaria, Guillermo
+- Remon Chavarria, Luis Angelo
+- Rodriguez Huamani, Lian Miguel
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

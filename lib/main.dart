@@ -18,12 +18,14 @@ class LoginApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: Scaffold(body: MyHomeLoginApp())
+        home: const Scaffold(body: MyHomeLoginApp())
     );
   }
 }
 
 class MyHomeLoginApp extends StatefulWidget {
+  const MyHomeLoginApp({super.key});
+
   @override
   State<MyHomeLoginApp> createState() => _MyHomePageState();
 }
@@ -33,18 +35,18 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50), // Margen horizontal con respecto a los bordes de la pantalla
+      margin: const EdgeInsets.symmetric(horizontal: 50), // Margen horizontal con respecto a los bordes de la pantalla
       child: Form(
         key: _formKey,
         child: Column(
           children: <Widget>[
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Image.asset(
               'images/Logo_SM.png',
               width: 280,
               height: 280,
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             TextFormField(
               decoration: InputDecoration(
                 labelText: 'Correo Institucional',
@@ -58,7 +60,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                 }
               },
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             TextFormField(
               obscureText: true,
               decoration: InputDecoration(
@@ -79,7 +81,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    runApp(MyApp()); //Aca llama a la pestaña inicio
+                    runApp(const MyApp()); //Aca llama a la pestaña inicio
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -89,7 +91,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                   ),
                   backgroundColor: Color(0xFF6C181B),
                 ),
-                child: Text(
+                child: const Text(
                   'INICIAR SESIÓN',
                   style: TextStyle(
                     color: Colors.white,
