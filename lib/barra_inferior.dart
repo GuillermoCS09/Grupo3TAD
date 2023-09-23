@@ -4,17 +4,17 @@ import 'pages/perfil.dart';
 import 'pages/reservar.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MyAppBarra());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class MyAppBarra extends StatefulWidget {
+  const MyAppBarra({super.key});
 
   @override
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyAppBarra> {
   int paginaActual = 0;
 
   List<Widget> paginas = [
