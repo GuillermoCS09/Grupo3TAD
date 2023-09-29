@@ -28,6 +28,12 @@ class MyHomeLoginApp extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomeLoginApp> {
   final _formKey = GlobalKey<FormState>();
+  static final RegExp _emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+  bool _esEmail(String str)
+  {
+    return _emailRegExp.hasMatch(str.toLowerCase());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,8 +112,8 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                 ),
               ),
               validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Ingrese su correo institucional';
+                if (!_esEmail(value.toString())){
+                  return 'Ingrese su correo correctamente';
                 }
               },
             ),
@@ -131,7 +137,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    runApp(const LoginApp()); //Aca llama a la pestaña inicio
+                    runApp(const MyAppBarra()); //Aca llama a la pestaña inicio
                   }
                 },
                 style: ElevatedButton.styleFrom(

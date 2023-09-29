@@ -87,6 +87,18 @@ flutter:
         - asset: assets/fonts/RobotoSlab/RobotoSlab-Medium.ttf
           style: italic
         - asset: assets/fonts/RobotoSlab/RobotoSlab-Regular.ttf
+    - family: Outfit
+      fonts:
+        - asset: assets/fonts/Outfit/Outfit-Bold.ttf
+        - asset: assets/fonts/Outfit/Outfit-Medium.ttf
+          style: italic
+        - asset: assets/fonts/Outfit/Outfit-Regular.ttf
+    - family: ReadexPro
+      fonts:
+        - asset: assets/fonts/ReadexPro/ReadexPro-Bold.ttf
+        - asset: assets/fonts/ReadexPro/ReadexPro-Medium.ttf
+          style: italic
+        - asset: assets/fonts/ReadexPro/ReadexPro-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
