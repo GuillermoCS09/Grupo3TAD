@@ -1,165 +1,20 @@
 import 'package:flutter/material.dart';
-import 'barra_inferior.dart';
+import 'splash.dart';
 
 //Proyecto Grupo 3 - Taller de Desarrollo Movil
 
 void main() {
-  runApp(const LoginApp());
+  runApp(const MyApp());
 }
 
-class LoginApp extends StatelessWidget {
-  const LoginApp({super.key});
-
-  // This widget is the root of your application.
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Proyecto ',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const Scaffold(body: MyHomeLoginApp())
-    );
-  }
-}
-
-class MyHomeLoginApp extends StatefulWidget {
-  const MyHomeLoginApp({super.key});
-
-  @override
-  State<MyHomeLoginApp> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomeLoginApp> {
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 50),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            //const SizedBox(height: 40),
-            //Center(
-              Container(
-                width: double.infinity,
-                height: 400,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF4B39EF), // #4B39EF
-                      Color(0xFFFF5963), // #FF5963
-                      Color(0xFFEE8B60), // #EE8B60
-                    ],
-                    stops: [0, 0.5, 1],
-                    begin: AlignmentDirectional(-1, -1),
-                    end: AlignmentDirectional(1, 1),
-                  ),
-                ),
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0x00FFFFFF),
-                        Colors.white60,
-                      ],
-                      stops: [0, 1],
-                      begin: AlignmentDirectional(0, -1),
-                      end: AlignmentDirectional(0, 1),
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 170,
-                        height: 170,
-                        decoration: BoxDecoration(
-                          color: Colors.white60,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Align(
-                          alignment: AlignmentDirectional(0.00, 0.00),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              'assets/images/logo_unmsm_morado.png',
-                              width: 118,
-                              height: 138,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            //),
-            const SizedBox(height: 40),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Correo Institucional',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Ingrese su correo institucional';
-                }
-              },
-            ),
-            const SizedBox(height: 30),
-            TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Contraseña',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Ingrese su contraseña';
-                }
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 120),
-              child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    runApp(const MyApp()); //Aca llama a la pestaña inicio
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(500, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  backgroundColor: Color(0xFF6C181B), // Color personalizado
-                ),
-                child: const Text(
-                  'INICIAR SESIÓN',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Lato',
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      title: 'Proyecto Grupo 3',
+      home:  MyAppSplash(),
     );
   }
 }
