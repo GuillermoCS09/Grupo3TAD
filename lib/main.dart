@@ -34,20 +34,75 @@ class MyHomeLoginApp extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomeLoginApp> {
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 50), // Margen horizontal con respecto a los bordes de la pantalla
+      margin: const EdgeInsets.symmetric(horizontal: 50),
       child: Form(
         key: _formKey,
         child: Column(
           children: <Widget>[
-            const SizedBox(height: 40),
-            Image.asset(
-              'images/Logo_SM.png',
-              width: 280,
-              height: 280,
-            ),
+            //const SizedBox(height: 40),
+            //Center(
+              Container(
+                width: double.infinity,
+                height: 400,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF4B39EF), // #4B39EF
+                      Color(0xFFFF5963), // #FF5963
+                      Color(0xFFEE8B60), // #EE8B60
+                    ],
+                    stops: [0, 0.5, 1],
+                    begin: AlignmentDirectional(-1, -1),
+                    end: AlignmentDirectional(1, 1),
+                  ),
+                ),
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0x00FFFFFF),
+                        Colors.white60,
+                      ],
+                      stops: [0, 1],
+                      begin: AlignmentDirectional(0, -1),
+                      end: AlignmentDirectional(0, 1),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 170,
+                        height: 170,
+                        decoration: BoxDecoration(
+                          color: Colors.white60,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Align(
+                          alignment: AlignmentDirectional(0.00, 0.00),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.asset(
+                              'assets/images/logo_unmsm_morado.png',
+                              width: 118,
+                              height: 138,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            //),
             const SizedBox(height: 40),
             TextFormField(
               decoration: InputDecoration(
@@ -56,8 +111,8 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              validator: (value){
-                if(value!.isEmpty){
+              validator: (value) {
+                if (value!.isEmpty) {
                   return 'Ingrese su correo institucional';
                 }
               },
@@ -71,13 +126,12 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              validator: (value){
-                if(value!.isEmpty){
+              validator: (value) {
+                if (value!.isEmpty) {
                   return 'Ingrese su contraseña';
                 }
               },
             ),
-            //BOTON
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 120),
               child: ElevatedButton(
@@ -91,7 +145,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  backgroundColor: Color(0xFF6C181B),
+                  backgroundColor: Color(0xFF6C181B), // Color personalizado
                 ),
                 child: const Text(
                   'INICIAR SESIÓN',
