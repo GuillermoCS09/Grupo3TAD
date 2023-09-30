@@ -9,28 +9,46 @@ class Reservar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget> [
         titulo(context),
+        barraBusqueda(context),
         salones(context)
       ],
     );
   }
 }
 
-Widget titulo(context){
+Widget barraBusqueda(context){
   return Container(
-    margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
-    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+    width: 600.0, // Ancho deseado de la barra de búsqueda
     decoration: BoxDecoration(
-      color: const Color(0xFFF9F3F3), // Color del Container
-      borderRadius: BorderRadius.circular(10.0), // Borde redondeado
-      border: Border.all(
-        color: Colors.black, // Color del borde
-        width: 0.3, // Ancho del borde
+      color: Colors.grey[200],
+      borderRadius: BorderRadius.circular(30.0), // Controla la forma redonda
+    ),
+    child: TextField(
+      decoration: InputDecoration(
+        hintText: 'Buscar Aulas',
+        prefixIcon: Icon(
+            Icons.search,
+            color: Colors.black), // Ícono de lupa
+        border: InputBorder.none, // Elimina el borde predeterminado
+        contentPadding: EdgeInsets.all(16.0), // Espacio interno
       ),
     ),
+  );
+}
+
+Widget titulo(context){
+  return Container(
+    margin: const EdgeInsets.symmetric(horizontal: 65, vertical: 25),
+    padding: const EdgeInsets.symmetric(horizontal: 65, vertical: 10),
     width: MediaQuery.of(context).size.width,
     child: const Text(
       'Reserva de Salones',
-      style: TextStyle(fontSize: 16),
+      style: TextStyle(
+          fontSize: 24,
+          fontFamily: 'Outfit',
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+      ),
     ),
   );
 }
@@ -44,17 +62,17 @@ Widget salones(context){
           const SizedBox(height: 20.0),
           buildCenteredContainer(
               'Aula 101\nNuevo Pabellón\n8:00 - 10:00 AM\nDisponible',
-              'images/salon1.jpg', context
+              'images/salon1.jpg', context, 220, 142
           ),
           const SizedBox(height: 30),
           buildCenteredContainer(
               'Aula 102\nNuevo Pabellón\n8:00 - 10:00 AM\nDisponible',
-              'images/salon4.jpg', context
+              'images/salon4.jpg', context, 220, 142
           ),
           const SizedBox(height: 30),
           buildCenteredContainer(
               'Aula 103\nNuevo Pabellón\n8:00 - 10:00 AM\nDisponible',
-              'images/salon4.jpg', context
+              'images/salon4.jpg', context, 220, 142
           ),
         ],
       ),
@@ -62,54 +80,76 @@ Widget salones(context){
   );
 }
 
-Widget buildCenteredContainer(String text, String url, context) {
+Widget buildCenteredContainer(String text, String imagePath, context ,double largo, double alto) {
+
   return Container(
-    width: 500.0,
-    height: 140.0,
+    width: 600.0,
+    height: 162.0,
     decoration: BoxDecoration(
-      color: Colors.white,
+      color: Color(0xFFF9F3F3),
       borderRadius: BorderRadius.circular(10.0),
-      border: Border.all(
-        color: Color(0xFF6C181B),
-        width: 2.0,
-      ),
     ),
-    child: Row(
+    padding: EdgeInsets.all(10.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(url),
-        ),
-        Expanded(
-          child: Align(
-            alignment: FractionalOffset.center,
-            child: Text(
-              text,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 14.0,
-                color: Colors.black,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.0), // El valor controla la circularidad del borde
+              child: Image.asset(
+                imagePath,
+                width: largo,
+                height: alto,
               ),
             ),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(right: 30, top: 10), // Ajusta los valores de left y top según tus necesidades
-          child: ElevatedButton(
-            onPressed: () {
-              _showPopup(context);
-            },
-            style: ElevatedButton.styleFrom(
-              primary: Color(0xFF6C181B), // Define el color de fondo del botón como rojo
+            Container(
+              width: 350.0, // Ancho deseado para el contenedor del texto y el botón
+              child: Column(
+                children: [
+                  Text(
+                    text,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'ReadexPro',
+                      fontSize: 18.0,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
+                  ElevatedButton(
+                    child: Text(
+                      'IR AHORA',
+                      style: TextStyle(
+                        fontFamily: 'Outfit',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {
+                      // Acción a realizar al presionar el botón
+                    },
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(200, 30),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      backgroundColor: Color(0xFF4B39EF),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            child: Text('Reservar Salón'),
-          ),
-        )
+          ],
+        ),
       ],
     ),
   );
+
 }
 
+/*
 void _showPopup(BuildContext context) {
   showDialog(
     context: context,
@@ -137,3 +177,4 @@ void _showPopup(BuildContext context) {
     },
   );
 }
+*/

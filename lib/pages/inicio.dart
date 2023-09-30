@@ -9,47 +9,38 @@ class Inicio extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Container(
-            width: 400,
-            height: 100,
-            decoration: BoxDecoration(
-              color: Color(0xFFF9F3F3),
-              borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(
-                color: Colors.black,
-                width: 2.0,
-              ),
-            ),
-            padding: EdgeInsets.all(10.0),
+          Align(
             alignment: Alignment.center,
-            child: const Text(
-              '¡BIENVENIDO, ALONSO!',
+            child: Text(
+              '       Bienvenido\nAlonso Matienzo',
               style: TextStyle(
+                fontFamily: 'Outfit',
                 fontSize: 24,
-                fontWeight: FontWeight.bold,
                 color: Colors.black,
+                  fontWeight: FontWeight.bold
               ),
             ),
           ),
           SizedBox(height: 20.0),
-          Image.asset(
-            'images/Logo_Usuario.png', // Reemplaza con la ruta de tu imagen
-            width: 150,
-            height: 150,
+          Icon(
+            Icons.location_history,
+            color: Colors.black,
+            size: 150,
           ),
           SizedBox(height: 20),
           Text(
             '¿Qué deseas hacer?',
             style: TextStyle(
               fontSize: 24,
+              fontFamily: 'Outfit',
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
-          SizedBox(height: 20.0),
-          buildCenteredContainer('Ver mi horario','images/Ver_Horario.jpg',200,130),
           SizedBox(height: 30),
-          buildCenteredContainer('Reservar un salón','images/Reservar_Salon.jpg',200,130),
+          buildCenteredContainer('Ver\nmi\nhorario','images/Ver_Horario.jpg',220,142),
+          SizedBox(height: 30),
+          buildCenteredContainer('Reservar\nun\nsalón','images/Reservar_Salon.jpg',220,142),
         ],
       ),
     );
@@ -57,16 +48,13 @@ class Inicio extends StatelessWidget {
 }
 
 Widget buildCenteredContainer(String text, String imagePath, double largo, double alto) {
+
   return Container(
     width: 600.0,
     height: 162.0,
     decoration: BoxDecoration(
       color: Color(0xFFF9F3F3),
       borderRadius: BorderRadius.circular(10.0),
-      border: Border.all(
-        color: Colors.black,
-        width: 2.0,
-      ),
     ),
     padding: EdgeInsets.all(10.0),
     child: Column(
@@ -75,27 +63,37 @@ Widget buildCenteredContainer(String text, String imagePath, double largo, doubl
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(
-              imagePath,
-              width: largo,
-              height: alto,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.0), // El valor controla la circularidad del borde
+              child: Image.asset(
+                imagePath,
+                width: largo,
+                height: alto,
+              ),
             ),
-            //SizedBox(width: 10.0),
             Container(
-              width: 350.0, // Establece el ancho deseado para el contenedor
+              width: 350.0, // Ancho deseado para el contenedor del texto y el botón
               child: Column(
                 children: [
                   Text(
                     text,
                     textAlign: TextAlign.center,
                     style: TextStyle(
+                      fontFamily: 'ReadexPro',
                       fontSize: 18.0,
                       color: Colors.black,
                     ),
                   ),
                   SizedBox(height: 30.0),
                   ElevatedButton(
-                    child: Text('IR AHORA'),
+                    child: Text(
+                      'IR AHORA',
+                      style: TextStyle(
+                        fontFamily: 'Outfit',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                     onPressed: () {
                       // Acción a realizar al presionar el botón
                     },
@@ -104,7 +102,7 @@ Widget buildCenteredContainer(String text, String imagePath, double largo, doubl
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      backgroundColor: Color(0xFF6C181B),
+                      backgroundColor: Color(0xFF4B39EF),
                     ),
                   ),
                 ],
@@ -115,4 +113,6 @@ Widget buildCenteredContainer(String text, String imagePath, double largo, doubl
       ],
     ),
   );
+
 }
+
