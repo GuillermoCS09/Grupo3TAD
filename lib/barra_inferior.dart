@@ -30,15 +30,40 @@ class _MyAppState extends State<MyAppBarra> {
       title: 'Material App',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'FISI - UNMSM',
-            style: TextStyle(
-              fontSize: 48,
-              fontFamily: 'RobotoSlab',
+            backgroundColor: Colors.white,
+            automaticallyImplyLeading: false,
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_rounded,
+                color: Color(0xFF101213),
+                size: 30,
+              ),
+              onPressed: () async {
+                //context.pop();
+              },
             ),
-          ),
-          centerTitle: true,
-          backgroundColor: const Color(0xFF6C181B),
+            title: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                'assets/images/Fondo_Cabecera.png',
+                width: 200,
+                height: 70,
+                fit: BoxFit.cover,
+              ),
+            ),
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.settings,
+                  color: Colors.black,
+                  size: 24,
+                ),
+                onPressed: () {
+                },
+              ),
+            ],
+            centerTitle: true,
+            elevation: 0
         ),
         body: paginas[paginaActual],
         bottomNavigationBar: BottomNavigationBar(
