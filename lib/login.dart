@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
             //Center(
             Container(
               width: double.infinity,
-              height: 400,
+              height: 350,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                   gradient: LinearGradient(
                     colors: [
                       Color(0x00FFFFFF),
-                      Colors.white60,
+                      Colors.white,
                     ],
                     stops: [0, 1],
                     begin: AlignmentDirectional(0, -1),
