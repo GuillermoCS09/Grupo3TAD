@@ -7,22 +7,32 @@ class MiInformacion extends StatefulWidget {
   _MiInformacionState createState() => _MiInformacionState ();
 }
 
-class _MiInformacionState
-    extends State<MiInformacion> {
-  late MiInformacionModel  _model;
-
+class _MiInformacionState extends State<MiInformacion> {
+  late MiInformacionModel _model;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  String valor1 = "Alonso";
+  String valor2 = "Matienzo";
+  String valor3 = "VIII";
+  String valor4 = "Ingeniería de Sistemas";
+  String valor5 = "20202020";
 
   @override
   void initState() {
     super.initState();
     _model = MiInformacionModel();
 
-    _model.textController1 ??= TextEditingController();
-    _model.textController2 ??= TextEditingController();
-    _model.textController3 ??= TextEditingController();
-    _model.textController4 ??= TextEditingController();
-    _model.textController5 ??= TextEditingController();
+    // _model.textController1 ??= TextEditingController();
+    // _model.textController2 ??= TextEditingController();
+    // _model.textController3 ??= TextEditingController();
+    // _model.textController4 ??= TextEditingController();
+    // _model.textController5 ??= TextEditingController();
+
+    _model.textController1.text = valor1;
+    _model.textController2.text = valor2;
+    _model.textController3.text = valor3;
+    _model.textController4.text = valor4;
+    _model.textController5.text = valor5;
   }
 
   @override
@@ -162,7 +172,6 @@ class _MiInformacionState
                                     fontFamily: 'ReadexPro',
                                     color: Color(0xFF57636C)
                                 ),
-                                hintText: 'Apellidos',
                                 hintStyle: TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'ReadexPro',
@@ -228,7 +237,6 @@ class _MiInformacionState
                                     fontFamily: 'ReadexPro',
                                     color: Color(0xFF57636C)
                                 ),
-                                hintText: 'Ciclo',
                                 hintStyle: TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'ReadexPro',
@@ -294,7 +302,6 @@ class _MiInformacionState
                                     fontFamily: 'ReadexPro',
                                     color: Color(0xFF57636C)
                                 ),
-                                hintText: 'Escuela Profesional',
                                 hintStyle: TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'ReadexPro',
@@ -360,7 +367,6 @@ class _MiInformacionState
                                     fontFamily: 'ReadexPro',
                                     color: Color(0xFF57636C)
                                 ),
-                                hintText: 'Código de Alumno',
                                 hintStyle: TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'ReadexPro',
@@ -414,6 +420,11 @@ class _MiInformacionState
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
+                  valor1 = _model.textController1.text;
+                  valor2 = _model.textController2.text;
+                  valor3 = _model.textController3.text;
+                  valor4 = _model.textController4.text;
+                  valor5 = _model.textController5.text;
                 },
                 child: Text(
                     'Guardar cambios',
@@ -448,11 +459,12 @@ class _MiInformacionState
 }
 
 class MiInformacionModel {
-  TextEditingController? textController1;
-  TextEditingController? textController2;
-  TextEditingController? textController3;
-  TextEditingController? textController4;
-  TextEditingController? textController5;
+  // TextEditingController? textController1;
+  TextEditingController textController1 = TextEditingController();
+  TextEditingController textController2 = TextEditingController();
+  TextEditingController textController3 = TextEditingController();
+  TextEditingController textController4 = TextEditingController();
+  TextEditingController textController5 = TextEditingController();
 
   // State field(s) for TextField widget.
   String? textController1Validator(BuildContext context, String? value) {
