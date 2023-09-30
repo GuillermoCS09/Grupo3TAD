@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Proyecto Grupo 3',
-      home:  MyAppSplash(),
+      home: MyAppSplash(),
     );
   }
 }

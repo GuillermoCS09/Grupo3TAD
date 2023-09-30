@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rating_dialog/rating_dialog.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'mi_informacion.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({Key? key}) : super(key: key);
@@ -125,7 +128,6 @@ class _Perfil extends State<Perfil> {
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
-
                             children: [
                               Padding(
                                 padding:
@@ -142,46 +144,55 @@ class _Perfil extends State<Perfil> {
                               Padding(
                                 padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 8, 16, 8),
-                                      child: Icon(
-                                        Icons.edit,
-                                        color: Color(0xFF57636C),
-                                        size: 24,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => MiInformacion(),
                                       ),
-                                    ),
-                                    Expanded(
-                                      child: Padding(
+                                    );
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 12, 0),
-                                        child: Text(
-                                          'Información personal',
-                                          textAlign: TextAlign.start,
-                                          style:
-                                            TextStyle(
-                                              fontSize: 14,
-                                              fontFamily: 'ReadexPro',
-                                              color: Color(0xFF57636C),
-                                            )
+                                            0, 8, 16, 8),
+                                        child: Icon(
+                                          Icons.edit,
+                                          color: Color(0xFF57636C),
+                                          size: 24,
                                         ),
                                       ),
-                                    ),
-                                    Text(
-                                      'Editar Perfil',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontFamily: 'ReadexPro',
-                                        color: Color(0xFF4B39EF),
-                                        fontSize: 14, // Tamaño de fuente personalizado
+                                      Expanded(
+                                        child: Padding(
+                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                              0, 0, 12, 0),
+                                          child: Text(
+                                              'Información personal',
+                                              textAlign: TextAlign.start,
+                                              style:
+                                              TextStyle(
+                                                fontSize: 14,
+                                                fontFamily: 'ReadexPro',
+                                                color: Color(0xFF57636C),
+                                              )
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                      Text(
+                                        'Editar Perfil',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: 'ReadexPro',
+                                          color: Color(0xFF4B39EF),
+                                          fontSize: 14, // Tamaño de fuente personalizado
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
                               ),
                               Padding(
                                 padding:
@@ -280,45 +291,49 @@ class _Perfil extends State<Perfil> {
                               Padding(
                                 padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 8, 16, 8),
-                                      child: Icon(
-                                        Icons.star,
-                                        color: Color(0xFF57636C),
-                                        size: 24,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Padding(
+                                child:
+                                InkWell(
+                                  onTap: _showRatingDialog,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 12, 0),
-                                        child: Text(
-                                          'Califícanos',
-                                          textAlign: TextAlign.start,
-                                          style:
-                                            TextStyle(
-                                              fontSize: 14,
-                                              fontFamily: 'ReadexPro',
-                                              color: Color(0xFF57636C),
-                                            )
+                                            0, 8, 16, 8),
+                                        child: Icon(
+                                          Icons.star,
+                                          color: Color(0xFF57636C),
+                                          size: 24,
                                         ),
                                       ),
-                                    ),
-                                    Text(
-                                      'Deja un comentario',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontFamily: 'ReadexPro',
-                                        color: Color(0xFF4B39EF),
-                                        fontSize: 14, // Tamaño de fuente personalizado
+                                      Expanded(
+                                        child: Padding(
+                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                              0, 0, 12, 0),
+                                          child: Text(
+                                            'Califícanos',
+                                            textAlign: TextAlign.start,
+                                            style:
+                                              TextStyle(
+                                                fontSize: 14,
+                                                fontFamily: 'ReadexPro',
+                                                color: Color(0xFF57636C),
+                                              )
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                      Text(
+                                        'Deja un comentario',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: 'ReadexPro',
+                                          color: Color(0xFF4B39EF),
+                                          fontSize: 14, // Tamaño de fuente personalizado
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -377,6 +392,68 @@ class _Perfil extends State<Perfil> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showRatingDialog() {
+    // actual store listing review & rating
+    void _rateAndReviewApp() async {
+      // refer to: https://pub.dev/packages/in_app_review
+      final _inAppReview = InAppReview.instance;
+
+      if (await _inAppReview.isAvailable()) {
+        print('request actual review from store');
+        _inAppReview.requestReview();
+      } else {
+        print('open actual store listing');
+        // TODO: use your own store ids
+        _inAppReview.openStoreListing(
+          appStoreId: '<your app store id>',
+          microsoftStoreId: '<your microsoft store id>',
+        );
+      }
+    }
+
+    final _dialog = RatingDialog(
+      initialRating: 1.0,
+      // your app's name?
+      title: Text(
+        'Puntúanos',
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      // encourage your user to leave a high rating?
+      message: Text(
+        '¿Te está gustando nuestra aplicación? ¡Califiícanos y déjanos tus comentarios.',
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontSize: 15),
+      ),
+      // your app's logo?
+      image: Image.asset('assets/images/logo_unmsm_morado.png', width: 100, height: 100),
+      submitButtonText: 'Enviar',
+      commentHint: '¡Deja tu comentario!',
+      onCancelled: () => print('cancelled'),
+      onSubmitted: (response) {
+        print('rating: ${response.rating}, comment: ${response.comment}');
+
+        // TODO: add your own logic
+        if (response.rating < 3.0) {
+          // send their comments to your email or anywhere you wish
+          // ask the user to contact you instead of leaving a bad review
+        } else {
+          _rateAndReviewApp();
+        }
+      },
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      barrierDismissible: true, // set to false if you want to force a rating
+      builder: (context) => _dialog,
     );
   }
 }
