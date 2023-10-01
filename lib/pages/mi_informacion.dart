@@ -417,37 +417,89 @@ class _MiInformacionState extends State<MiInformacion> {
                   ],
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  valor1 = _model.textController1.text;
-                  valor2 = _model.textController2.text;
-                  valor3 = _model.textController3.text;
-                  valor4 = _model.textController4.text;
-                  valor5 = _model.textController5.text;
-                },
-                child: Text(
-                    'Guardar cambios',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    fontFamily: 'ReadexPro'
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  backgroundColor: Color(0xFF4B39EF),
-                  foregroundColor: Colors.white,
-                  minimumSize: Size(270.0, 50.0),
-                  elevation: 3,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12), // Bordes redondeados del botón
-                    side: BorderSide(
-                      color: Colors.transparent, // Color del borde
-                      width: 1, // Ancho del borde
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16, 24, 16, 44),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: AlignmentDirectional(0.00, 0.00),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 16),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              'Cancelar',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  fontFamily: 'ReadexPro'
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                              // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                              backgroundColor: Colors.white,
+                              foregroundColor: Color(0xFF14181B),
+                              minimumSize: Size(230.0, 52.0),
+                              elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12), // Bordes redondeados del botón
+                                side: BorderSide(
+                                  color: Color(0xFFE0E3E7), // Color del borde
+                                  width: 2, // Ancho del borde
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    Expanded(
+                      child: Align(
+                        alignment: AlignmentDirectional(0.00, 0.00),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 16),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              valor1 = _model.textController1.text;
+                              valor2 = _model.textController2.text;
+                              valor3 = _model.textController3.text;
+                              valor4 = _model.textController4.text;
+                              valor5 = _model.textController5.text;
+                            },
+                            child: Text(
+                              'Guardar cambios',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  fontFamily: 'ReadexPro'
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                              // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                              backgroundColor: Color(0xFF4B39EF),
+                              foregroundColor: Colors.white,
+                              minimumSize: Size(230.0, 52.0),
+                              elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12), // Bordes redondeados del botón
+                                side: BorderSide(
+                                  color: Colors.transparent, // Color del borde
+                                  width: 1, // Ancho del borde
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

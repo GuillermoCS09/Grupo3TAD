@@ -427,7 +427,7 @@ class _Perfil extends State<Perfil> {
       ),
       // encourage your user to leave a high rating?
       message: Text(
-        '¿Te está gustando nuestra aplicación? ¡Califiícanos y déjanos tus comentarios.',
+        '¿Te está gustando nuestra aplicación? ¡Califícanos y déjanos tus comentarios.',
         textAlign: TextAlign.center,
         style: const TextStyle(fontSize: 15),
       ),

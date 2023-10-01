@@ -7,13 +7,16 @@ class Reservar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget> [
-        titulo(context),
-        barraBusqueda(context),
-        salones(context)
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget> [
+          titulo(context),
+          barraBusqueda(context),
+          salones(context)
+        ],
+      ),
     );
   }
 }
@@ -46,44 +49,163 @@ Widget titulo(context){
     child: const Text(
       'Reserva de Salones',
       style: TextStyle(
-          fontSize: 24,
-          fontFamily: 'Outfit',
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
+        fontSize: 24,
+        fontFamily: 'Outfit',
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
       ),
     ),
   );
 }
 
 Widget salones(context){
-  return SingleChildScrollView( // Envuelve todo el contenido con un ScrollView
-    child: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const SizedBox(height: 20.0),
-          buildCenteredContainer(
-              'Aula 101\nNuevo Pabellón\n8:00 - 10:00 AM\nDisponible',
-              'images/salon1.jpg', context, 220, 142
+  return Column(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Color(0xFFF1F4F8),
           ),
-          const SizedBox(height: 30),
-          buildCenteredContainer(
-              'Aula 102\nNuevo Pabellón\n8:00 - 10:00 AM\nDisponible',
-              'images/salon4.jpg', context, 220, 142
+          child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:
+                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
+                  child: ListView(
+                      padding: EdgeInsets.zero,
+                      primary: false,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        buildCenteredContainer(context, 'Aula 101', 'Nuevo Pabellón', 'assets/images/salon1.jpg'),
+                        buildCenteredContainer(context, 'Aula 102', 'Nuevo Pabellón', 'assets/images/salon2.jpg'),
+                        buildCenteredContainer(context, 'Aula 103', 'Antiguo Pabellón', 'assets/images/salon3.jpg'),
+                      ]
+                  ),
+                ),
+              ]
           ),
-          const SizedBox(height: 30),
-          buildCenteredContainer(
-              'Aula 103\nNuevo Pabellón\n8:00 - 10:00 AM\nDisponible',
-              'images/salon4.jpg', context, 220, 142
-          ),
-        ],
-      ),
-    ),
+        ),
+      ]
   );
 }
 
-Widget buildCenteredContainer(String text, String imagePath, context ,double largo, double alto) {
-
+Widget buildCenteredContainer(BuildContext context, String aula, String pabellon, String imagePath) {
+  return Padding(
+    padding:
+    EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+    child: Container(
+      width: 220,
+      height: 160,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 4,
+            color: Color(0x33000000),
+            offset: Offset(0, 2),
+          )
+        ],
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: Color(0xFFE0E3E7),
+          width: 1,
+        ),
+      ),
+      child: Padding(
+        padding:
+        EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                imagePath,
+                width: 192,
+                height: 144,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                    EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                    child: Text(
+                      aula,
+                      style: TextStyle(
+                        fontFamily: 'ReadexPro',
+                        fontSize: 16,
+                        color: Color(0xFF14181B),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    pabellon,
+                    style: TextStyle(
+                      fontFamily: 'ReadexPro',
+                      fontSize: 14,
+                      color: Color(0xFF57636C),
+                    ),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(
+                        0.00, 0.00),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional
+                          .fromSTEB(0, 8, 0, 0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => TableEventsExample()),
+                          );
+                        },
+                        child: Text(
+                          'Ver detalles',
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 14,
+                              fontFamily: 'ReadexPro'
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          backgroundColor: Color(0xFF4B39EF),
+                          foregroundColor: Colors.white,
+                          minimumSize: Size(113.0, 40.0),
+                          elevation: 3,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12), // Bordes redondeados del botón
+                            side: BorderSide(
+                              color: Colors.transparent, // Color del borde
+                              width: 1, // Ancho del borde
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+  /*
   return Container(
     width: 600.0,
     height: 162.0,
@@ -95,6 +217,7 @@ Widget buildCenteredContainer(String text, String imagePath, context ,double lar
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -130,10 +253,7 @@ Widget buildCenteredContainer(String text, String imagePath, context ,double lar
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => TableEventsExample()),
-                      );
+                      // Acción a realizar al presionar el botón
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(200, 30),
@@ -151,8 +271,10 @@ Widget buildCenteredContainer(String text, String imagePath, context ,double lar
       ],
     ),
   );
-
+  */
 }
+
+
 
 /*
 void _showPopup(BuildContext context) {
