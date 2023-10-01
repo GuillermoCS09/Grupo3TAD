@@ -115,4 +115,3 @@ Widget buildCenteredContainer(String text, String imagePath, double largo, doubl
   );
 
 }
-

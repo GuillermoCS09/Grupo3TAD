@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Calendario.dart';
+
 class Reservar extends StatelessWidget {
   const Reservar({super.key});
 
@@ -128,7 +130,10 @@ Widget buildCenteredContainer(String text, String imagePath, context ,double lar
                       ),
                     ),
                     onPressed: () {
-                      // Acción a realizar al presionar el botón
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TableEventsExample()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(200, 30),
