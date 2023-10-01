@@ -87,7 +87,7 @@ class _MyAppState extends State<MyAppBarra> {
               label: 'Perfil',
             ),
           ],
-          selectedItemColor: const Color(0xFF6C181B),
+          selectedItemColor: const Color(0xFF4B39EF),
         ),
       ),
     );

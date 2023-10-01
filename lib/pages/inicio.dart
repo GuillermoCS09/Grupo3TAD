@@ -38,9 +38,9 @@ class Inicio extends StatelessWidget {
             ),
           ),
           SizedBox(height: 30),
-          buildCenteredContainer('Ver\nmi\nhorario','images/Ver_Horario.jpg',220,142),
+          buildCenteredContainer('Ver\nmi\nhorario','assets/images/Ver_Horario.jpg',220,142),
           SizedBox(height: 30),
-          buildCenteredContainer('Reservar\nun\nsalón','images/Reservar_Salon.jpg',220,142),
+          buildCenteredContainer('Reservar\nun\nsalón','assets/images/Reservar_Salon.jpg',220,142),
         ],
       ),
     );

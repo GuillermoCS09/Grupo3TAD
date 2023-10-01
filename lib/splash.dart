@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePageSplash>
             SizedBox(
               width: 294,
               height: 400,
-              child: Image.asset('images/unmsm_escudo.png') ,
+              child: Image.asset('assets/images/unmsm_escudo.png') ,
             ),
           ],
         ),

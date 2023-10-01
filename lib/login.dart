@@ -133,8 +133,40 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
               },
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 120),
+              padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 80),
               child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    runApp(const MyAppBarra()); //Aca llama a la pestaña inicio
+                  }
+                },
+                child: Text(
+                  'Iniciar Sesión',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    fontFamily: 'ReadexPro',
+                    color: Colors.white
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  backgroundColor: Color(0xFF4B39EF),
+                  foregroundColor: Colors.white,
+                  minimumSize: Size(230.0, 50.0),
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10), // Bordes redondeados del botón
+                    side: BorderSide(
+                      color: Colors.transparent, // Color del borde
+                      width: 1, // Ancho del borde
+                    ),
+                  ),
+                ),
+              ),
+              /*
+              ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     runApp(const MyAppBarra()); //Aca llama a la pestaña inicio
@@ -156,6 +188,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                   ),
                 ),
               ),
+              */
             )
           ],
         ),
