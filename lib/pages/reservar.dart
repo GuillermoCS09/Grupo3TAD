@@ -96,8 +96,7 @@ Widget salones(context){
 
 Widget buildCenteredContainer(BuildContext context, String aula, String pabellon, String imagePath) {
   return Padding(
-    padding:
-    EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+    padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
     child: Container(
       width: 220,
       height: 160,
@@ -117,8 +116,7 @@ Widget buildCenteredContainer(BuildContext context, String aula, String pabellon
         ),
       ),
       child: Padding(
-        padding:
-        EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+        padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -139,8 +137,7 @@ Widget buildCenteredContainer(BuildContext context, String aula, String pabellon
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding:
-                    EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                     child: Text(
                       aula,
                       style: TextStyle(
@@ -162,8 +159,7 @@ Widget buildCenteredContainer(BuildContext context, String aula, String pabellon
                     alignment: AlignmentDirectional(
                         0.00, 0.00),
                     child: Padding(
-                      padding: EdgeInsetsDirectional
-                          .fromSTEB(0, 8, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(

@@ -50,9 +50,8 @@ class Inicio extends StatelessWidget {
 }
 
 Widget buildCenteredContainer(String text, String imagePath, double largo, double alto) {
-
   return Container(
-    width: 600.0,
+    width: 380.0,
     height: 162.0,
     decoration: BoxDecoration(
       color: Color(0xFFF9F3F3),
@@ -60,10 +59,10 @@ Widget buildCenteredContainer(String text, String imagePath, double largo, doubl
     ),
     padding: EdgeInsets.all(10.0),
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      // crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10.0), // El valor controla la circularidad del borde
@@ -74,7 +73,7 @@ Widget buildCenteredContainer(String text, String imagePath, double largo, doubl
               ),
             ),
             Container(
-              width: 350.0, // Ancho deseado para el contenedor del texto y el botón
+              width: 140.0, // Ancho deseado para el contenedor del texto y el botón
               child: Column(
                 children: [
                   Text(
@@ -86,10 +85,10 @@ Widget buildCenteredContainer(String text, String imagePath, double largo, doubl
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 30.0),
+                  SizedBox(height: 15.0),
                   ElevatedButton(
                     child: Text(
-                      'IR AHORA',
+                      'Ir ahora',
                       style: TextStyle(
                         fontFamily: 'Outfit',
                         fontWeight: FontWeight.bold,
@@ -100,7 +99,7 @@ Widget buildCenteredContainer(String text, String imagePath, double largo, doubl
                       // Acción a realizar al presionar el botón
                     },
                     style: ElevatedButton.styleFrom(
-                      fixedSize: Size(200, 30),
+                      fixedSize: Size(100, 30),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
