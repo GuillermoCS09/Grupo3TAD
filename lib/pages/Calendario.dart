@@ -49,7 +49,7 @@ class _TableEventsExampleState extends State<TableEventsExample>{
     return Scaffold(
       appBar: AppBar(
         title: Text('Reserva tu horario'),
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF4B39EF),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){

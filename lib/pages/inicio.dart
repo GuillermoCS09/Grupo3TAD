@@ -5,43 +5,45 @@ class Inicio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              '       Bienvenido\nAlonso Matienzo',
-              style: TextStyle(
-                fontFamily: 'Outfit',
-                fontSize: 24,
-                color: Colors.black,
+    return SingleChildScrollView(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                'Bienvenido\nAlonso Matienzo',
+                style: TextStyle(
+                  fontFamily: 'Outfit',
+                  fontSize: 24,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 20.0),
-          Icon(
-            Icons.location_history,
-            color: Colors.black,
-            size: 150,
-          ),
-          SizedBox(height: 20),
-          Text(
-            '¿Qué deseas hacer?',
-            style: TextStyle(
-              fontSize: 24,
-              fontFamily: 'Outfit',
-              fontWeight: FontWeight.bold,
+            SizedBox(height: 20.0),
+            Icon(
+              Icons.location_history,
               color: Colors.black,
+              size: 150,
             ),
-          ),
-          SizedBox(height: 30),
-          buildCenteredContainer('Ver\nmi\nhorario','assets/images/Ver_Horario.jpg',220,142),
-          SizedBox(height: 30),
-          buildCenteredContainer('Reservar\nun\nsalón','assets/images/Reservar_Salon.jpg',220,142),
-        ],
+            SizedBox(height: 20),
+            Text(
+              '¿Qué deseas hacer?',
+              style: TextStyle(
+                fontSize: 24,
+                fontFamily: 'Outfit',
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(height: 30),
+            buildCenteredContainer('Ver\nmi\nhorario','assets/images/Ver_Horario.jpg',220,142),
+            SizedBox(height: 30),
+            buildCenteredContainer('Reservar\nun\nsalón','assets/images/Reservar_Salon.jpg',220,142),
+          ],
+        ),
       ),
     );
   }

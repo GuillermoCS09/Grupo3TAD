@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePageSplash>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF6C181B),
+      backgroundColor: const Color(0xFF4B39EF),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePageSplash>
             SizedBox(
               width: 294,
               height: 400,
-              child: Image.asset('assets/images/unmsm_escudo.png') ,
+              child: Image.asset('assets/images/logo_unmsm_blanco.png') ,
             ),
           ],
         ),
