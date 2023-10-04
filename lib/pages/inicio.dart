@@ -10,7 +10,7 @@ class Inicio extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Align(
+            const Align(
               alignment: Alignment.center,
               child: Text(
                 'Bienvenido\nAlonso Matienzo',
@@ -22,14 +22,14 @@ class Inicio extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20.0),
-            Icon(
+            const SizedBox(height: 20.0),
+            const Icon(
               Icons.location_history,
               color: Colors.black,
               size: 150,
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               '¿Qué deseas hacer?',
               style: TextStyle(
                 fontSize: 24,
@@ -38,9 +38,9 @@ class Inicio extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             buildCenteredContainer('Ver\nmi\nhorario','assets/images/Ver_Horario.jpg',220,142),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             buildCenteredContainer('Reservar\nun\nsalón','assets/images/Reservar_Salon.jpg',220,142),
           ],
         ),
@@ -54,10 +54,10 @@ Widget buildCenteredContainer(String text, String imagePath, double largo, doubl
     width: 380.0,
     height: 162.0,
     decoration: BoxDecoration(
-      color: Color(0xFFF9F3F3),
+      color: const Color(0xFFF9F3F3),
       borderRadius: BorderRadius.circular(10.0),
     ),
-    padding: EdgeInsets.all(10.0),
+    padding: const EdgeInsets.all(10.0),
     child: Column(
       // crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -72,38 +72,38 @@ Widget buildCenteredContainer(String text, String imagePath, double largo, doubl
                 height: alto,
               ),
             ),
-            Container(
+            SizedBox(
               width: 140.0, // Ancho deseado para el contenedor del texto y el botón
               child: Column(
                 children: [
                   Text(
                     text,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'ReadexPro',
                       fontSize: 18.0,
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   ElevatedButton(
-                    child: Text(
+                    onPressed: () {
+                      // Acción a realizar al presionar el botón
+                    },
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(100, 30),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      backgroundColor: const Color(0xFF4B39EF),
+                    ),
+                    child: const Text(
                       'Ir ahora',
                       style: TextStyle(
                         fontFamily: 'Outfit',
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
-                    ),
-                    onPressed: () {
-                      // Acción a realizar al presionar el botón
-                    },
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(100, 30),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      backgroundColor: Color(0xFF4B39EF),
                     ),
                   ),
                 ],

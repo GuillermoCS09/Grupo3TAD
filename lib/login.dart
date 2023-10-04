@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
               Container(
                 width: double.infinity,
                 height: 350,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
                       Color(0xFF4B39EF), // #4B39EF
@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                 child: Container(
                   width: 100,
                   height: 100,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
                         Color(0x00FFFFFF),
@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Align(
-                          alignment: AlignmentDirectional(0.00, 0.00),
+                          alignment: const AlignmentDirectional(0.00, 0.00),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: Image.asset(
@@ -148,28 +148,28 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                       runApp(const MyAppBarra()); //Aca llama a la pestaña inicio
                     }
                   },
-                  child: Text(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    backgroundColor: const Color(0xFF4B39EF),
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size(230.0, 50.0),
+                    elevation: 3,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10), // Bordes redondeados del botón
+                      side: const BorderSide(
+                        color: Colors.transparent, // Color del borde
+                        width: 1, // Ancho del borde
+                      ),
+                    ),
+                  ),
+                  child: const Text(
                     'Iniciar Sesión',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         fontFamily: 'ReadexPro',
                         color: Colors.white
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                    // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                    backgroundColor: Color(0xFF4B39EF),
-                    foregroundColor: Colors.white,
-                    minimumSize: Size(230.0, 50.0),
-                    elevation: 3,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10), // Bordes redondeados del botón
-                      side: BorderSide(
-                        color: Colors.transparent, // Color del borde
-                        width: 1, // Ancho del borde
-                      ),
                     ),
                   ),
                 ),

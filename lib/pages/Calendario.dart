@@ -48,17 +48,17 @@ class _TableEventsExampleState extends State<TableEventsExample>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reserva tu horario'),
-        backgroundColor: Color(0xFF4B39EF),
+        title: const Text('Reserva tu horario'),
+        backgroundColor: const Color(0xFF4B39EF),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           showDialog(context: context, builder: (context){
             return AlertDialog(
               scrollable: true,
-              title: Text("Nombre del Evento"),
+              title: const Text("Nombre del Evento"),
               content: Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: TextField(
                   controller: _eventController,
                 ),
@@ -72,13 +72,13 @@ class _TableEventsExampleState extends State<TableEventsExample>{
                     Navigator.of(context).pop();
                     _selectedEvents.value = _getEventsForDay(_selectedDay!);
                   },
-                  child: Text("Enviar"),
+                  child: const Text("Enviar"),
                 )
               ],
             );
           });
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: Column(
         children: [
@@ -91,7 +91,7 @@ class _TableEventsExampleState extends State<TableEventsExample>{
             startingDayOfWeek: StartingDayOfWeek.monday,
             onDaySelected: _onDaySelected,
             eventLoader: _getEventsForDay,
-            calendarStyle: CalendarStyle(
+            calendarStyle: const CalendarStyle(
               outsideDaysVisible: false,
             ),
             onFormatChanged: (format){
@@ -105,7 +105,7 @@ class _TableEventsExampleState extends State<TableEventsExample>{
               _focusedDay = focusedDay;
             },
           ),
-          SizedBox(height: 8.0),
+          const SizedBox(height: 8.0),
           Expanded(
             child: ValueListenableBuilder<List<Event>>(
                 valueListenable: _selectedEvents,
@@ -114,7 +114,7 @@ class _TableEventsExampleState extends State<TableEventsExample>{
                     itemCount: value.length,
                     itemBuilder: (context, index) {
                       return Container(
-                        margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                         decoration: BoxDecoration(
                           border: Border.all(),
                           borderRadius: BorderRadius.circular(12),
@@ -126,7 +126,6 @@ class _TableEventsExampleState extends State<TableEventsExample>{
                       );
                     },
                   );
-
                 }),
           )
         ],

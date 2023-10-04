@@ -18,9 +18,9 @@ class _MyAppState extends State<MyAppBarra> {
   int paginaActual = 0;
 
   List<Widget> paginas = [
-    Inicio(),
-    Reservar(),
-    Perfil()
+    const Inicio(),
+    const Reservar(),
+    const Perfil()
   ];
 
   @override
@@ -33,7 +33,7 @@ class _MyAppState extends State<MyAppBarra> {
             backgroundColor: Colors.white,
             automaticallyImplyLeading: false,
             leading: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_rounded,
                 color: Color(0xFF101213),
                 size: 30,
@@ -53,7 +53,7 @@ class _MyAppState extends State<MyAppBarra> {
             ),
             actions: [
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.settings,
                   color: Colors.black,
                   size: 24,

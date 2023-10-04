@@ -28,7 +28,7 @@ Widget barraBusqueda(context){
       color: Colors.grey[200],
       borderRadius: BorderRadius.circular(30.0), // Controla la forma redonda
     ),
-    child: TextField(
+    child: const TextField(
       decoration: InputDecoration(
         hintText: 'Buscar Aulas',
         prefixIcon: Icon(
@@ -65,7 +65,7 @@ Widget salones(context){
       children: [
         Container(
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color(0xFFF1F4F8),
           ),
           child: Column(
@@ -73,8 +73,7 @@ Widget salones(context){
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding:
-                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
                   child: ListView(
                       padding: EdgeInsets.zero,
                       primary: false,
@@ -96,13 +95,13 @@ Widget salones(context){
 
 Widget buildCenteredContainer(BuildContext context, String aula, String pabellon, String imagePath) {
   return Padding(
-    padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+    padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
     child: Container(
       width: 220,
       height: 160,
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             blurRadius: 4,
             color: Color(0x33000000),
@@ -111,12 +110,12 @@ Widget buildCenteredContainer(BuildContext context, String aula, String pabellon
         ],
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Color(0xFFE0E3E7),
+          color: const Color(0xFFE0E3E7),
           width: 1,
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+        padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -130,17 +129,17 @@ Widget buildCenteredContainer(BuildContext context, String aula, String pabellon
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                     child: Text(
                       aula,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'ReadexPro',
                         fontSize: 16,
                         color: Color(0xFF14181B),
@@ -149,45 +148,45 @@ Widget buildCenteredContainer(BuildContext context, String aula, String pabellon
                   ),
                   Text(
                     pabellon,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'ReadexPro',
                       fontSize: 14,
                       color: Color(0xFF57636C),
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(
+                    alignment: const AlignmentDirectional(
                         0.00, 0.00),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => TableEventsExample()),
+                            MaterialPageRoute(builder: (context) => const TableEventsExample()),
                           );
                         },
-                        child: Text(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          backgroundColor: const Color(0xFF4B39EF),
+                          foregroundColor: Colors.white,
+                          minimumSize: const Size(113.0, 40.0),
+                          elevation: 3,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12), // Bordes redondeados del botón
+                            side: const BorderSide(
+                              color: Colors.transparent, // Color del borde
+                              width: 1, // Ancho del borde
+                            ),
+                          ),
+                        ),
+                        child: const Text(
                           'Ver detalles',
                           style: TextStyle(
                               fontWeight: FontWeight.normal,
                               fontSize: 14,
                               fontFamily: 'ReadexPro'
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          backgroundColor: Color(0xFF4B39EF),
-                          foregroundColor: Colors.white,
-                          minimumSize: Size(113.0, 40.0),
-                          elevation: 3,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12), // Bordes redondeados del botón
-                            side: BorderSide(
-                              color: Colors.transparent, // Color del borde
-                              width: 1, // Ancho del borde
-                            ),
                           ),
                         ),
                       ),

@@ -26,7 +26,7 @@ class _MyHomePageState extends State<MyHomePageSplash>
   _navigatetohome();
   }
   _navigatetohome() async
-  {  await Future.delayed(Duration(milliseconds: 2000), () {});
+  {  await Future.delayed(const Duration(milliseconds: 2000), () {});
   Navigator.pushReplacement(
       context,
       MaterialPageRoute(

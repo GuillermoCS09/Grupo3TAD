@@ -48,9 +48,9 @@ class _MiInformacionState extends State<MiInformacion> {
       key: scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xFF4B39EF),
+        backgroundColor: const Color(0xFF4B39EF),
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           'Complete Profile',
           style: TextStyle(
             fontSize: 16,
@@ -58,7 +58,7 @@ class _MiInformacionState extends State<MiInformacion> {
             fontWeight: FontWeight.bold
           ),
         ),
-        actions: [],
+        actions: const [],
         centerTitle: false,
         elevation: 0,
       ),
@@ -68,7 +68,7 @@ class _MiInformacionState extends State<MiInformacion> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16, 24, 16, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
@@ -85,7 +85,7 @@ class _MiInformacionState extends State<MiInformacion> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+                padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,25 +95,24 @@ class _MiInformacionState extends State<MiInformacion> {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding:
-                            EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                             child: TextFormField(
                               controller: _model.textController1,
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: 'Nombres',
-                                labelStyle: TextStyle(
+                                labelStyle: const TextStyle(
                                   fontSize: 14,
                                   fontFamily: 'ReadexPro',
                                   color: Color(0xFF57636C)
                                 ),
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'ReadexPro',
                                     color: Color(0xFF57636C)
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color:
                                     Color(0xFFE0E3E7),
                                     width: 2,
@@ -121,21 +120,21 @@ class _MiInformacionState extends State<MiInformacion> {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFF4B39EF),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFFFF5963),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFFFF5963),
                                     width: 2,
                                   ),
@@ -144,7 +143,7 @@ class _MiInformacionState extends State<MiInformacion> {
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 14,
                                   fontFamily: 'ReadexPro',
                                   color: Color(0xFF57636C)
@@ -160,47 +159,45 @@ class _MiInformacionState extends State<MiInformacion> {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding:
-                            EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                             child: TextFormField(
                               controller: _model.textController2,
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: 'Apellidos',
-                                labelStyle: TextStyle(
+                                labelStyle: const TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'ReadexPro',
                                     color: Color(0xFF57636C)
                                 ),
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'ReadexPro',
                                     color: Color(0xFF57636C)
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:
-                                    Color(0xFFE0E3E7),
+                                  borderSide: const BorderSide(
+                                    color: Color(0xFFE0E3E7),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFF4B39EF),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFFFF5963),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFFFF5963),
                                     width: 2,
                                   ),
@@ -209,7 +206,7 @@ class _MiInformacionState extends State<MiInformacion> {
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 14,
                                   fontFamily: 'ReadexPro',
                                   color: Color(0xFF57636C)
@@ -225,25 +222,24 @@ class _MiInformacionState extends State<MiInformacion> {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding:
-                            EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                             child: TextFormField(
                               controller: _model.textController3,
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: 'Ciclo',
-                                labelStyle: TextStyle(
+                                labelStyle: const TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'ReadexPro',
                                     color: Color(0xFF57636C)
                                 ),
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'ReadexPro',
                                     color: Color(0xFF57636C)
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color:
                                     Color(0xFFE0E3E7),
                                     width: 2,
@@ -251,21 +247,21 @@ class _MiInformacionState extends State<MiInformacion> {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFF4B39EF),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFFFF5963),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFFFF5963),
                                     width: 2,
                                   ),
@@ -274,7 +270,7 @@ class _MiInformacionState extends State<MiInformacion> {
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 14,
                                   fontFamily: 'ReadexPro',
                                   color: Color(0xFF57636C)
@@ -290,47 +286,45 @@ class _MiInformacionState extends State<MiInformacion> {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding:
-                            EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                             child: TextFormField(
                               controller: _model.textController4,
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: 'Escuela Profesional',
-                                labelStyle: TextStyle(
+                                labelStyle: const TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'ReadexPro',
                                     color: Color(0xFF57636C)
                                 ),
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'ReadexPro',
                                     color: Color(0xFF57636C)
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:
-                                    Color(0xFFE0E3E7),
+                                  borderSide: const BorderSide(
+                                    color: Color(0xFFE0E3E7),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFF4B39EF),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFFFF5963),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFFFF5963),
                                     width: 2,
                                   ),
@@ -339,7 +333,7 @@ class _MiInformacionState extends State<MiInformacion> {
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 14,
                                   fontFamily: 'ReadexPro',
                                   color: Color(0xFF57636C)
@@ -355,46 +349,45 @@ class _MiInformacionState extends State<MiInformacion> {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding:
-                            EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                             child: TextFormField(
                               controller: _model.textController5,
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: 'Código de Alumno',
-                                labelStyle: TextStyle(
+                                labelStyle: const TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'ReadexPro',
                                     color: Color(0xFF57636C)
                                 ),
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'ReadexPro',
                                     color: Color(0xFF57636C)
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFFE0E3E7),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFF4B39EF),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFFFF5963),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFFFF5963),
                                     width: 2,
                                   ),
@@ -403,7 +396,7 @@ class _MiInformacionState extends State<MiInformacion> {
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 14,
                                   fontFamily: 'ReadexPro',
                                   color: Color(0xFF57636C)
@@ -418,40 +411,40 @@ class _MiInformacionState extends State<MiInformacion> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 24, 16, 44),
+                padding: const EdgeInsetsDirectional.fromSTEB(16, 24, 16, 44),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
                       child: Align(
-                        alignment: AlignmentDirectional(0.00, 0.00),
+                        alignment: const AlignmentDirectional(0.00, 0.00),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 16),
+                          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 8, 16),
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Text(
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                              // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                              backgroundColor: Colors.white,
+                              foregroundColor: const Color(0xFF14181B),
+                              minimumSize: const Size(230.0, 52.0),
+                              elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12), // Bordes redondeados del botón
+                                side: const BorderSide(
+                                  color: Color(0xFFE0E3E7), // Color del borde
+                                  width: 2, // Ancho del borde
+                                ),
+                              ),
+                            ),
+                            child: const Text(
                               'Cancelar',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                   fontFamily: 'ReadexPro'
-                              ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                              // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                              backgroundColor: Colors.white,
-                              foregroundColor: Color(0xFF14181B),
-                              minimumSize: Size(230.0, 52.0),
-                              elevation: 3,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12), // Bordes redondeados del botón
-                                side: BorderSide(
-                                  color: Color(0xFFE0E3E7), // Color del borde
-                                  width: 2, // Ancho del borde
-                                ),
                               ),
                             ),
                           ),
@@ -460,9 +453,9 @@ class _MiInformacionState extends State<MiInformacion> {
                     ),
                     Expanded(
                       child: Align(
-                        alignment: AlignmentDirectional(0.00, 0.00),
+                        alignment: const AlignmentDirectional(0.00, 0.00),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 16),
+                          padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 16),
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context);
@@ -472,27 +465,27 @@ class _MiInformacionState extends State<MiInformacion> {
                               valor4 = _model.textController4.text;
                               valor5 = _model.textController5.text;
                             },
-                            child: Text(
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                              // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                              backgroundColor: const Color(0xFF4B39EF),
+                              foregroundColor: Colors.white,
+                              minimumSize: const Size(230.0, 52.0),
+                              elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12), // Bordes redondeados del botón
+                                side: const BorderSide(
+                                  color: Colors.transparent, // Color del borde
+                                  width: 1, // Ancho del borde
+                                ),
+                              ),
+                            ),
+                            child: const Text(
                               'Guardar cambios',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                   fontFamily: 'ReadexPro'
-                              ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                              // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                              backgroundColor: Color(0xFF4B39EF),
-                              foregroundColor: Colors.white,
-                              minimumSize: Size(230.0, 52.0),
-                              elevation: 3,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12), // Bordes redondeados del botón
-                                side: BorderSide(
-                                  color: Colors.transparent, // Color del borde
-                                  width: 1, // Ancho del borde
-                                ),
                               ),
                             ),
                           ),
@@ -548,10 +541,10 @@ class MiInformacionModel {
   // void initState(BuildContext context) {}
 
   void dispose() {
-    textController1?.dispose();
-    textController2?.dispose();
-    textController3?.dispose();
-    textController4?.dispose();
-    textController5?.dispose();
+    textController1.dispose();
+    textController2.dispose();
+    textController3.dispose();
+    textController4.dispose();
+    textController5.dispose();
   }
 }

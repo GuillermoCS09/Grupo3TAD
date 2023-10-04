@@ -35,29 +35,29 @@ class _Perfil extends State<Perfil> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFF4B39EF),
+        backgroundColor: const Color(0xFF4B39EF),
         body: Align(
-          alignment: AlignmentDirectional(0.00, 0.00),
+          alignment: const AlignmentDirectional(0.00, 0.00),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Container(
+              SizedBox(
                 width: 200,
                 child: Stack(
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(0.00, 0.00),
+                      alignment: const AlignmentDirectional(0.00, 0.00),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                         child: Container(
                           width: 180,
                           height: 180,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                             shape: BoxShape.circle,
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
+                            padding: const EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(100),
                               child: Image.asset(
@@ -74,7 +74,7 @@ class _Perfil extends State<Perfil> {
                   ],
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 12),
                 child: Text(
                   'Alonso Matienzo',
@@ -87,7 +87,7 @@ class _Perfil extends State<Perfil> {
                   ),
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
                 child: Text(
                   'alonso.matienzo@unmsm.com',
@@ -101,7 +101,7 @@ class _Perfil extends State<Perfil> {
                 child: Container(
                   width: double.infinity,
                   height: 400,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white, // Cambiado: FlutterFlowTheme.of(context).secondaryBackground
                     boxShadow: [
                       BoxShadow(
@@ -123,13 +123,12 @@ class _Perfil extends State<Perfil> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding:
-                          EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
+                              const Padding(
                                 padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
                                 child: Text(
@@ -142,17 +141,16 @@ class _Perfil extends State<Perfil> {
                                 ),
                               ),
                               Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: InkWell(
                                   onTap: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) => MiInformacion(),
+                                        builder: (context) => const MiInformacion(),
                                       ),
                                     );
                                   },
-                                  child: Row(
+                                  child: const Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
@@ -194,7 +192,7 @@ class _Perfil extends State<Perfil> {
                                   ),
                                 )
                               ),
-                              Padding(
+                              const Padding(
                                 padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: Row(
@@ -239,13 +237,12 @@ class _Perfil extends State<Perfil> {
                                 ),
                               ),
                               Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Padding(
+                                    const Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 8, 16, 8),
                                       child: Icon(
@@ -254,7 +251,7 @@ class _Perfil extends State<Perfil> {
                                         size: 24,
                                       ),
                                     ),
-                                    Expanded(
+                                    const Expanded(
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 0, 12, 0),
@@ -273,28 +270,26 @@ class _Perfil extends State<Perfil> {
                                     Switch.adaptive(
                                       value: switchValue ??= true, // crear bool para el valor
                                       onChanged: (newValue) async {
-                                        setState(() =>
-                                        switchValue = newValue!);
+                                        setState(() => switchValue = newValue!);
                                       },
                                       activeColor:
-                                      Color(0xFF4B39EF),
+                                      const Color(0xFF4B39EF),
                                       activeTrackColor:
-                                      Color(0x4D4B39EF),
+                                      const Color(0x4D4B39EF),
                                       inactiveTrackColor:
-                                      Color(0xFFE0E3E7),
+                                      const Color(0xFFE0E3E7),
                                       inactiveThumbColor:
-                                      Color(0xFF57636C),
+                                      const Color(0xFF57636C),
                                     ),
                                   ],
                                 ),
                               ),
                               Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child:
                                 InkWell(
                                   onTap: _showRatingDialog,
-                                  child: Row(
+                                  child: const Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
@@ -336,7 +331,7 @@ class _Perfil extends State<Perfil> {
                                   ),
                                 ),
                               ),
-                              Padding(
+                              const Padding(
                                 padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: Row(
@@ -417,19 +412,19 @@ class _Perfil extends State<Perfil> {
     final _dialog = RatingDialog(
       initialRating: 1.0,
       // your app's name?
-      title: Text(
+      title: const Text(
         'Puntúanos',
         textAlign: TextAlign.center,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 25,
           fontWeight: FontWeight.bold,
         ),
       ),
       // encourage your user to leave a high rating?
-      message: Text(
+      message: const Text(
         '¿Te está gustando nuestra aplicación? ¡Califícanos y déjanos tus comentarios.',
         textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 15),
+        style: TextStyle(fontSize: 15),
       ),
       // your app's logo?
       image: Image.asset('assets/images/logo_unmsm_morado.png', width: 100, height: 100),
