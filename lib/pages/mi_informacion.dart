@@ -11,11 +11,12 @@ class _MiInformacionState extends State<MiInformacion> {
   late MiInformacionModel _model;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  String valor1 = "Alonso";
-  String valor2 = "Matienzo";
-  String valor3 = "VIII";
-  String valor4 = "Ingeniería de Sistemas";
-  String valor5 = "20202020";
+  String nombre = "Alonso";
+  String apellido_paterno = "Matienzo";
+  String ciclo = "VIII";
+  String escuela_profesional = "Ingeniería de Sistemas";
+  String codigo = "20202020";
+  String correo = "alonso.matienzo@unmsm.edu.pe";
 
   @override
   void initState() {
@@ -28,11 +29,12 @@ class _MiInformacionState extends State<MiInformacion> {
     // _model.textController4 ??= TextEditingController();
     // _model.textController5 ??= TextEditingController();
 
-    _model.textController1.text = valor1;
-    _model.textController2.text = valor2;
-    _model.textController3.text = valor3;
-    _model.textController4.text = valor4;
-    _model.textController5.text = valor5;
+    _model.textController1.text = nombre;
+    _model.textController2.text = apellido_paterno;
+    _model.textController3.text = ciclo;
+    _model.textController4.text = escuela_profesional;
+    _model.textController5.text = codigo;
+    _model.textController6.text = correo;
   }
 
   @override
@@ -49,9 +51,9 @@ class _MiInformacionState extends State<MiInformacion> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: const Color(0xFF4B39EF),
-        automaticallyImplyLeading: false,
+        // automaticallyImplyLeading: false,
         title: const Text(
-          'Complete Profile',
+          'Información Personal',
           style: TextStyle(
             fontSize: 16,
             fontFamily: 'ReadexPro',
@@ -90,323 +92,12 @@ class _MiInformacionState extends State<MiInformacion> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                            child: TextFormField(
-                              controller: _model.textController1,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Nombres',
-                                labelStyle: const TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: 'ReadexPro',
-                                  color: Color(0xFF57636C)
-                                ),
-                                hintStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'ReadexPro',
-                                    color: Color(0xFF57636C)
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color:
-                                    Color(0xFFE0E3E7),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFF4B39EF),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFFF5963),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFFF5963),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                              ),
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: 'ReadexPro',
-                                  color: Color(0xFF57636C)
-                              ),
-                              validator: (value) => _model.textController1Validator(context, value),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                            child: TextFormField(
-                              controller: _model.textController2,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Apellidos',
-                                labelStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'ReadexPro',
-                                    color: Color(0xFF57636C)
-                                ),
-                                hintStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'ReadexPro',
-                                    color: Color(0xFF57636C)
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFE0E3E7),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFF4B39EF),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFFF5963),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFFF5963),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                              ),
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: 'ReadexPro',
-                                  color: Color(0xFF57636C)
-                              ),
-                              validator: (value) => _model.textController2Validator(context, value),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                            child: TextFormField(
-                              controller: _model.textController3,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Ciclo',
-                                labelStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'ReadexPro',
-                                    color: Color(0xFF57636C)
-                                ),
-                                hintStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'ReadexPro',
-                                    color: Color(0xFF57636C)
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color:
-                                    Color(0xFFE0E3E7),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFF4B39EF),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFFF5963),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFFF5963),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                              ),
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: 'ReadexPro',
-                                  color: Color(0xFF57636C)
-                              ),
-                              validator: (value) => _model.textController3Validator(context, value),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                            child: TextFormField(
-                              controller: _model.textController4,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Escuela Profesional',
-                                labelStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'ReadexPro',
-                                    color: Color(0xFF57636C)
-                                ),
-                                hintStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'ReadexPro',
-                                    color: Color(0xFF57636C)
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFE0E3E7),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFF4B39EF),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFFF5963),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFFF5963),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                              ),
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: 'ReadexPro',
-                                  color: Color(0xFF57636C)
-                              ),
-                              validator: (value) => _model.textController4Validator(context, value),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                            child: TextFormField(
-                              controller: _model.textController5,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Código de Alumno',
-                                labelStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'ReadexPro',
-                                    color: Color(0xFF57636C)
-                                ),
-                                hintStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'ReadexPro',
-                                    color: Color(0xFF57636C)
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFE0E3E7),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFF4B39EF),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFFF5963),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFFF5963),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                              ),
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: 'ReadexPro',
-                                  color: Color(0xFF57636C)
-                              ),
-                              validator: (value) => _model.textController5Validator(context, value),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    CampoTexto(context, _model.textController1, 'Nombres', (value) => _model.textController1Validator(context, value)),
+                    CampoTexto(context, _model.textController2, 'Apellidos', (value) => _model.textController2Validator(context, value)),
+                    CampoTexto(context, _model.textController3, 'Ciclo', (value) => _model.textController3Validator(context, value)),
+                    CampoTexto(context, _model.textController4, 'Escuela Profesional', (value) => _model.textController4Validator(context, value)),
+                    CampoTexto(context, _model.textController5, 'Código', (value) => _model.textController5Validator(context, value)),
+                    CampoTexto(context, _model.textController6, 'Correo institucional', (value) => _model.textController6Validator(context, value)),
                   ],
                 ),
               ),
@@ -459,11 +150,11 @@ class _MiInformacionState extends State<MiInformacion> {
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context);
-                              valor1 = _model.textController1.text;
-                              valor2 = _model.textController2.text;
-                              valor3 = _model.textController3.text;
-                              valor4 = _model.textController4.text;
-                              valor5 = _model.textController5.text;
+                              nombre = _model.textController1.text;
+                              apellido_paterno = _model.textController2.text;
+                              ciclo = _model.textController3.text;
+                              escuela_profesional = _model.textController4.text;
+                              codigo = _model.textController5.text;
                             },
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
@@ -503,6 +194,72 @@ class _MiInformacionState extends State<MiInformacion> {
   }
 }
 
+Widget CampoTexto(BuildContext context, TextEditingController controller, String label, String? Function(String?)? validator) {
+  return Row(
+    mainAxisSize: MainAxisSize.max,
+    children: [
+      Expanded(
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+          child: TextFormField(
+            controller: controller,
+            obscureText: false,
+            decoration: InputDecoration(
+              labelText: label,
+              labelStyle: const TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'ReadexPro',
+                  color: Color(0xFF57636C)
+              ),
+              hintStyle: const TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'ReadexPro',
+                  color: Color(0xFF57636C)
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Color(0xFFE0E3E7),
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Color(0xFF4B39EF),
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Color(0xFFFF5963),
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Color(0xFFFF5963),
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              filled: true,
+              fillColor: Colors.white,
+            ),
+            style: const TextStyle(
+                fontSize: 14,
+                fontFamily: 'ReadexPro',
+                color: Color(0xFF57636C)
+            ),
+            validator: validator,//(value) => _model.textController1Validator(context, value),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
 class MiInformacionModel {
   // TextEditingController? textController1;
   TextEditingController textController1 = TextEditingController();
@@ -510,6 +267,7 @@ class MiInformacionModel {
   TextEditingController textController3 = TextEditingController();
   TextEditingController textController4 = TextEditingController();
   TextEditingController textController5 = TextEditingController();
+  TextEditingController textController6 = TextEditingController();
 
   // State field(s) for TextField widget.
   String? textController1Validator(BuildContext context, String? value) {
@@ -536,6 +294,10 @@ class MiInformacionModel {
     // Lógica de validación para el primer TextFormField
     return null; // Retorna null si la validación es exitosa, o un mensaje de error si falla.
   }
+  String? textController6Validator(BuildContext context, String? value) {
+    // Lógica de validación para el primer TextFormField
+    return null; // Retorna null si la validación es exitosa, o un mensaje de error si falla.
+  }
 
   // Implementa las funciones de validación para los demás TextFormField si es necesario.
   // void initState(BuildContext context) {}
@@ -546,5 +308,6 @@ class MiInformacionModel {
     textController3.dispose();
     textController4.dispose();
     textController5.dispose();
+    textController6.dispose();
   }
 }

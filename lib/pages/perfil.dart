@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'mi_informacion.dart';
+import 'mis_reservas.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({Key? key}) : super(key: key);
@@ -192,49 +193,57 @@ class _Perfil extends State<Perfil> {
                                   ),
                                 )
                               ),
-                              const Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 8, 16, 8),
-                                      child: Icon(
-                                        Icons.calendar_month,
-                                        color: Color(0xFF57636C),
-                                        size: 24,
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => MisReservas(),
                                       ),
-                                    ),
-                                    Expanded(
-                                      child: Padding(
+                                    );
+                                  },
+                                  child: const Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 12, 0),
-                                        child: Text(
-                                          'Ver mis reservas',
-                                          textAlign: TextAlign.start,
-                                          style:
-                                            TextStyle(
-                                              fontSize: 14,
-                                              fontFamily: 'ReadexPro',
-                                              color: Color(0xFF57636C),
-                                            )
+                                            0, 8, 16, 8),
+                                        child: Icon(
+                                          Icons.calendar_month,
+                                          color: Color(0xFF57636C),
+                                          size: 24,
                                         ),
                                       ),
-                                    ),
-                                    Text(
-                                      'Historial',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontFamily: 'ReadexPro',
-                                        color: Color(0xFF4B39EF),
-                                        fontSize: 14, // Tamaño de fuente personalizado
+                                      Expanded(
+                                        child: Padding(
+                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                              0, 0, 12, 0),
+                                          child: Text(
+                                              'Ver mis reservas',
+                                              textAlign: TextAlign.start,
+                                              style:
+                                              TextStyle(
+                                                fontSize: 14,
+                                                fontFamily: 'ReadexPro',
+                                                color: Color(0xFF57636C),
+                                              )
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                      Text(
+                                        'Historial',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: 'ReadexPro',
+                                          color: Color(0xFF4B39EF),
+                                          fontSize: 14, // Tamaño de fuente personalizado
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
