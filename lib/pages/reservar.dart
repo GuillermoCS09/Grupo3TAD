@@ -1,9 +1,32 @@
 import 'package:flutter/material.dart';
-
 import 'Calendario.dart';
+import 'package:tflite_flutter/tflite_flutter.dart';
 
-class Reservar extends StatelessWidget {
+class Reservar extends StatefulWidget {
   const Reservar({super.key});
+
+  _ReservarState createState() => _ReservarState();
+}
+
+class _ReservarState extends State<Reservar> {
+  var predValue = "Cargando..."; // Texto de carga inicial
+  late Interpreter interpreter;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadModelAndRunInference();
+  }
+
+  Future<void> _loadModelAndRunInference() async {
+    interpreter = await Interpreter.fromAsset('assets/Modelo.tflite');
+    final output = List.filled(1 * 1, 0.0).reshape([1, 1]); // Ajusta la forma a [1, 1]
+    interpreter.run([96], output);
+    setState(() {
+      final parsedValue = double.parse(output[0][0].toString());
+      predValue = parsedValue.round().toString();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +36,48 @@ class Reservar extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: <Widget> [
           titulo(context),
+          prediccionReservas(predValue),
           barraBusqueda(context),
           salones(context)
         ],
       ),
     );
   }
+
+  @override
+  void dispose() {
+    interpreter.close();
+    super.dispose();
+  }
+}
+
+Widget titulo(context){
+  return Container(
+    margin: const EdgeInsets.symmetric(horizontal: 65, vertical: 25),
+    padding: const EdgeInsets.symmetric(horizontal: 65, vertical: 10),
+    width: MediaQuery.of(context).size.width,
+    child: const Text(
+      'Reserva de Salones',
+      style: TextStyle(
+        fontSize: 24,
+        fontFamily: 'Outfit',
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
+    ),
+  );
+}
+
+Widget prediccionReservas(var predValue){
+  return Padding(
+    padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 16),
+    child: Text(
+      "Reservas estimadas para hoy: $predValue",
+      style: TextStyle(fontSize: 16,
+      fontFamily: 'ReadexPro',
+      color: Colors.black,)
+    ),
+  );
 }
 
 Widget barraBusqueda(context){
@@ -36,23 +95,6 @@ Widget barraBusqueda(context){
             color: Colors.black), // Ícono de lupa
         border: InputBorder.none, // Elimina el borde predeterminado
         contentPadding: EdgeInsets.all(16.0), // Espacio interno
-      ),
-    ),
-  );
-}
-
-Widget titulo(context){
-  return Container(
-    margin: const EdgeInsets.symmetric(horizontal: 65, vertical: 25),
-    padding: const EdgeInsets.symmetric(horizontal: 65, vertical: 10),
-    width: MediaQuery.of(context).size.width,
-    child: const Text(
-      'Reserva de Salones',
-      style: TextStyle(
-        fontSize: 24,
-        fontFamily: 'Outfit',
-        fontWeight: FontWeight.bold,
-        color: Colors.black,
       ),
     ),
   );
@@ -200,76 +242,7 @@ Widget buildCenteredContainer(BuildContext context, String aula, String pabellon
       ),
     ),
   );
-  /*
-  return Container(
-    width: 600.0,
-    height: 162.0,
-    decoration: BoxDecoration(
-      color: Color(0xFFF9F3F3),
-      borderRadius: BorderRadius.circular(10.0),
-    ),
-    padding: EdgeInsets.all(10.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10.0), // El valor controla la circularidad del borde
-              child: Image.asset(
-                imagePath,
-                width: largo,
-                height: alto,
-              ),
-            ),
-            Container(
-              width: 350.0, // Ancho deseado para el contenedor del texto y el botón
-              child: Column(
-                children: [
-                  Text(
-                    text,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'ReadexPro',
-                      fontSize: 18.0,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(height: 20.0),
-                  ElevatedButton(
-                    child: Text(
-                      'IR AHORA',
-                      style: TextStyle(
-                        fontFamily: 'Outfit',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    onPressed: () {
-                      // Acción a realizar al presionar el botón
-                    },
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(200, 30),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      backgroundColor: Color(0xFF4B39EF),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
-  */
 }
-
-
 
 /*
 void _showPopup(BuildContext context) {

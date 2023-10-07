@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'barra_inferior.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:proyecto_sm/auth.dart';
 
 class LoginApp extends StatelessWidget {
   const LoginApp({super.key});
@@ -27,6 +29,33 @@ class MyHomeLoginApp extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomeLoginApp> {
+  String? errorMessage = '';//
+  bool isLogin = true;
+
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerPassword = TextEditingController();
+
+  // Future<void> signInWithEmailAndPassword() async {
+  //   try {
+  //     await Auth().signInWithEmailAndPassword(
+  //         email: _controllerEmail.text,
+  //         password: _controllerPassword.text
+  //     );
+  //   } on FirebaseAuthException catch (e) {
+  //     setState(() {
+  //       errorMessage = e.message;
+  //     });
+  //   }
+  // }
+
+  @override
+  void dispose(){
+    _controllerEmail.dispose();
+    _controllerPassword.dispose();
+    super.dispose();
+  }
+
   final _formKey = GlobalKey<FormState>();
   static final RegExp _emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
@@ -34,6 +63,10 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
   {
     return _emailRegExp.hasMatch(str.toLowerCase());
   }
+
+  // Widget _errorMessage() {
+  //   return Text(errorMessage == '' ? '' : '$errorMessage');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -116,6 +149,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
+                      controller: _controllerEmail,
                       validator: (value) {
                         if (!_esEmail(value.toString())){
                           return 'Ingrese su correo correctamente';
@@ -131,6 +165,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
+                      controller: _controllerPassword,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Ingrese su contraseña';
@@ -145,7 +180,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      runApp(const MyAppBarra()); //Aca llama a la pestaña inicio
+                      _signIn();
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -203,5 +238,22 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
         ),
       ),
     );
+  }
+
+  void _signIn() async {
+    String email = _controllerEmail.text;
+    String password = _controllerPassword.text;
+    
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+    if(user != null) {
+      print("User is successfully signedIn");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MyAppBarra()),
+        // (Route<dynamic> route) => false, // Esta función siempre devuelve false, eliminando todas las rutas anteriores.
+      );
+    } else {
+      print("Some error happened");
+    }
   }
 }

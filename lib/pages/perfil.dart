@@ -194,7 +194,7 @@ class _Perfil extends State<Perfil> {
                                 )
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: InkWell(
                                   onTap: () {
                                     Navigator.of(context).push(
@@ -295,8 +295,7 @@ class _Perfil extends State<Perfil> {
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                child:
-                                InkWell(
+                                child: InkWell(
                                   onTap: _showRatingDialog,
                                   child: const Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -340,49 +339,51 @@ class _Perfil extends State<Perfil> {
                                   ),
                                 ),
                               ),
-                              const Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 8, 16, 8),
-                                      child: Icon(
-                                        Icons.login_rounded,
-                                        color: Color(0xFF57636C),
-                                        size: 24,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Padding(
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                child: InkWell(
+                                  onTap: () {Navigator.pop(context);},
+                                  child: const Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 12, 0),
-                                        child: Text(
-                                          'Salir de mi cuenta',
-                                          textAlign: TextAlign.start,
-                                          style:
-                                            TextStyle(
-                                              fontSize: 14,
-                                              fontFamily: 'ReadexPro',
-                                              color: Color(0xFF57636C),
-                                            )
+                                            0, 8, 16, 8),
+                                        child: Icon(
+                                          Icons.login_rounded,
+                                          color: Color(0xFF57636C),
+                                          size: 24,
                                         ),
                                       ),
-                                    ),
-                                    Text(
-                                      'Cerrar Sesión',
-                                      style: TextStyle(
-                                        fontFamily: 'ReadexPro',
-                                        color: Color(0xFF4B39EF),
-                                        fontSize: 14, // Peso de fuente personalizado
-                                        // Otros atributos de estilo de texto que desees personalizar
+                                      Expanded(
+                                        child: Padding(
+                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                              0, 0, 12, 0),
+                                          child: Text(
+                                              'Salir de mi cuenta',
+                                              textAlign: TextAlign.start,
+                                              style:
+                                              TextStyle(
+                                                fontSize: 14,
+                                                fontFamily: 'ReadexPro',
+                                                color: Color(0xFF57636C),
+                                              )
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                      Text(
+                                        'Cerrar Sesión',
+                                        style: TextStyle(
+                                          fontFamily: 'ReadexPro',
+                                          color: Color(0xFF4B39EF),
+                                          fontSize: 14, // Peso de fuente personalizado
+                                          // Otros atributos de estilo de texto que desees personalizar
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
                               ),
                             ],
                           ),
