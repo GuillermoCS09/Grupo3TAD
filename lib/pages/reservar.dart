@@ -34,11 +34,12 @@ class _ReservarState extends State<Reservar> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
-        children: <Widget> [
+        children: <Widget>[
           titulo(context),
           prediccionReservas(predValue),
           barraBusqueda(context),
-          salones(context)
+          Filtros(),// Llamar a la función Filtros
+          salones(context),
         ],
       ),
     );
@@ -57,7 +58,7 @@ Widget titulo(context){
     padding: const EdgeInsets.symmetric(horizontal: 65, vertical: 10),
     width: MediaQuery.of(context).size.width,
     child: const Text(
-      'Reserva de Salones',
+      'Reserva de   Salones',
       style: TextStyle(
         fontSize: 24,
         fontFamily: 'Outfit',
@@ -79,6 +80,91 @@ Widget prediccionReservas(var predValue){
     ),
   );
 }
+
+class Filtros extends StatefulWidget {
+  @override
+  _FiltrosState createState() => _FiltrosState();
+}
+
+class _FiltrosState extends State<Filtros> {
+  List<String> list = ['Seleccione la hora','One', 'Two', 'Three', 'Four'];
+  String dropdownValue = "";
+
+  @override
+  void initState() {
+    super.initState();
+    dropdownValue = list.first;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 398,
+      height: 73,
+      decoration: BoxDecoration(
+        color: Colors.white,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Expanded(
+            child: Container(
+              width: 178,
+              height: 50,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: Color(0xFFC7C5C5),
+                  width: 2,
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 2),
+                    child: Text(
+                      'Seleccione el día',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'ReadexPro',
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.calendar_today,
+                      color: Colors.black,
+                      size: 24,
+                    ),
+                    onPressed: () {
+                      print('IconButton pressed ...');
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+          DropdownMenu<String>(
+          initialSelection: list.first,
+          onSelected: (String? value) {
+          // This is called when the user selects an item.
+          setState(() {
+            dropdownValue = value!;
+          });
+          },
+          dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
+          return DropdownMenuEntry<String>(value: value, label: value);
+          }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 
 Widget barraBusqueda(context){
   return Container(
