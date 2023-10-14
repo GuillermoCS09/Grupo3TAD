@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Proyecto Grupo 3',
+      theme: ThemeData(unselectedWidgetColor: Colors.grey[200],),
       home: MyAppSplash(),
     );
   }

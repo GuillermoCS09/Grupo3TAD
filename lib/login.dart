@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'barra_inferior.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:proyecto_sm/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginApp extends StatelessWidget {
   const LoginApp({super.key});
@@ -178,7 +179,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 80),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       _signIn();
                     }
@@ -247,11 +248,27 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
     User? user = await _auth.signInWithEmailAndPassword(email, password);
     if(user != null) {
       print("User is successfully signedIn");
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MyAppBarra()),
-        // (Route<dynamic> route) => false, // Esta función siempre devuelve false, eliminando todas las rutas anteriores.
-      );
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('usuarios')
+          .where('correo', isEqualTo: user.email)
+          .get();
+      if (querySnapshot.docs.isNotEmpty) {
+        DocumentSnapshot userSnapshot = querySnapshot.docs[0];
+        // Si el perfil existe, muestra el saludo en la siguiente página.
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MyAppBarra(
+              nombre: userSnapshot['nombre'],
+              apellidoPaterno: userSnapshot['apellido_paterno'],
+              apellidoMaterno: userSnapshot['apellido_materno'],
+            ),
+          ),
+          // (Route<dynamic> route) => false, // Esta función siempre devuelve false, eliminando todas las rutas anteriores.
+        );
+      } else {
+        print("nop");
+      }
     } else {
       print("Some error happened");
     }

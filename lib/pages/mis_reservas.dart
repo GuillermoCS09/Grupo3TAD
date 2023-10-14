@@ -225,8 +225,6 @@ class Activas extends StatelessWidget {
                               scrollDirection: Axis.vertical,
                               children: [
                                 aulaReservada(context, 'Aula 101', '05/10/23', '10:00 AM - 12:00 PM', 'assets/images/salon1.jpg'),
-                                aulaReservada(context, 'Aula 102', '04/10/23', '03:00 PM - 05:00 PM', 'assets/images/salon2.jpg'),
-                                aulaReservada(context, 'Aula 103', '03/10/23', '04:00 PM - 06:00 PM', 'assets/images/salon3.jpg'),
                               ]
                           ),
                         ),
@@ -316,8 +314,6 @@ class Canceladas extends StatelessWidget {
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
                               children: [
-                                aulaReservada(context, 'Aula 103', '05/10/23', '10:00 AM - 12:00 PM', 'assets/images/salon1.jpg'),
-                                aulaReservada(context, 'Aula 104', '04/10/23', '03:00 PM - 05:00 PM', 'assets/images/salon2.jpg'),
                                 aulaReservada(context, 'Aula 105', '03/10/23', '04:00 PM - 06:00 PM', 'assets/images/salon3.jpg'),
                               ]
                           ),

@@ -124,14 +124,13 @@ class _Perfil extends State<Perfil> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                                padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
                                 child: Text(
                                   'Ajustes',
                                   style: TextStyle( // Corregido: FlutterFlowTheme.of(context).headlineSmall
@@ -140,6 +139,45 @@ class _Perfil extends State<Perfil> {
                                     color: Color(0xFF14181B), // Cambiado: FlutterFlowTheme.of(context).info
                                   ),
                                 ),
+                              ),
+                              ListView(
+                                shrinkWrap: true,
+                                children: [
+                                  ListTile(
+                                    visualDensity: VisualDensity(horizontal: -4),
+                                    leading: Icon(
+                                      Icons.edit,
+                                      color: Color(0xFF57636C),
+                                      size: 24,
+                                    ), // Elemento a la izquierda
+                                    title: Text(
+                                        'Información personal',
+                                        textAlign: TextAlign.start,
+                                        style:
+                                        TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'ReadexPro',
+                                          color: Color(0xFF57636C),
+                                        )
+                                    ), // Texto principal
+                                    trailing: Text(
+                                      'Editar Perfil',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontFamily: 'ReadexPro',
+                                        color: Color(0xFF4B39EF),
+                                        fontSize: 14, // Tamaño de fuente personalizado
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) => const MiInformacion(),
+                                        ),
+                                      );
+                                    },// Texto a la derecha
+                                  ),
+                                ],
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),

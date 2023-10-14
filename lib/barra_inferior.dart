@@ -3,12 +3,21 @@ import 'pages/inicio.dart';
 import 'pages/perfil.dart';
 import 'pages/reservar.dart';
 
-void main() {
-  runApp(const MyAppBarra());
-}
+// void main() {
+//   runApp(const MyAppBarra());
+// }
 
 class MyAppBarra extends StatefulWidget {
-  const MyAppBarra({super.key});
+  //const MyAppBarra({super.key});
+  final String nombre;
+  final String apellidoPaterno;
+  final String apellidoMaterno;
+
+  MyAppBarra({
+    required this.nombre,
+    required this.apellidoPaterno,
+    required this.apellidoMaterno,
+  });
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -17,11 +26,21 @@ class MyAppBarra extends StatefulWidget {
 class _MyAppState extends State<MyAppBarra> {
   int paginaActual = 0;
 
-  List<Widget> paginas = [
-    const Inicio(),
-    const Reservar(),
-    const Perfil()
-  ];
+  late List<Widget> paginas;
+
+  @override
+  void initState() {
+    super.initState();
+    paginas = [
+      Inicio(
+        nombre: widget.nombre,
+        apellidoPaterno: widget.apellidoPaterno,
+        apellidoMaterno: widget.apellidoMaterno,
+      ),
+      const Reservar(),
+      const Perfil(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {

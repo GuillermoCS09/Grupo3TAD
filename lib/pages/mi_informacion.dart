@@ -13,6 +13,7 @@ class _MiInformacionState extends State<MiInformacion> {
 
   String nombre = "Alonso";
   String apellido_paterno = "Matienzo";
+  String apellido_materno = "Torres";
   String ciclo = "VIII";
   String escuela_profesional = "Ingeniería de Sistemas";
   String codigo = "20202020";
@@ -31,10 +32,11 @@ class _MiInformacionState extends State<MiInformacion> {
 
     _model.textController1.text = nombre;
     _model.textController2.text = apellido_paterno;
-    _model.textController3.text = ciclo;
-    _model.textController4.text = escuela_profesional;
-    _model.textController5.text = codigo;
-    _model.textController6.text = correo;
+    _model.textController3.text = apellido_materno;
+    _model.textController4.text = ciclo;
+    _model.textController5.text = escuela_profesional;
+    _model.textController6.text = codigo;
+    _model.textController7.text = correo;
   }
 
   @override
@@ -93,11 +95,12 @@ class _MiInformacionState extends State<MiInformacion> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CampoTexto(context, _model.textController1, 'Nombres', (value) => _model.textController1Validator(context, value)),
-                    CampoTexto(context, _model.textController2, 'Apellidos', (value) => _model.textController2Validator(context, value)),
-                    CampoTexto(context, _model.textController3, 'Ciclo', (value) => _model.textController3Validator(context, value)),
-                    CampoTexto(context, _model.textController4, 'Escuela Profesional', (value) => _model.textController4Validator(context, value)),
-                    CampoTexto(context, _model.textController5, 'Código', (value) => _model.textController5Validator(context, value)),
-                    CampoTexto(context, _model.textController6, 'Correo institucional', (value) => _model.textController6Validator(context, value)),
+                    CampoTexto(context, _model.textController2, 'Apellido Paterno', (value) => _model.textController2Validator(context, value)),
+                    CampoTexto(context, _model.textController3, 'Apellido Materno', (value) => _model.textController3Validator(context, value)),
+                    CampoTexto(context, _model.textController4, 'Ciclo', (value) => _model.textController4Validator(context, value)),
+                    CampoTexto(context, _model.textController5, 'Escuela Profesional', (value) => _model.textController5Validator(context, value)),
+                    CampoTexto(context, _model.textController6, 'Código', (value) => _model.textController6Validator(context, value)),
+                    CampoTexto(context, _model.textController7, 'Correo institucional', (value) => _model.textController7Validator(context, value)),
                   ],
                 ),
               ),
@@ -152,9 +155,11 @@ class _MiInformacionState extends State<MiInformacion> {
                               Navigator.pop(context);
                               nombre = _model.textController1.text;
                               apellido_paterno = _model.textController2.text;
-                              ciclo = _model.textController3.text;
-                              escuela_profesional = _model.textController4.text;
-                              codigo = _model.textController5.text;
+                              apellido_materno = _model.textController3.text;
+                              ciclo = _model.textController4.text;
+                              escuela_profesional = _model.textController5.text;
+                              codigo = _model.textController6.text;
+                              correo = _model.textController7.text;
                             },
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
@@ -268,6 +273,7 @@ class MiInformacionModel {
   TextEditingController textController4 = TextEditingController();
   TextEditingController textController5 = TextEditingController();
   TextEditingController textController6 = TextEditingController();
+  TextEditingController textController7 = TextEditingController();
 
   // State field(s) for TextField widget.
   String? textController1Validator(BuildContext context, String? value) {
@@ -298,6 +304,10 @@ class MiInformacionModel {
     // Lógica de validación para el primer TextFormField
     return null; // Retorna null si la validación es exitosa, o un mensaje de error si falla.
   }
+  String? textController7Validator(BuildContext context, String? value) {
+    // Lógica de validación para el primer TextFormField
+    return null; // Retorna null si la validación es exitosa, o un mensaje de error si falla.
+  }
 
   // Implementa las funciones de validación para los demás TextFormField si es necesario.
   // void initState(BuildContext context) {}
@@ -309,5 +319,6 @@ class MiInformacionModel {
     textController4.dispose();
     textController5.dispose();
     textController6.dispose();
+    textController7.dispose();
   }
 }

@@ -3,9 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:proyecto_sm/auth.dart';
 
 class Inicio extends StatelessWidget {
-  const Inicio({super.key});
+  //Inicio({super.key});
+  final String nombre;
+  final String apellidoPaterno;
+  final String apellidoMaterno;
 
-  // final User? user = Auth().currentUser;
+  Inicio({
+    required this.nombre,
+    required this.apellidoPaterno,
+    required this.apellidoMaterno,
+  });
+
+  final User? user = FirebaseAuthService().currentUser;
   //
   // Future<void> signOut() async {
   //   await Auth().signOut();
@@ -18,11 +27,11 @@ class Inicio extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Align(
+            Align(
               alignment: Alignment.center,
               child: Text(
-                'Bienvenido\nAlonso Matienzo',
-                style: TextStyle(
+                'Bienvenido, $nombre $apellidoPaterno',
+                style: const TextStyle(
                   fontFamily: 'Outfit',
                   fontSize: 24,
                   color: Colors.black,
