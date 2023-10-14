@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_sm/user_data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MiInformacion extends StatefulWidget {
-  const MiInformacion({Key? key}) : super(key: key);
+  final UserData userData;
+  const MiInformacion({Key? key, required this.userData}) : super(key: key);
 
   @override
   _MiInformacionState createState() => _MiInformacionState ();
@@ -30,20 +34,44 @@ class _MiInformacionState extends State<MiInformacion> {
     // _model.textController4 ??= TextEditingController();
     // _model.textController5 ??= TextEditingController();
 
-    _model.textController1.text = nombre;
-    _model.textController2.text = apellido_paterno;
-    _model.textController3.text = apellido_materno;
-    _model.textController4.text = ciclo;
-    _model.textController5.text = escuela_profesional;
-    _model.textController6.text = codigo;
-    _model.textController7.text = correo;
+    _model.textController1.text = widget.userData.nombre;
+    _model.textController2.text = widget.userData.apellidoPaterno;
+    _model.textController3.text = widget.userData.apellidoMaterno;
+    _model.textController4.text = widget.userData.ciclo;
+    _model.textController5.text = widget.userData.escuelaProfesional;
+    _model.textController6.text = widget.userData.codigo.toString();
+    _model.textController7.text = widget.userData.correo;
   }
 
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
+  }
+
+  Future<void> updateUserInformation() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    print(user?.uid);
+    if (user != null) {
+      final userRef = FirebaseFirestore.instance.collection('usuarios').doc(user.uid);
+
+      try {
+        await userRef.update({
+          'nombre': _model.textController1.text,
+          'apellido_paterno': _model.textController2.text,
+          'apellido_materno': _model.textController3.text,
+          'ciclo': _model.textController4.text,
+          'escuela_profesional': _model.textController5.text,
+          'codigo': int.parse(_model.textController6.text),
+          'correo': _model.textController7.text,
+        });
+        // Puedes mostrar un mensaje de éxito si deseas
+        print("Información actualizada exitosamente.");
+      } catch (error) {
+        // Maneja el error aquí
+        print("Error al actualizar la información: $error");
+      }
+    }
   }
 
   @override
@@ -152,14 +180,15 @@ class _MiInformacionState extends State<MiInformacion> {
                           padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 16),
                           child: ElevatedButton(
                             onPressed: () {
+                              updateUserInformation();
                               Navigator.pop(context);
-                              nombre = _model.textController1.text;
-                              apellido_paterno = _model.textController2.text;
-                              apellido_materno = _model.textController3.text;
-                              ciclo = _model.textController4.text;
-                              escuela_profesional = _model.textController5.text;
-                              codigo = _model.textController6.text;
-                              correo = _model.textController7.text;
+                              // nombre = _model.textController1.text;
+                              // apellido_paterno = _model.textController2.text;
+                              // apellido_materno = _model.textController3.text;
+                              // ciclo = _model.textController4.text;
+                              // escuela_profesional = _model.textController5.text;
+                              // codigo = _model.textController6.text;
+                              // correo = _model.textController7.text;
                             },
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),

@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:proyecto_sm/auth.dart';
+import 'package:proyecto_sm/user_data.dart';
 
 class Inicio extends StatelessWidget {
   //Inicio({super.key});
-  final String nombre;
-  final String apellidoPaterno;
-  final String apellidoMaterno;
+  final UserData userData;
 
-  Inicio({
-    required this.nombre,
-    required this.apellidoPaterno,
-    required this.apellidoMaterno,
-  });
+  Inicio({required this.userData});
 
   final User? user = FirebaseAuthService().currentUser;
   //
@@ -30,7 +25,7 @@ class Inicio extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: Text(
-                'Bienvenido, $nombre $apellidoPaterno',
+                'Bienvenido, ${userData.nombre} ${userData.apellidoPaterno}',
                 style: const TextStyle(
                   fontFamily: 'Outfit',
                   fontSize: 24,

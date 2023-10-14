@@ -3,6 +3,7 @@ import 'barra_inferior.dart';
 import 'package:proyecto_sm/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:proyecto_sm/user_data.dart';
 
 class LoginApp extends StatelessWidget {
   const LoginApp({super.key});
@@ -36,19 +37,6 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
   final FirebaseAuthService _auth = FirebaseAuthService();
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
-
-  // Future<void> signInWithEmailAndPassword() async {
-  //   try {
-  //     await Auth().signInWithEmailAndPassword(
-  //         email: _controllerEmail.text,
-  //         password: _controllerPassword.text
-  //     );
-  //   } on FirebaseAuthException catch (e) {
-  //     setState(() {
-  //       errorMessage = e.message;
-  //     });
-  //   }
-  // }
 
   @override
   void dispose(){
@@ -209,30 +197,6 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                     ),
                   ),
                 ),
-                /*
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    runApp(const MyAppBarra()); //Aca llama a la pestaña inicio
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(500, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  backgroundColor: Color(0xFF6C181B), // Color personalizado
-                ),
-                child: const Text(
-                  'INICIAR SESIÓN',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Lato',
-                  ),
-                ),
-              ),
-              */
               )
             ],
           ),
@@ -253,16 +217,21 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
           .where('correo', isEqualTo: user.email)
           .get();
       if (querySnapshot.docs.isNotEmpty) {
-        DocumentSnapshot userSnapshot = querySnapshot.docs[0];
+        DocumentSnapshot userData = querySnapshot.docs[0];
+        UserData userdatos = UserData(
+          nombre: userData['nombre'],
+          apellidoPaterno: userData['apellido_paterno'],
+          apellidoMaterno: userData['apellido_materno'],
+          ciclo: userData['ciclo'],
+          codigo: userData['codigo'],
+          correo: userData['correo'],
+          escuelaProfesional: userData['escuela_profesional']
+        );
         // Si el perfil existe, muestra el saludo en la siguiente página.
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => MyAppBarra(
-              nombre: userSnapshot['nombre'],
-              apellidoPaterno: userSnapshot['apellido_paterno'],
-              apellidoMaterno: userSnapshot['apellido_materno'],
-            ),
+            builder: (context) => MyAppBarra(userData: userdatos),
           ),
           // (Route<dynamic> route) => false, // Esta función siempre devuelve false, eliminando todas las rutas anteriores.
         );

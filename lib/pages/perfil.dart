@@ -3,9 +3,11 @@ import 'package:rating_dialog/rating_dialog.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'mi_informacion.dart';
 import 'mis_reservas.dart';
+import 'package:proyecto_sm/user_data.dart';
 
 class Perfil extends StatefulWidget {
-  const Perfil({Key? key}) : super(key: key);
+  final UserData userData;
+  const Perfil({Key? key, required this.userData}) : super(key: key);
 
   @override
   _Perfil createState() => _Perfil();
@@ -14,10 +16,12 @@ class Perfil extends StatefulWidget {
 class _Perfil extends State<Perfil> {
   final unfocusNode = FocusNode();
   bool? switchValue;
+  UserData? userData; //?
 
   @override
   void initState() {
     super.initState();
+    userData = widget.userData;
   }
 
   @override
@@ -75,12 +79,12 @@ class _Perfil extends State<Perfil> {
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 12),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 12),
                 child: Text(
-                  'Alonso Matienzo',
+                  '${userData?.nombre} ${userData?.apellidoPaterno}',
                   textAlign: TextAlign.center,
-                  style: TextStyle( // Corregido: FlutterFlowTheme.of(context).headlineSmall.override(...)
+                  style: const TextStyle( // Corregido: FlutterFlowTheme.of(context).headlineSmall.override(...)
                     fontFamily: 'Outfit',
                     color: Colors.white, // Cambiado: FlutterFlowTheme.of(context).info
                     fontSize: 24,
@@ -88,11 +92,11 @@ class _Perfil extends State<Perfil> {
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
                 child: Text(
-                  'alonso.matienzo@unmsm.com',
-                  style: TextStyle( // Corregido: FlutterFlowTheme.of(context).titleSmall.override(...)
+                  '${userData?.correo}',
+                  style: const TextStyle( // Corregido: FlutterFlowTheme.of(context).titleSmall.override(...)
                     fontFamily: 'ReadexPro',
                     color: Colors.white, // Cambiado: FlutterFlowTheme.of(context).accent4
                   ),
@@ -170,11 +174,15 @@ class _Perfil extends State<Perfil> {
                                       ),
                                     ),
                                     onTap: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) => const MiInformacion(),
-                                        ),
-                                      );
+                                      if (userData != null) {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) => MiInformacion(userData: userData!),
+                                          ),
+                                        );
+                                      } else {
+                                        // Manejar el caso en el que userData es nulo
+                                      }
                                     },// Texto a la derecha
                                   ),
                                 ],
@@ -183,11 +191,15 @@ class _Perfil extends State<Perfil> {
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => const MiInformacion(),
-                                      ),
-                                    );
+                                    if (userData != null) {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) => MiInformacion(userData: userData!),
+                                        ),
+                                      );
+                                    } else {
+                                      // Manejar el caso en el que userData es nulo
+                                    }
                                   },
                                   child: const Row(
                                     mainAxisSize: MainAxisSize.max,
