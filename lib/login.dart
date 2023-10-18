@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
   }
 
   final _formKey = GlobalKey<FormState>();
-  static final RegExp _emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+  static final RegExp _emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@unmsm\.edu\.pe$");
 
   bool _esEmail(String str)
   {

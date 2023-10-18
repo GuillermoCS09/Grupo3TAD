@@ -128,7 +128,7 @@ class _Perfil extends State<Perfil> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +144,7 @@ class _Perfil extends State<Perfil> {
                                   ),
                                 ),
                               ),
-                              ListView(
+                              /*ListView(
                                 shrinkWrap: true,
                                 children: [
                                   ListTile(
@@ -187,6 +187,7 @@ class _Perfil extends State<Perfil> {
                                   ),
                                 ],
                               ),
+                               */
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: InkWell(
