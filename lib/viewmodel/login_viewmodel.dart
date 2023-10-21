@@ -22,6 +22,27 @@ class LoginViewModel {
     return password.isNotEmpty;
   }
 
+  Future<void> showPasswordIncorrectDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Contraseña Incorrecta'),
+          content: Text('La contraseña proporcionada es incorrecta. Por favor, inténtelo de nuevo.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cerrar'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<void> signIn(BuildContext context) async {
     final email = emailController.text;
     final password = passwordController.text;
@@ -60,6 +81,7 @@ class LoginViewModel {
         print("No se encontraron datos de usuario");
       }
     } else {
+      showPasswordIncorrectDialog(context);
       print("Ha ocurrido un error");
     }
   }

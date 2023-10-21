@@ -14,8 +14,9 @@ class Calendario extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        title: const Text('Reserva tu horario'),
-        backgroundColor: const Color(0xFF4B39EF),),
+          title: const Text('Reserva tu horario'),
+          backgroundColor: const Color(0xFF4B39EF),
+        ),
         body: Directionality(
           textDirection: TextDirection.ltr,
           child: SfCalendar(

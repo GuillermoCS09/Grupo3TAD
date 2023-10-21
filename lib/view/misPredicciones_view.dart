@@ -19,30 +19,8 @@ class _PrediccionWidgetState extends State<PrediccionWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFF1F4F8),
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: Color(0xFF101213),
-            size: 24,
-          ),
-          onPressed: () {
-            print('IconButton pressed ...');
-          },
-        ),
-        title: Text(
-          'Predicciones',
-          style: TextStyle(
-            fontFamily: 'ReadexPro',
-            color: Color(0xFF101213),
-            fontSize: 30,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        actions: [],
-        centerTitle: false,
-        elevation: 0,
+        title: const Text('Predicciones'),
+        backgroundColor: const Color(0xFF4B39EF),
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -43,16 +43,16 @@ class _MyAppState extends State<MyAppBarra> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_rounded,
-              color: Color(0xFF101213),
-              size: 30,
-            ),
-            onPressed: () async {
-              //context.pop();
-            },
-          ),
+          // leading: IconButton(
+          //   icon: const Icon(
+          //     Icons.arrow_back_rounded,
+          //     color: Color(0xFF101213),
+          //     size: 30,
+          //   ),
+          //   onPressed: () async {
+          //     //context.pop();
+          //   },
+          // ),
           title: ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(
