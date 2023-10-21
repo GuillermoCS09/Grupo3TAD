@@ -4,6 +4,8 @@ import 'package:proyecto_sm/viewmodel/reservar_viewmodel.dart';
 import 'package:proyecto_sm/model/reservar_model.dart';
 import 'package:proyecto_sm/view/calendario_view.dart';
 
+var textoCalendario = "  Escoge tu fecha";
+
 class ReservarView extends StatefulWidget {
   final ReservarViewModel viewModel;
 
@@ -231,8 +233,8 @@ class _ReservarViewState extends State<ReservarView> {
       ),
     );
   }
-}
 
+}
 class Filtros extends StatefulWidget {
   @override
   _FiltrosState createState() => _FiltrosState();
@@ -241,6 +243,7 @@ class Filtros extends StatefulWidget {
 class _FiltrosState extends State<Filtros> {
   List<String> items = ['Seleccione la hora','One', 'Two', 'Three', 'Four'];
   String selectedItem = "Seleccione la hora";
+  DateTime selectedDate = DateTime.now();
 
   @override
   void initState() {
@@ -275,7 +278,7 @@ class _FiltrosState extends State<Filtros> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    ' Seleccione el día',
+                    textoCalendario,
                     style: TextStyle(
                       fontSize: 14,
                       fontFamily: 'ReadexPro',
@@ -288,9 +291,20 @@ class _FiltrosState extends State<Filtros> {
                       color: Colors.black,
                       size: 24,
                     ),
-                    onPressed: () {
-                      print('IconButton pressed ...');
-                    },
+                    onPressed: () async {
+                      final DateTime? dateTime = await showDatePicker(
+                        context: context,
+                        initialDate: selectedDate,
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(3000),
+                      );
+                      if (dateTime != null) {
+                        setState(() {
+                          selectedDate = dateTime;
+                          textoCalendario = textoCalendario = " ${dateTime.year}-${dateTime.month}-${dateTime.day}";
+                        });
+                      }
+                    }
                   ),
                 ],
               ),
