@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_sm/pages/Calendario.dart';
 import 'package:proyecto_sm/viewmodel/reservar_viewmodel.dart';
 import 'package:proyecto_sm/model/reservar_model.dart';
+import 'package:proyecto_sm/view/calendario_view.dart';
 
 class ReservarView extends StatefulWidget {
   final ReservarViewModel viewModel;
@@ -69,14 +70,14 @@ class _ReservarViewState extends State<ReservarView> {
 
   Widget barraBusqueda(context){
     return Container(
-      width: 500.0,
+      width: 365.0,
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(30.0),
       ),
       child: const TextField(
         decoration: InputDecoration(
-          hintText: 'Buscar Aulasa',
+          hintText: 'Buscar Aulas',
           prefixIcon: Icon(
               Icons.search,
               color: Colors.black),
@@ -192,7 +193,7 @@ class _ReservarViewState extends State<ReservarView> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const TableEventsExample()),
+                              MaterialPageRoute(builder: (context) => Calendario()),
                             );
                           },
                           style: ElevatedButton.styleFrom(
