@@ -241,7 +241,7 @@ class Filtros extends StatefulWidget {
 }
 
 class _FiltrosState extends State<Filtros> {
-  List<String> items = ['Seleccione la hora','One', 'Two', 'Three', 'Four'];
+  List<String> items = ['Seleccione la hora','8:00 - 9:00', '9:00 - 10:00', '10:00 - 11:00', '11:00 - 12:00'];
   String selectedItem = "Seleccione la hora";
   DateTime selectedDate = DateTime.now();
 
