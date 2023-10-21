@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_sm/view/login_view.dart';
-import 'package:proyecto_sm/viewmodel/login_view_model.dart';
+import 'package:proyecto_sm/viewmodel/login_viewmodel.dart';
 import 'login.dart';
 
 class MyAppSplash extends StatelessWidget {

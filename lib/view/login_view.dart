@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_sm/viewmodel/login_view_model.dart';
+import 'package:proyecto_sm/viewmodel/login_viewmodel.dart';
 
 class LoginAppView extends StatelessWidget {
   const LoginAppView({Key? key});

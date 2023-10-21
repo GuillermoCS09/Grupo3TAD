@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import 'package:in_app_review/in_app_review.dart';
-import 'mi_informacion.dart';
+import 'package:proyecto_sm/view/mi_informacion_view.dart';
+//import 'mi_informacion.dart';
 import 'mis_reservas.dart';
 import 'package:proyecto_sm/model/user_model.dart';
 
