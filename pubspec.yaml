@@ -43,6 +43,8 @@ dependencies:
   cloud_firestore: ^4.9.3
   syncfusion_flutter_calendar: ^23.1.41
   syncfusion_flutter_datepicker: ^23.1.41
+  fl_chart: ^0.40.0
+
 
 dev_dependencies:
   flutter_test:

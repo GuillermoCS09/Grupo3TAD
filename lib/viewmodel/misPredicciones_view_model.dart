@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_sm/view/reservar_view.dart';
-import 'package:proyecto_sm/model/reservar_model.dart';
 import 'package:proyecto_sm/view/misPredicciones_view.dart';
+import 'package:proyecto_sm/model/misPredicciones_model.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
-class ReservarViewModel {
-
+class misPrediccionViewModel {
   String predValue = "Cargando...";
   late Interpreter interpreter;
 
-  ReservarViewModel() {
+  misPrediccionViewModel() {
     _loadModelAndRunInference();
   }
 
@@ -22,11 +20,4 @@ class ReservarViewModel {
   }
 
   getReservas() {}
-/*
-  Future<List<Reserva>> getReservas() async {
-    // Aquí puedes cargar y devolver la lista de reservas desde algún origen de datos.
-    // Por ejemplo, puedes cargar los datos desde una API o una base de datos.
-    // Retorna una lista de objetos Reserva.
-  }
-  */
 }

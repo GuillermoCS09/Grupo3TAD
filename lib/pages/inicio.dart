@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:proyecto_sm/auth.dart';
 import 'package:proyecto_sm/model/user_model.dart';
+import 'package:proyecto_sm/view/misPredicciones_view.dart%20';
+
+import '../viewmodel/misPredicciones_view_model.dart';
 
 class Inicio extends StatelessWidget {
   //Inicio({super.key});
@@ -53,7 +56,7 @@ class Inicio extends StatelessWidget {
             const SizedBox(height: 30),
             buildCenteredContainer('Ver\nmi\nhorario','assets/images/Ver_Horario.jpg',220,142, context),
             const SizedBox(height: 30),
-            buildCenteredContainer('Reservar\nun\nsalón','assets/images/Reservar_Salon.jpg',220,142, context),
+            buildCenteredContainer('Ver\npredicción','assets/images/Reservar_Salon.jpg',220,142, context),
           ],
         ),
       ),
@@ -62,6 +65,7 @@ class Inicio extends StatelessWidget {
 }
 
 Widget buildCenteredContainer(String text, String imagePath, double largo, double alto, BuildContext context) {
+  final viewModel = misPrediccionViewModel();
   return Container(
     width: 380.0,
     height: 162.0,
@@ -100,7 +104,12 @@ Widget buildCenteredContainer(String text, String imagePath, double largo, doubl
                   const SizedBox(height: 15.0),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => PrediccionWidget(viewModel: viewModel
+                            ),
+                          ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size(100, 30),
