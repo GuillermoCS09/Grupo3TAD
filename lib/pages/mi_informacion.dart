@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_sm/user_data.dart';
+import 'package:proyecto_sm/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -14,14 +14,6 @@ class MiInformacion extends StatefulWidget {
 class _MiInformacionState extends State<MiInformacion> {
   late MiInformacionModel _model;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  String nombre = "Alonso";
-  String apellido_paterno = "Matienzo";
-  String apellido_materno = "Torres";
-  String ciclo = "VIII";
-  String escuela_profesional = "Ingeniería de Sistemas";
-  String codigo = "20202020";
-  String correo = "alonso.matienzo@unmsm.edu.pe";
 
   @override
   void initState() {
@@ -85,9 +77,9 @@ class _MiInformacionState extends State<MiInformacion> {
         title: const Text(
           'Información Personal',
           style: TextStyle(
-            fontSize: 16,
-            fontFamily: 'ReadexPro',
-            fontWeight: FontWeight.bold
+              fontSize: 16,
+              fontFamily: 'ReadexPro',
+              fontWeight: FontWeight.bold
           ),
         ),
         actions: const [],
@@ -180,7 +172,16 @@ class _MiInformacionState extends State<MiInformacion> {
                           padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 16),
                           child: ElevatedButton(
                             onPressed: () {
-                              updateUserInformation();
+                              setState(() {
+                                widget.userData.nombre = _model.textController1.text;
+                                widget.userData.apellidoPaterno = _model.textController2.text;
+                                widget.userData.apellidoMaterno = _model.textController3.text;
+                                widget.userData.ciclo = _model.textController4.text;
+                                widget.userData.codigo = int.parse(_model.textController6.text);
+                                widget.userData.correo = _model.textController7.text;
+                                widget.userData.escuelaProfesional = _model.textController5.text;
+                              });
+                              updateUserInformation(); // Actualiza la información en Firebase
                               Navigator.pop(context);
                               // nombre = _model.textController1.text;
                               // apellido_paterno = _model.textController2.text;
@@ -238,6 +239,7 @@ Widget CampoTexto(BuildContext context, TextEditingController controller, String
           child: TextFormField(
             controller: controller,
             obscureText: false,
+            // initialValue: initialValue,
             decoration: InputDecoration(
               labelText: label,
               labelStyle: const TextStyle(

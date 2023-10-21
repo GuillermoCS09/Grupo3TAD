@@ -1,69 +1,44 @@
 import 'package:flutter/material.dart';
-import 'barra_inferior.dart';
-import 'package:proyecto_sm/auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:proyecto_sm/model/user_model.dart';
+import 'package:proyecto_sm/viewmodel/login_view_model.dart';
 
-class LoginApp extends StatelessWidget {
-  const LoginApp({super.key});
+class LoginAppView extends StatelessWidget {
+  const LoginAppView({Key? key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Proyecto',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4B39EF)),
-          useMaterial3: true,
-        ),
-        home: const Scaffold(body: MyHomeLoginApp())
+      title: 'Mi Aplicación de Inicio de Sesión',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4B39EF)),
+        useMaterial3: true,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold( // Agregar un Scaffold o widget de Material como ancestro
+        body: MyHomeLoginApp(viewModel: LoginViewModel()),
+      ),
     );
   }
 }
 
 class MyHomeLoginApp extends StatefulWidget {
-  const MyHomeLoginApp({super.key});
+  final LoginViewModel viewModel;
+
+  const MyHomeLoginApp({Key? key, required this.viewModel}) : super(key: key);
 
   @override
   State<MyHomeLoginApp> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomeLoginApp> {
-  String? errorMessage = '';//
-  bool isLogin = true;
-
-  final FirebaseAuthService _auth = FirebaseAuthService();
-  final TextEditingController _controllerEmail = TextEditingController();
-  final TextEditingController _controllerPassword = TextEditingController();
-
-  @override
-  void dispose(){
-    _controllerEmail.dispose();
-    _controllerPassword.dispose();
-    super.dispose();
-  }
-
-  final _formKey = GlobalKey<FormState>();
-  static final RegExp _emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@unmsm\.edu\.pe$");
-
-  bool _esEmail(String str)
-  {
-    return _emailRegExp.hasMatch(str.toLowerCase());
-  }
-
-  // Widget _errorMessage() {
-  //   return Text(errorMessage == '' ? '' : '$errorMessage');
-  // }
-
   @override
   Widget build(BuildContext context) {
+    final viewModel = widget.viewModel;
+
     return SingleChildScrollView(
       child: Container(
         // margin: const EdgeInsets.symmetric(horizontal: 50),
         child: Form(
-          key: _formKey,
+          key: viewModel.formKey,
           child: Column(
             children: <Widget>[
               //const SizedBox(height: 40),
@@ -138,9 +113,9 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      controller: _controllerEmail,
+                      controller: viewModel.emailController,
                       validator: (value) {
-                        if (!_esEmail(value.toString())){
+                        if (!viewModel.isEmailValid(value.toString())){
                           return 'Ingrese su correo correctamente';
                         }
                       },
@@ -154,7 +129,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      controller: _controllerPassword,
+                      controller: viewModel.passwordController,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Ingrese su contraseña';
@@ -168,8 +143,8 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                 padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 80),
                 child: ElevatedButton(
                   onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      _signIn();
+                    if (viewModel.formKey.currentState!.validate()) {
+                      viewModel.signIn(context);
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -203,43 +178,5 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
         ),
       ),
     );
-  }
-
-  void _signIn() async {
-    String email = _controllerEmail.text;
-    String password = _controllerPassword.text;
-    
-    User? user = await _auth.signInWithEmailAndPassword(email, password);
-    if(user != null) {
-      print("User is successfully signedIn");
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('usuarios')
-          .where('correo', isEqualTo: user.email)
-          .get();
-      if (querySnapshot.docs.isNotEmpty) {
-        DocumentSnapshot userData = querySnapshot.docs[0];
-        UserData userdatos = UserData(
-          nombre: userData['nombre'],
-          apellidoPaterno: userData['apellido_paterno'],
-          apellidoMaterno: userData['apellido_materno'],
-          ciclo: userData['ciclo'],
-          codigo: userData['codigo'],
-          correo: userData['correo'],
-          escuelaProfesional: userData['escuela_profesional']
-        );
-        // Si el perfil existe, muestra el saludo en la siguiente página.
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => MyAppBarra(userData: userdatos),
-          ),
-          // (Route<dynamic> route) => false, // Esta función siempre devuelve false, eliminando todas las rutas anteriores.
-        );
-      } else {
-        print("nop");
-      }
-    } else {
-      print("Some error happened");
-    }
   }
 }

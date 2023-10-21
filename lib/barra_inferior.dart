@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'pages/inicio.dart';
 import 'pages/perfil.dart';
 import 'pages/reservar.dart';
-import 'package:proyecto_sm/user_data.dart';
+import 'package:proyecto_sm/model/user_model.dart';
 
 class MyAppBarra extends StatefulWidget {
   final UserData userData;

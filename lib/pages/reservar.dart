@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_sm/pages/horario.dart';
 import 'Calendario.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class Reservar extends StatefulWidget {
   const Reservar({super.key});
@@ -36,6 +38,7 @@ class _ReservarState extends State<Reservar> {
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           titulo(context),
+          //SfCalendar(),
           prediccionReservas(predValue),
           barraBusqueda(context),
           Filtros(),// Llamar a la función Filtros
@@ -291,7 +294,7 @@ Widget buildCenteredContainer(BuildContext context, String aula, String pabellon
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const TableEventsExample()),
+                            MaterialPageRoute(builder: (context) => Horarios()),//TableEventsExample()),
                           );
                         },
                         style: ElevatedButton.styleFrom(

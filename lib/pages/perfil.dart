@@ -3,7 +3,7 @@ import 'package:rating_dialog/rating_dialog.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'mi_informacion.dart';
 import 'mis_reservas.dart';
-import 'package:proyecto_sm/user_data.dart';
+import 'package:proyecto_sm/model/user_model.dart';
 
 class Perfil extends StatefulWidget {
   final UserData userData;

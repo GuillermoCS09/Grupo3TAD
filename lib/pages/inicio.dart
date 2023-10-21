@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:proyecto_sm/auth.dart';
-import 'package:proyecto_sm/user_data.dart';
+import 'package:proyecto_sm/model/user_model.dart';
 
 class Inicio extends StatelessWidget {
   //Inicio({super.key});

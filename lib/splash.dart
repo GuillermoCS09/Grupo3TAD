@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_sm/view/login_view.dart';
+import 'package:proyecto_sm/viewmodel/login_view_model.dart';
 import 'login.dart';
 
 class MyAppSplash extends StatelessWidget {
@@ -27,10 +29,12 @@ class _MyHomePageState extends State<MyHomePageSplash>
   }
   _navigatetohome() async
   {  await Future.delayed(const Duration(milliseconds: 2000), () {});
+  final loginViewModel = LoginViewModel();
+
   Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-          builder: (context) => LoginApp()));
+          builder: (context) => LoginAppView()));
   }
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,7 @@ class _MyHomePageState extends State<MyHomePageSplash>
             SizedBox(
               width: 294,
               height: 400,
-              child: Image.asset('assets/images/logo_unmsm_blanco.png') ,
+              child: Image.asset('assets/images/logo_reservatech.png') ,
             ),
           ],
         ),

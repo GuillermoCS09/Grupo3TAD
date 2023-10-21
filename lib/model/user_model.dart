@@ -1,11 +1,11 @@
 class UserData {
-  final String nombre;
-  final String apellidoPaterno;
-  final String apellidoMaterno;
-  final String ciclo;
-  final int codigo;
-  final String correo;
-  final String escuelaProfesional;
+  String nombre;
+  String apellidoPaterno;
+  String apellidoMaterno;
+  String ciclo;
+  int codigo;
+  String correo;
+  String escuelaProfesional;
 
   UserData({
     required this.nombre,
