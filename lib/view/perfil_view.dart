@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:proyecto_sm/view/mi_informacion_view.dart';
-import 'mis_reservas.dart';
+import 'package:proyecto_sm/pages/mis_reservas.dart';
 import 'package:proyecto_sm/model/user_model.dart';
+import 'package:proyecto_sm/viewmodel/perfil_viewmodel.dart'; // Importa el ViewModel
 
 class Perfil extends StatefulWidget {
-  final UserData userData;
-  const Perfil({Key? key, required this.userData}) : super(key: key);
+  final PerfilViewModel viewModel;
+
+  const Perfil({Key? key, required this.viewModel}) : super(key: key);
 
   @override
   _Perfil createState() => _Perfil();
@@ -16,12 +18,11 @@ class Perfil extends StatefulWidget {
 class _Perfil extends State<Perfil> {
   final unfocusNode = FocusNode();
   bool? switchValue;
-  UserData? userData; //?
 
   @override
   void initState() {
     super.initState();
-    userData = widget.userData;
+    //switchValue = widget.viewModel.switchValue;
   }
 
   @override
@@ -82,23 +83,23 @@ class _Perfil extends State<Perfil> {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 12),
                 child: Text(
-                  '${userData?.nombre} ${userData?.apellidoPaterno}',
+                  '${widget.viewModel.userData.nombre} ${widget.viewModel.userData.apellidoPaterno}',
                   textAlign: TextAlign.center,
-                  style: const TextStyle( // Corregido: FlutterFlowTheme.of(context).headlineSmall.override(...)
+                  style: const TextStyle(
                     fontFamily: 'Outfit',
-                    color: Colors.white, // Cambiado: FlutterFlowTheme.of(context).info
+                    color: Colors.white,
                     fontSize: 24,
-                    fontWeight: FontWeight.bold
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
                 child: Text(
-                  '${userData?.correo}',
-                  style: const TextStyle( // Corregido: FlutterFlowTheme.of(context).titleSmall.override(...)
+                  '${widget.viewModel.userData.correo}',
+                  style: const TextStyle(
                     fontFamily: 'ReadexPro',
-                    color: Colors.white, // Cambiado: FlutterFlowTheme.of(context).accent4
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -107,7 +108,7 @@ class _Perfil extends State<Perfil> {
                   width: double.infinity,
                   height: 400,
                   decoration: const BoxDecoration(
-                    color: Colors.white, // Cambiado: FlutterFlowTheme.of(context).secondaryBackground
+                    color: Colors.white,
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 3,
@@ -137,15 +138,29 @@ class _Perfil extends State<Perfil> {
                                 padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
                                 child: Text(
                                   'Ajustes',
-                                  style: TextStyle( // Corregido: FlutterFlowTheme.of(context).headlineSmall
+                                  style: TextStyle(
                                     fontFamily: 'Outfit',
-                                    fontSize: 24, // Tamaño de fuente añadido
-                                    color: Color(0xFF14181B), // Cambiado: FlutterFlowTheme.of(context).info
+                                    fontSize: 24,
+                                    color: Color(0xFF14181B),
                                   ),
                                 ),
                               ),
-                              OpcionAjustes(context, userData!, Icons.edit, 'Información personal', 'Editar Perfil', MiInformacion(userData: userData!)),
-                              OpcionAjustes(context, userData!, Icons.calendar_month, 'Ver mis reservas', 'Historial', MisReservas()),
+                              OpcionAjustes(
+                                context,
+                                widget.viewModel.userData,
+                                Icons.edit,
+                                'Información personal',
+                                'Editar Perfil',
+                                MiInformacion(userData: widget.viewModel.userData),
+                              ),
+                              OpcionAjustes(
+                                context,
+                                widget.viewModel.userData,
+                                Icons.calendar_month,
+                                'Ver mis reservas',
+                                'Historial',
+                                MisReservas(),
+                              ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: Row(
@@ -153,8 +168,7 @@ class _Perfil extends State<Perfil> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     const Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 8, 16, 8),
+                                      padding: EdgeInsetsDirectional.fromSTEB(0, 8, 16, 8),
                                       child: Icon(
                                         Icons.notifications_active,
                                         color: Color(0xFF57636C),
@@ -163,24 +177,22 @@ class _Perfil extends State<Perfil> {
                                     ),
                                     const Expanded(
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 12, 0),
+                                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
                                         child: Text(
                                           'Mostrar notificaciones',
                                           textAlign: TextAlign.start,
-                                          style:
-                                            TextStyle(
-                                              fontSize: 14,
-                                              fontFamily: 'ReadexPro',
-                                              color: Color(0xFF57636C),
-                                            )
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: 'ReadexPro',
+                                            color: Color(0xFF57636C),
+                                          ),
                                         ),
                                       ),
                                     ),
                                     Switch.adaptive(
-                                      value: switchValue ??= true, // crear bool para el valor
-                                      onChanged: (newValue) async {
-                                        setState(() => switchValue = newValue!);
+                                      value: switchValue ?? true,
+                                      onChanged: (newValue) {
+                                        setState(() => switchValue = newValue);
                                       },
                                       activeColor: const Color(0xFF4B39EF),
                                       activeTrackColor: const Color(0x4D4B39EF),
@@ -193,14 +205,13 @@ class _Perfil extends State<Perfil> {
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: InkWell(
-                                  onTap: _showRatingDialog,
+                                  onTap: () => _showRatingDialog(context),
                                   child: const Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 8, 16, 8),
+                                        padding: EdgeInsetsDirectional.fromSTEB(0, 8, 16, 8),
                                         child: Icon(
                                           Icons.star,
                                           color: Color(0xFF57636C),
@@ -209,17 +220,15 @@ class _Perfil extends State<Perfil> {
                                       ),
                                       Expanded(
                                         child: Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                              0, 0, 12, 0),
+                                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
                                           child: Text(
                                             'Califícanos',
                                             textAlign: TextAlign.start,
-                                            style:
-                                              TextStyle(
-                                                fontSize: 14,
-                                                fontFamily: 'ReadexPro',
-                                                color: Color(0xFF57636C),
-                                              )
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              fontFamily: 'ReadexPro',
+                                              color: Color(0xFF57636C),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -229,7 +238,7 @@ class _Perfil extends State<Perfil> {
                                         style: TextStyle(
                                           fontFamily: 'ReadexPro',
                                           color: Color(0xFF4B39EF),
-                                          fontSize: 14, // Tamaño de fuente personalizado
+                                          fontSize: 14,
                                         ),
                                       ),
                                     ],
@@ -239,14 +248,15 @@ class _Perfil extends State<Perfil> {
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: InkWell(
-                                  onTap: () {Navigator.pop(context);},
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
                                   child: const Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 8, 16, 8),
+                                        padding: EdgeInsetsDirectional.fromSTEB(0, 8, 16, 8),
                                         child: Icon(
                                           Icons.login_rounded,
                                           color: Color(0xFF57636C),
@@ -255,17 +265,15 @@ class _Perfil extends State<Perfil> {
                                       ),
                                       Expanded(
                                         child: Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                              0, 0, 12, 0),
+                                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
                                           child: Text(
-                                              'Salir de mi cuenta',
-                                              textAlign: TextAlign.start,
-                                              style:
-                                              TextStyle(
-                                                fontSize: 14,
-                                                fontFamily: 'ReadexPro',
-                                                color: Color(0xFF57636C),
-                                              )
+                                            'Salir de mi cuenta',
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              fontFamily: 'ReadexPro',
+                                              color: Color(0xFF57636C),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -274,13 +282,12 @@ class _Perfil extends State<Perfil> {
                                         style: TextStyle(
                                           fontFamily: 'ReadexPro',
                                           color: Color(0xFF4B39EF),
-                                          fontSize: 14, // Peso de fuente personalizado
-                                          // Otros atributos de estilo de texto que desees personalizar
+                                          fontSize: 14,
                                         ),
                                       ),
                                     ],
                                   ),
-                                )
+                                ),
                               ),
                             ],
                           ),
@@ -297,9 +304,7 @@ class _Perfil extends State<Perfil> {
     );
   }
 
-
-
-  void _showRatingDialog() {
+  void _showRatingDialog(BuildContext context) {
     // actual store listing review & rating
     void _rateAndReviewApp() async {
       // refer to: https://pub.dev/packages/in_app_review
@@ -362,57 +367,58 @@ class _Perfil extends State<Perfil> {
   }
 }
 
-Widget OpcionAjustes(BuildContext context, UserData userData, IconData icono, String nombreOpcion, String detalleOpcion, Widget ventana){
+Widget OpcionAjustes(BuildContext context, UserData userData, IconData icono, String nombreOpcion, String detalleOpcion, Widget ventana) {
   return Padding(
-    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-    child: InkWell(
-      onTap: () {
-        if (userData != null) {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => ventana,
-            ),
-          );
-        } else {
-            // Manejar el caso en el que userData es nulo
-        }
-      },
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 16, 8),
-            child: Icon(
-              icono,
-              color: const Color(0xFF57636C),
-              size: 24,
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
-              child: Text(nombreOpcion,
-                textAlign: TextAlign.start,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'ReadexPro',
-                  color: Color(0xFF57636C),
-                )
+      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+      child: InkWell(
+        onTap: () {
+          if (userData != null) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ventana,
+              ),
+            );
+          } else {
+          // Manejar el caso en el que userData es nulo
+          }
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 16, 8),
+              child: Icon(
+                icono,
+                color: const Color(0xFF57636C),
+                size: 24,
               ),
             ),
-          ),
-          Text(
-            detalleOpcion,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontFamily: 'ReadexPro',
-              color: Color(0xFF4B39EF),
-              fontSize: 14, // Tamaño de fuente personalizado
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
+                child: Text(
+                  nombreOpcion,
+                  textAlign: TextAlign.start,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'ReadexPro',
+                    color: Color(0xFF57636C),
+                  ),
+                ),
+              ),
             ),
-          ),
-        ],
-      ),
-    )
+            Text(
+              detalleOpcion,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontFamily: 'ReadexPro',
+                color: Color(0xFF4B39EF),
+                fontSize: 14,
+              ),
+            ),
+          ],
+        ),
+      )
   );
 }
