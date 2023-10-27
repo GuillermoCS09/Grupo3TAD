@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import 'package:in_app_review/in_app_review.dart';
+import 'package:proyecto_sm/auth.dart';
 import 'package:proyecto_sm/view/mi_informacion_view.dart';
 import 'package:proyecto_sm/pages/mis_reservas.dart';
 import 'package:proyecto_sm/model/user_model.dart';
-import 'package:proyecto_sm/viewmodel/perfil_viewmodel.dart'; // Importa el ViewModel
+import 'package:proyecto_sm/viewmodel/perfil_viewmodel.dart';
+
+import 'login_view.dart'; // Importa el ViewModel
 
 class Perfil extends StatefulWidget {
   final PerfilViewModel viewModel;
@@ -18,6 +21,7 @@ class Perfil extends StatefulWidget {
 class _Perfil extends State<Perfil> {
   final unfocusNode = FocusNode();
   bool? switchValue;
+  final FirebaseAuthService _auth = FirebaseAuthService();
 
   @override
   void initState() {
@@ -67,7 +71,7 @@ class _Perfil extends State<Perfil> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(100),
                               child: Image.asset(
-                                'assets/images/Logo_Usuario.png',
+                                widget.viewModel.userData.foto,
                                 width: 180,
                                 height: 180,
                                 fit: BoxFit.cover,
@@ -249,7 +253,12 @@ class _Perfil extends State<Perfil> {
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.pop(context);
+                                    _auth.signOut();
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (context) => LoginAppView(),
+                                      ),
+                                    );
                                   },
                                   child: const Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -258,7 +267,7 @@ class _Perfil extends State<Perfil> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(0, 8, 16, 8),
                                         child: Icon(
-                                          Icons.login_rounded,
+                                          Icons.logout_rounded,
                                           color: Color(0xFF57636C),
                                           size: 24,
                                         ),

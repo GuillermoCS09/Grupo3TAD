@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'pages/inicio.dart';
-import 'pages/perfil.dart';
+import 'view/inicio_view.dart';
+//import 'pages/perfil.dart';
 import 'package:proyecto_sm/model/user_model.dart';
 import 'package:proyecto_sm/view/reservar_view.dart';
 import 'package:proyecto_sm/viewmodel/reservar_viewmodel.dart';
+import 'package:proyecto_sm/view/perfil_view.dart';
+import 'package:proyecto_sm/viewmodel/perfil_viewmodel.dart';
 
 class MyAppBarra extends StatefulWidget {
   final UserData userData;
@@ -18,10 +20,12 @@ class _MyAppState extends State<MyAppBarra> {
   int paginaActual = 0;
   late List<Widget> paginas;
   final UserData userData;
-  late ReservarViewModel viewModel;
+  late ReservarViewModel viewModelReservar;
+  late PerfilViewModel viewModelPerfil;
 
   _MyAppState(this.userData){
-    viewModel = ReservarViewModel();
+    viewModelReservar = ReservarViewModel();
+    viewModelPerfil = PerfilViewModel(userData: userData);
   }
 
   @override
@@ -29,8 +33,9 @@ class _MyAppState extends State<MyAppBarra> {
     super.initState();
     paginas = [
       Inicio(userData: userData),
-      ReservarView(viewModel: viewModel),
-      Perfil(userData: userData),
+      ReservarView(viewModel: viewModelReservar),
+      Perfil(viewModel: viewModelPerfil),
+      //Perfil(userData: userData),
     ];
   }
 

@@ -164,34 +164,34 @@ class Activas extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: <Widget> [
           Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,//Color(0xFFF1F4F8),
-                  ),
-                  child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
-                          child: ListView(
-                              padding: EdgeInsets.zero,
-                              primary: false,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              children: [
-                                aulaReservada(context, 'Aula 101', '05/10/23', '10:00 AM - 12:00 PM', 'assets/images/aula101.jpg'),
-                              ]
-                          ),
-                        ),
-                      ]
-                  ),
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Colors.white,//Color(0xFFF1F4F8),
                 ),
-              ]
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
+                      child: ListView(
+                        padding: EdgeInsets.zero,
+                        primary: false,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          aulaReservada(context, 'Aula 101', '05/10/23', '10:00 AM - 12:00 PM', 'assets/images/aula101.jpg'),
+                        ]
+                      ),
+                    ),
+                  ]
+                ),
+              ),
+            ]
           )
         ],
       ),
@@ -208,36 +208,36 @@ class Pasadas extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: <Widget> [
           Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,//Color(0xFFF1F4F8),
-                  ),
-                  child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
-                          child: ListView(
-                              padding: EdgeInsets.zero,
-                              primary: false,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              children: [
-                                aulaReservada(context, 'Aula 102', '05/10/23', '10:00 AM - 12:00 PM', 'assets/images/aula102.jpg'),
-                                aulaReservada(context, 'Aula 103', '04/10/23', '03:00 PM - 05:00 PM', 'assets/images/aula103.jpg'),
-                                aulaReservada(context, 'Aula 104', '03/10/23', '04:00 PM - 06:00 PM', 'assets/images/aula104.jpg'),
-                              ]
-                          ),
-                        ),
-                      ]
-                  ),
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Colors.white,//Color(0xFFF1F4F8),
                 ),
-              ]
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
+                      child: ListView(
+                        padding: EdgeInsets.zero,
+                        primary: false,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          aulaReservada(context, 'Aula 102', '05/10/23', '10:00 AM - 12:00 PM', 'assets/images/aula102.jpg'),
+                          aulaReservada(context, 'Aula 103', '04/10/23', '03:00 PM - 05:00 PM', 'assets/images/aula103.jpg'),
+                          aulaReservada(context, 'Aula 104', '03/10/23', '04:00 PM - 06:00 PM', 'assets/images/aula104.jpg'),
+                        ]
+                      ),
+                    ),
+                  ]
+                ),
+              ),
+            ]
           )
         ],
       ),
@@ -254,34 +254,34 @@ class Canceladas extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: <Widget> [
           Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,//Color(0xFFF1F4F8),
-                  ),
-                  child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
-                          child: ListView(
-                              padding: EdgeInsets.zero,
-                              primary: false,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              children: [
-                                aulaReservada(context, 'Aula 101', '03/10/23', '04:00 PM - 06:00 PM', 'assets/images/aula101.jpg'),
-                              ]
-                          ),
-                        ),
-                      ]
-                  ),
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Colors.white,//Color(0xFFF1F4F8),
                 ),
-              ]
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
+                      child: ListView(
+                        padding: EdgeInsets.zero,
+                        primary: false,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          aulaReservada(context, 'Aula 101', '03/10/23', '04:00 PM - 06:00 PM', 'assets/images/aula101.jpg'),
+                        ]
+                      ),
+                    ),
+                  ]
+                ),
+              ),
+            ]
           )
         ],
       ),

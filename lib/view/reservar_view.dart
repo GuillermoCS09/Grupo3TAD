@@ -63,7 +63,7 @@ class _ReservarViewState extends State<ReservarView> {
       padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 16),
       child: Text(
           "Reservas estimadas para hoy: $predValue",
-          style: TextStyle(fontSize: 16,
+          style: const TextStyle(fontSize: 16,
             fontFamily: 'ReadexPro',
             color: Colors.black,)
       ),
@@ -255,14 +255,14 @@ class _FiltrosState extends State<Filtros> {
     return Container(
       width: 398,
       height: 73,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 16,right: 15), // Ajusta la cantidad de espacio a la izquierda
+            padding: const EdgeInsets.only(left: 16,right: 15), // Ajusta la cantidad de espacio a la izquierda
             child: Container(
               width: 170,
               height: 48,
@@ -270,7 +270,7 @@ class _FiltrosState extends State<Filtros> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: Color(0xFFC7C5C5),
+                  color: const Color(0xFFC7C5C5),
                   width: 2,
                 ),
               ),
@@ -279,14 +279,14 @@ class _FiltrosState extends State<Filtros> {
                 children: [
                   Text(
                     textoCalendario,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       fontFamily: 'ReadexPro',
                       color: Colors.black,
                     ),
                   ),
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.calendar_today,
                       color: Colors.black,
                       size: 24,
@@ -314,10 +314,10 @@ class _FiltrosState extends State<Filtros> {
             width: 180, // Ajusta el ancho del Container para el campo de entrada
             child: InputDecorator(
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(width: 2, color: Color(0xFFC7C5C5)),
+                  borderSide: const BorderSide(width: 2, color: Color(0xFFC7C5C5)),
                 ),
               ),
               child: DropdownButtonHideUnderline(
@@ -327,7 +327,7 @@ class _FiltrosState extends State<Filtros> {
                     value: item,
                     child: Text(
                       item,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontFamily: 'ReadexPro',
                         color: Colors.black,

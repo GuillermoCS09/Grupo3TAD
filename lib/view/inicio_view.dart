@@ -66,7 +66,6 @@ class Inicio extends StatelessWidget {
 }
 
 Widget buildCenteredContainer(String text, String imagePath, double largo, double alto, BuildContext context, Widget ventana) {
-
   return Container(
     width: 380.0,
     height: 162.0,

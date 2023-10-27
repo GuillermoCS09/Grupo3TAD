@@ -225,7 +225,8 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
           ciclo: userData['ciclo'],
           codigo: userData['codigo'],
           correo: userData['correo'],
-          escuelaProfesional: userData['escuela_profesional']
+          escuelaProfesional: userData['escuela_profesional'],
+          foto: userData['foto']
         );
         // Si el perfil existe, muestra el saludo en la siguiente página.
         Navigator.push(

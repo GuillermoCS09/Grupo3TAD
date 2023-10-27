@@ -69,9 +69,10 @@ class LoginViewModel {
           codigo: userData['codigo'],
           correo: userData['correo'],
           escuelaProfesional: userData['escuela_profesional'],
+          foto: userData['foto']
         );
 
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => MyAppBarra(userData: userdatos),

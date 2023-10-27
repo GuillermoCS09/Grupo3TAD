@@ -25,8 +25,15 @@ class FirebaseAuthService {
     return null;
   }
 
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+    } catch (e) {
+      print('Error al cerrar sesión: $e');
+    }
+  }
 
-  // final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+// final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   //
   // User? get currentUser => _firebaseAuth.currentUser;
   //

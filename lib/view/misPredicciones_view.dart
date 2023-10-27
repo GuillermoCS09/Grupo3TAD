@@ -13,7 +13,7 @@ class PrediccionWidget extends StatefulWidget {
 }
 
 class _PrediccionWidgetState extends State<PrediccionWidget> {
-  List<double> data = [30.0, 15.0, 20.0, 30.0, 25.0, 30.0];
+  List<double> data = [30.0, 15.0, 20.0, 30.0, 25.0, 30.0]; // Reservas en el tiempo
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,6 @@ class _PrediccionWidgetState extends State<PrediccionWidget> {
   }
 
   Widget prediccion(context){
-
     return SafeArea(
       top: true,
       child: Padding(
@@ -44,7 +43,7 @@ class _PrediccionWidgetState extends State<PrediccionWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text(
+            const Text(
               'Predicción de Reservas de Salones',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -53,7 +52,7 @@ class _PrediccionWidgetState extends State<PrediccionWidget> {
                 color: Colors.black, // Set your text color here
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(right: 16),
               child: Text(
                 'Estimado diario',
@@ -68,7 +67,7 @@ class _PrediccionWidgetState extends State<PrediccionWidget> {
 
 
             // Aca va el codigo del grafico
-            Container(
+            SizedBox(
               height: 300, // Define the height of the chart
               child: LineChart(
                 LineChartData(
@@ -76,21 +75,21 @@ class _PrediccionWidgetState extends State<PrediccionWidget> {
                   titlesData: FlTitlesData(show: false),
                   borderData: FlBorderData(
                     show: true,
-                    border: Border(
+                    border: const Border(
                       bottom: BorderSide(
-                        color: const Color(0xFF37434D),
+                        color: Color(0xFF37434D),
                         width: 1,
                       ),
                       left: BorderSide(
-                        color: const Color(0xFF37434D),
+                        color: Color(0xFF37434D),
                         width: 1,
                       ),
                       right: BorderSide(
-                        color: const Color(0xFF37434D),
+                        color: Color(0xFF37434D),
                         width: 1,
                       ),
                       top: BorderSide(
-                        color: const Color(0xFF37434D),
+                        color: Color(0xFF37434D),
                         width: 1,
                       ),
                     ),
@@ -116,11 +115,8 @@ class _PrediccionWidgetState extends State<PrediccionWidget> {
           ],
         ),
       ),
-
     );
-
   }
-
 
   Widget prediccionReservas(var predValue) {
     //misPrediccionViewModel viewModel = misPrediccionViewModel();

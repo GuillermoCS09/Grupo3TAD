@@ -6,6 +6,7 @@ class UserData {
   int codigo;
   String correo;
   String escuelaProfesional;
+  String foto;
 
   UserData({
     required this.nombre,
@@ -15,5 +16,6 @@ class UserData {
     required this.codigo,
     required this.correo,
     required this.escuelaProfesional,
+    required this.foto
   });
 }

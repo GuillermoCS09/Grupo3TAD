@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:proyecto_sm/view/reservar_view.dart';
-import 'package:proyecto_sm/model/reservar_model.dart';
-import 'package:proyecto_sm/view/misPredicciones_view.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 class ReservarViewModel {
