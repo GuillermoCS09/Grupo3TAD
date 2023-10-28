@@ -253,12 +253,7 @@ class _Perfil extends State<Perfil> {
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: InkWell(
                                   onTap: () {
-                                    _auth.signOut();
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                        builder: (context) => LoginAppView(),
-                                      ),
-                                    );
+                                    showLogoutDialog(context);
                                   },
                                   child: const Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -310,6 +305,52 @@ class _Perfil extends State<Perfil> {
           ),
         ),
       ),
+    );
+  }
+
+  showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0), // Personaliza el radio de los bordes
+          ),
+          backgroundColor: const Color(0xFFEAE7FD),
+          title: const Text('Cerrar sesión'),
+          content: const Text('¿Está seguro de que desea cerrar sesión?'),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+              ),
+              child: const Text('Cancelar', style: TextStyle(color: Color(0xFF4B39EF))),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+              ),
+              child: const Text('Cerrar sesión', style: TextStyle(color: Color(0xFF4B39EF))),
+              onPressed: () {
+                _auth.signOut();
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => LoginAppView(),
+                  ),
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
