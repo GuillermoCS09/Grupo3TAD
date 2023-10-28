@@ -112,9 +112,10 @@ class _ReservarViewState extends State<ReservarView> {
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         children: [
-                          buildCenteredContainer(context, 'Aula 101', 'Nuevo Pabellón', 'assets/images/aula101.jpg'),
-                          buildCenteredContainer(context, 'Aula 102', 'Nuevo Pabellón', 'assets/images/aula102.jpg'),
+                          buildCenteredContainer(context, 'Aula 101', 'Antiguo Pabellón', 'assets/images/aula101.jpg'),
+                          buildCenteredContainer(context, 'Aula 102', 'Antiguo Pabellón', 'assets/images/aula102.jpg'),
                           buildCenteredContainer(context, 'Aula 103', 'Antiguo Pabellón', 'assets/images/aula103.jpg'),
+                          buildCenteredContainer(context, 'Aula 104', 'Antiguo Pabellón', 'assets/images/aula104.jpg'),
                         ]
                     ),
                   ),
