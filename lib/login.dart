@@ -4,6 +4,9 @@ import 'package:proyecto_sm/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:proyecto_sm/model/user_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:proyecto_sm/api_connection/api_connection.dart';
 
 class LoginApp extends StatelessWidget {
   const LoginApp({super.key});
@@ -37,6 +40,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
   final FirebaseAuthService _auth = FirebaseAuthService();
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+  get userdatos => null;
 
   @override
   void dispose(){
@@ -208,27 +212,34 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
   void _signIn() async {
     String email = _controllerEmail.text;
     String password = _controllerPassword.text;
-    
+
     User? user = await _auth.signInWithEmailAndPassword(email, password);
     if(user != null) {
       print("User is successfully signedIn");
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('usuarios')
-          .where('correo', isEqualTo: user.email)
-          .get();
-      if (querySnapshot.docs.isNotEmpty) {
-        DocumentSnapshot userData = querySnapshot.docs[0];
-        UserData userdatos = UserData(
-          nombre: userData['nombre'],
-          apellidoPaterno: userData['apellido_paterno'],
-          apellidoMaterno: userData['apellido_materno'],
-          ciclo: userData['ciclo'],
-          codigo: userData['codigo'],
-          correo: userData['correo'],
-          escuelaProfesional: userData['escuela_profesional'],
-          foto: userData['foto']
+
+      final response = await http.post(
+          Uri.parse(API.query),
+          body: {
+            "correo": user.email,
+          },
         );
-        // Si el perfil existe, muestra el saludo en la siguiente página.
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+
+        if (data['success']) {
+          setState(() {
+            UserData userdatos = UserData(
+                nombre: data['nombre'],
+                apellidoPaterno: data['apellido_paterno'],
+                apellidoMaterno: data['apellido_materno'],
+                ciclo: data['ciclo'],
+                codigo: data['codigo'],
+                correo: data['correo'],
+                escuelaProfesional: data['escuela_profesional'],
+                foto: data['foto']
+            );
+          });
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -236,10 +247,13 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
           ),
           // (Route<dynamic> route) => false, // Esta función siempre devuelve false, eliminando todas las rutas anteriores.
         );
-      } else {
-        print("nop");
+        } else {
+            // Manejar el caso en el que no se encontraron registros.
+        }
+      }else {
+        // Manejar errores de conexión.
       }
-    } else {
+    }else {
       print("Some error happened");
     }
   }
