@@ -216,9 +216,8 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
     User? user = await _auth.signInWithEmailAndPassword(email, password);
     if(user != null) {
       print("User is successfully signedIn");
-
       final response = await http.post(
-          Uri.parse(API.query),
+          Uri.parse(API.consultalogin),
           body: {
             "correo": user.email,
           },

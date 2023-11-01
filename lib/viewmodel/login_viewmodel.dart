@@ -4,6 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../barra_inferior.dart';
 import '../model/user_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:proyecto_sm/api_connection/api_connection.dart';
 
 class LoginViewModel {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>(); // Agrega esta línea
@@ -55,31 +58,39 @@ class LoginViewModel {
     User? user = await _auth.signInWithEmailAndPassword(email, password);
     if (user != null) {
       print("Usuario ha iniciado sesión exitosamente");
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('usuarios')
-          .where('correo', isEqualTo: user.email)
-          .get();
-      if (querySnapshot.docs.isNotEmpty) {
-        DocumentSnapshot userData = querySnapshot.docs[0];
-        UserData userdatos = UserData(
-          nombre: userData['nombre'],
-          apellidoPaterno: userData['apellido_paterno'],
-          apellidoMaterno: userData['apellido_materno'],
-          ciclo: userData['ciclo'],
-          codigo: userData['codigo'],
-          correo: userData['correo'],
-          escuelaProfesional: userData['escuela_profesional'],
-          foto: userData['foto']
-        );
-
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => MyAppBarra(userData: userdatos),
-          ),
-        );
-      } else {
-        print("No se encontraron datos de usuario");
+      final response = await http.post(
+        Uri.parse(API.consultalogin),
+        body: {
+          "correo": user.email,
+        },
+      );
+      if (response.statusCode == 200) {
+        print("azzzzzspodkaspokd");
+        print("Respuesta del servidor: ${response.body}");
+        final data = json.decode(response.body);
+        if (data['success']) {
+            UserData userdatos = UserData(
+                nombre: data['nombre'],
+                apellidoPaterno: data['apellido_paterno'],
+                apellidoMaterno: data['apellido_materno'],
+                ciclo: data['ciclo'],
+                codigo: int.parse(data['codigo_usuario']),
+                correo: data['correo'],
+                escuelaProfesional: data['escuela_profesional'],
+                foto: data['foto']
+            );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MyAppBarra(userData: userdatos),
+            ),
+          );
+        } else {
+          print("1xdas------");
+        }
+      }else {
+        // Manejar errores de conexión.
+        print("2as------");
       }
     } else {
       showPasswordIncorrectDialog(context);

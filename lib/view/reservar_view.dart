@@ -4,6 +4,7 @@ import 'package:proyecto_sm/viewmodel/reservar_viewmodel.dart';
 import 'package:proyecto_sm/model/reservar_model.dart';
 import 'package:proyecto_sm/view/calendario_view.dart';
 
+
 var textoCalendario = "  Escoge tu fecha";
 
 class ReservarView extends StatefulWidget {
@@ -17,11 +18,19 @@ class ReservarView extends StatefulWidget {
 
 class _ReservarViewState extends State<ReservarView> {
   var predValue = "Cargando..."; // Texto de carga inicial
-  late List<Reserva> reservas;
+  List<Reserva> listaSalones = [];
 
   @override
   void initState() {
     super.initState();
+    obtenerSalones();
+  }
+
+  Future<void> obtenerSalones() async {
+    List<Reserva> salones = await ReservarViewModel().getReservas(); // Llama a la función para obtener la lista de salones
+    setState(() {
+      listaSalones = salones; // Almacena la lista de salones en el estado del widget
+    });
   }
 
   @override
@@ -89,7 +98,7 @@ class _ReservarViewState extends State<ReservarView> {
       ),
     );
   }
-
+  /*
   Widget salones(context) {
     return Column(
         mainAxisSize: MainAxisSize.max,
@@ -124,6 +133,44 @@ class _ReservarViewState extends State<ReservarView> {
           ),
         ]
     );
+    */
+  Widget salones(context) {
+    return Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: Color(0xFFF1F4F8),
+            ),
+            child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
+                    child: ListView(
+                        padding: EdgeInsets.zero,
+                        primary: false,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        children: listaSalones.map((salon) {
+                          return buildCenteredContainer(
+                            context,
+                            salon.nombre,
+                            salon.pabellon,
+                            salon.imagePath,
+                          );
+                        }).toList(),
+                    ),
+                  ),
+                ]
+            ),
+          ),
+        ]
+    );
+
   }
 
   Widget buildCenteredContainer(BuildContext context, String aula, String pabellon, String imagePath) {
