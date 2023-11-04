@@ -27,7 +27,7 @@ class _ReservarViewState extends State<ReservarView> {
   String selectedItemInicio = "Inicio";
   String selectedItemFin = "Fin";
   DateTime selectedDate = DateTime.now();
-
+  bool mostrarSalonesFiltrados = false;
 
   @override
   void initState() {
@@ -93,7 +93,8 @@ class _ReservarViewState extends State<ReservarView> {
     }
 
     setState(() {
-      listaSalones = salonesFiltrados; //Sobreescribo el filtro ua hecho
+      mostrarSalonesFiltrados = true;
+      // listaSalones = salonesFiltrados; //Sobreescribo el filtro ya hecho
     });
   }
 
@@ -211,6 +212,8 @@ class _ReservarViewState extends State<ReservarView> {
     );
     */
   Widget salones(context) {
+    final salonesAMostrar = mostrarSalonesFiltrados ? salonesFiltrados : listaSalones;
+
     return Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -231,7 +234,7 @@ class _ReservarViewState extends State<ReservarView> {
                         primary: false,
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
-                        children: listaSalones.map((salon) {
+                        children: salonesAMostrar.map((salon) {
                           return buildCenteredContainer(
                             context,
                             salon.nombre,
