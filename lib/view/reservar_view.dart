@@ -3,7 +3,7 @@ import 'package:proyecto_sm/pages/Calendario.dart';
 import 'package:proyecto_sm/viewmodel/reservar_viewmodel.dart';
 import 'package:proyecto_sm/model/reservar_model.dart';
 import 'package:proyecto_sm/view/calendario_view.dart';
-
+import 'package:intl/intl.dart';
 
 var textoCalendario = "  Escoge tu fecha";
 
@@ -19,6 +19,15 @@ class ReservarView extends StatefulWidget {
 class _ReservarViewState extends State<ReservarView> {
   var predValue = "Cargando..."; // Texto de carga inicial
   List<Reserva> listaSalones = [];
+  List<Reserva> salonesFiltrados = [];
+
+  List<String> itemsinicio = ['Inicio','8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19'];
+  List<String> itemsfin = ['Fin', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
+
+  String selectedItemInicio = "Inicio";
+  String selectedItemFin = "Fin";
+  DateTime selectedDate = DateTime.now();
+
 
   @override
   void initState() {
@@ -28,9 +37,70 @@ class _ReservarViewState extends State<ReservarView> {
 
   Future<void> obtenerSalones() async {
     List<Reserva> salones = await ReservarViewModel().getReservas(); // Llama a la función para obtener la lista de salones
+    for (var objeto in salones) {
+      print('Nombre: ${objeto.nombre}');
+      for (var disp in objeto.disponibilidades) {
+        print('Salon: ${disp.idSalon}, Día: ${disp.dia}, Hora inicio: ${disp.horaInicio}, Hora fin: ${disp.horaFin}, Estado: ${disp.estado}');
+      }
+      print('------');
+    }
     setState(() {
       listaSalones = salones; // Almacena la lista de salones en el estado del widget
+      //salonesFiltrados = salones;
     });
+  }
+
+  void aplicarFiltro() {
+    // Filtra la lista de salones según las selecciones del DatePicker y los Dropdowns
+    salonesFiltrados = listaSalones.where((salon) {
+      final fechaSeleccionada = selectedDate.toLocal();
+      final diaSemana = obtenerDiaSemana(fechaSeleccionada); // Obtiene el día de la semana
+      final horaInicioSeleccionada = int.tryParse(selectedItemInicio);
+      final horaFinSeleccionada = int.tryParse(selectedItemFin);
+
+      // print(fechaSeleccionada.toString() + ' ' + diaSemana + ' ' + horaInicioSeleccionada.toString() + ' ' + horaFinSeleccionada.toString());
+
+      if (fechaSeleccionada != null &&
+          diaSemana != null &&
+          horaInicioSeleccionada != null &&
+          horaFinSeleccionada != null) { //diferente de Inicio y Fin
+        // Comprueba si la hora de inicio y la hora de fin se superponen con la reserva
+        return salon.disponibilidades.any((disponibilidad) {
+          final horaInicioReserva = disponibilidad.horaInicio;
+          final horaFinReserva = disponibilidad.horaFin;
+          // print('horaInicioReserva: ' + horaInicioReserva.toString() + '\nhoraFinReserva: ' + horaFinReserva.toString());
+
+          // Comprueba si el día de la semana, la hora de inicio y la hora de fin se superponen y si la disponibilidad está marcada como 1 (disponible)
+          if (disponibilidad.dia == diaSemana &&
+              horaInicioSeleccionada < horaFinReserva &&
+              horaFinSeleccionada > horaInicioReserva &&
+              disponibilidad.estado &&
+              salon.idSalon == disponibilidad.idSalon) {
+            return true; // El salón está disponible en ese horario
+          }
+          return false;
+        });
+      }
+      return false; // Si no se selecciona ninguna opción, no se aplica el filtro
+    }).toList();
+    print(salonesFiltrados);
+    for (var salonFil in salonesFiltrados) {
+      print('Nombre: ${salonFil.idSalon}, Pabellon: ${salonFil.pabellon}');
+      // for (var disp in objeto.disponibilidades) {
+      //   print('Salon: ${disp.idSalon}, Día: ${disp.dia}, Hora inicio: ${disp.horaInicio}, Hora fin: ${disp.horaFin}, Estado: ${disp.estado}');
+      // }
+      // print('------');
+    }
+
+    setState(() {
+      listaSalones = salonesFiltrados; //Sobreescribo el filtro ua hecho
+    });
+  }
+
+
+  String obtenerDiaSemana(DateTime fecha) {
+    final fomatter = DateFormat('EEEE', 'es');
+    return fomatter.format(fecha);
   }
 
   @override
@@ -43,7 +113,13 @@ class _ReservarViewState extends State<ReservarView> {
           titulo(context),
           prediccionReservas(widget.viewModel.predValue),
           barraBusqueda(context),
-          Filtros(),
+          filtros(),
+          ElevatedButton(
+            onPressed: () {
+              aplicarFiltro(); // Llama al filtro cuando se presiona el botón "Buscar"
+            },
+            child: Text('Buscar'),
+          ),
           salones(context), // Pasa las reservas al widget de salones
         ],
       ),
@@ -282,118 +358,140 @@ class _ReservarViewState extends State<ReservarView> {
     );
   }
 
-}
-class Filtros extends StatefulWidget {
-  @override
-  _FiltrosState createState() => _FiltrosState();
-}
-
-class _FiltrosState extends State<Filtros> {
-  List<String> items = ['Seleccione la hora','8:00 - 9:00', '9:00 - 10:00', '10:00 - 11:00', '11:00 - 12:00'];
-  String selectedItem = "Seleccione la hora";
-  DateTime selectedDate = DateTime.now();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget filtros(){
     return Container(
-      width: 398,
-      height: 73,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+      // width: 398,
+      // height: 73,
+      // decoration: const BoxDecoration(
+      //   color: Colors.white,
+      // ),
       child: Row(
-        mainAxisSize: MainAxisSize.max,
+        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16,right: 15), // Ajusta la cantidad de espacio a la izquierda
-            child: Container(
-              width: 170,
-              height: 48,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: const Color(0xFFC7C5C5),
-                  width: 2,
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                    textoCalendario,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontFamily: 'ReadexPro',
-                      color: Colors.black,
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.calendar_today,
-                      color: Colors.black,
-                      size: 24,
-                    ),
-                    onPressed: () async {
-                      final DateTime? dateTime = await showDatePicker(
-                        context: context,
-                        initialDate: selectedDate,
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(3000),
-                      );
-                      if (dateTime != null) {
-                        setState(() {
-                          selectedDate = dateTime;
-                          textoCalendario = textoCalendario = " ${dateTime.year}-${dateTime.month}-${dateTime.day}";
-                        });
-                      }
-                    }
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Container(
-            width: 180, // Ajusta el ancho del Container para el campo de entrada
-            child: InputDecorator(
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                border: OutlineInputBorder(
+          Expanded(
+            // padding: const EdgeInsets.only(left: 16,right: 15),
+            child: InkWell(
+              onTap: () async {
+                final DateTime? dateTime = await showDatePicker(
+                  context: context,
+                  initialDate: selectedDate,
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(3000),
+                );
+                if (dateTime != null) {
+                  setState(() {
+                    selectedDate = dateTime;
+                    textoCalendario = " ${dateTime.year}-${dateTime.month}-${dateTime.day}";
+                  });
+                }
+              },
+              child: Container(
+                width: 170,
+                padding: const EdgeInsets.all(12.0),
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(width: 2, color: Color(0xFFC7C5C5)),
+                  border: Border.all(
+                    color: const Color(0xFFC7C5C5),
+                    width: 2,
+                  ),
                 ),
-              ),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  value: selectedItem,
-                  items: items.map((item) => DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(
-                      item,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      textoCalendario,
                       style: const TextStyle(
                         fontSize: 14,
                         fontFamily: 'ReadexPro',
                         color: Colors.black,
                       ),
                     ),
-                  )).toList(),
-                  onChanged: (item) {
-                    setState(() {
-                      selectedItem = item!;
-                    });
-                  },
+                    const Icon(
+                      Icons.calendar_today,
+                      color: Colors.black,
+                      size: 24,
+                    ), // Icono a la derecha
+                  ],
                 ),
               ),
             ),
           ),
+          const SizedBox(width: 4.0),
+          Expanded(
+            //width: 180, // Ajusta el ancho del Container para el campo de entrada
+            child: Row(
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  width: 90,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color(0xFFC7C5C5), // Color del borde
+                      width: 2, // Ancho del borde
+                    ),
+                    borderRadius: BorderRadius.circular(8), // Borde redondeado
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: selectedItemInicio,
+                      items: itemsinicio.map((item) => DropdownMenuItem<String>(
+                        value: item,
+                        child: Text(
+                          item,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'ReadexPro',
+                            color: Colors.black,
+                          ),
+                        ),
+                      )).toList(),
+                      onChanged: (item) {
+                        setState(() {
+                          selectedItemInicio = item!;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 4.0),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  width: 80,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color(0xFFC7C5C5), // Color del borde
+                      width: 2, // Ancho del borde
+                    ),
+                    borderRadius: BorderRadius.circular(8), // Borde redondeado
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: selectedItemFin,
+                      items: itemsfin.map((item) => DropdownMenuItem<String>(
+                        value: item,
+                        child: Text(
+                          item,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'ReadexPro',
+                            color: Colors.black,
+                          ),
+                        ),
+                      )).toList(),
+                      onChanged: (item) {
+                        setState(() {
+                          selectedItemFin = item!;
+                        });
+                      },
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ],
       ),
-    )
-    ;
+    );
   }
 }

@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_sm/view/misPredicciones_view.dart';
 import 'package:proyecto_sm/viewmodel/misPredicciones_view_model.dart';
 import 'splash.dart';
-
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 //Proyecto Grupo 3 - Taller de Desarrollo Movil
 
 Future main() async {
+  initializeDateFormatting('es', null);
   WidgetsFlutterBinding.ensureInitialized();
   if(kIsWeb) {
     await Firebase.initializeApp(options: FirebaseOptions(
@@ -34,7 +35,6 @@ class MyApp extends StatelessWidget {
 
 
     return MaterialApp(
-
       debugShowCheckedModeBanner: false,
       title: 'Proyecto Grupo 3',
       theme: ThemeData(unselectedWidgetColor: Colors.grey[200],),
