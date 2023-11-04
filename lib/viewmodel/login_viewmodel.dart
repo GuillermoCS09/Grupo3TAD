@@ -65,7 +65,7 @@ class LoginViewModel {
         },
       );
       if (response.statusCode == 200) {
-        print("azzzzzspodkaspokd");
+
         print("Respuesta del servidor: ${response.body}");
         final data = json.decode(response.body);
         if (data['success']) {
@@ -86,11 +86,9 @@ class LoginViewModel {
             ),
           );
         } else {
-          print("1xdas------");
         }
       }else {
         // Manejar errores de conexión.
-        print("2as------");
       }
     } else {
       showPasswordIncorrectDialog(context);

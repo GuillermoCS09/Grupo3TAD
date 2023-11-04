@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_sm/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:proyecto_sm/api_connection/api_connection.dart';
 
 class MiInformacionViewModel {
   final UserData userData;
@@ -45,23 +48,38 @@ class MiInformacionViewModel {
 
   void updateUserInformation() async {
     User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      final userRef = FirebaseFirestore.instance.collection('usuarios').doc(user.uid);
 
-      try {
-        await userRef.update({
+    print('textController1: ${textController1.text}');
+    print('textController2: ${textController2.text}');
+    print('textController3: ${textController3.text}');
+    print('textController4: ${textController4.text}');
+    print('textController5: ${textController5.text}');
+    print('textController6: ${textController6.text}');
+    print('textController7: ${textController7.text}');
+
+    if (user != null) {
+      final response = await http.post(
+        Uri.parse(API.updateperfil),
+        body: {
           'nombre': textController1.text,
           'apellido_paterno': textController2.text,
           'apellido_materno': textController3.text,
           'ciclo': textController4.text,
           'escuela_profesional': textController5.text,
-          'codigo': int.parse(textController6.text),
+          'codigo': textController6.text,
           'correo': textController7.text,
-        });
-        print("Información actualizada exitosamente.");
-      } catch (error) {
-        print("Error al actualizar la información: $error");
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['success']) {
+          print("Información actualizada exitosamente.");
+        }else{
+          print("Hubo un error al ejecutar los cambios.");
+        }
       }
+
     }
   }
 }
