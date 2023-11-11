@@ -29,21 +29,27 @@ class _ReservarViewState extends State<ReservarView> {
   DateTime selectedDate = DateTime.now();
   bool mostrarSalonesFiltrados = false;
 
+  TextEditingController searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     obtenerSalones();
+
+    searchController.addListener(() {
+      aplicarFiltroPorNombre(searchController.text);
+    });
   }
 
   Future<void> obtenerSalones() async {
     List<Reserva> salones = await ReservarViewModel().getReservas(); // Llama a la función para obtener la lista de salones
-    for (var objeto in salones) {
-      print('Nombre: ${objeto.nombre}');
-      for (var disp in objeto.disponibilidades) {
-        print('Salon: ${disp.idSalon}, Día: ${disp.dia}, Hora inicio: ${disp.horaInicio}, Hora fin: ${disp.horaFin}, Estado: ${disp.estado}');
-      }
-      print('------');
-    }
+    // for (var objeto in salones) {
+    //   print('Nombre: ${objeto.nombre}');
+    //   for (var disp in objeto.disponibilidades) {
+    //     print('Salon: ${disp.idSalon}, Día: ${disp.dia}, Hora inicio: ${disp.horaInicio}, Hora fin: ${disp.horaFin}, Estado: ${disp.estado}');
+    //   }
+    //   print('------');
+    // }
     setState(() {
       listaSalones = salones; // Almacena la lista de salones en el estado del widget
       //salonesFiltrados = salones;
@@ -58,7 +64,7 @@ class _ReservarViewState extends State<ReservarView> {
       final horaInicioSeleccionada = int.tryParse(selectedItemInicio);
       final horaFinSeleccionada = int.tryParse(selectedItemFin);
 
-      // print(fechaSeleccionada.toString() + ' ' + diaSemana + ' ' + horaInicioSeleccionada.toString() + ' ' + horaFinSeleccionada.toString());
+      print(fechaSeleccionada.toString() + ' ' + diaSemana + ' ' + horaInicioSeleccionada.toString() + ' ' + horaFinSeleccionada.toString());
 
       if (fechaSeleccionada != null &&
           diaSemana != null &&
@@ -93,15 +99,32 @@ class _ReservarViewState extends State<ReservarView> {
     }
 
     setState(() {
-      mostrarSalonesFiltrados = true;
-      // listaSalones = salonesFiltrados; //Sobreescribo el filtro ya hecho
+      if (selectedItemInicio != "Inicio" && selectedItemFin != "Fin") {
+        mostrarSalonesFiltrados = true;
+      } else {
+        mostrarSalonesFiltrados = false; // Resgresa a listaSalones
+      }
+      // listaSalones = salonesFiltrados;
     });
   }
-
 
   String obtenerDiaSemana(DateTime fecha) {
     final fomatter = DateFormat('EEEE', 'es');
     return fomatter.format(fecha);
+  }
+
+  void aplicarFiltroPorNombre(String filtro) {
+    setState(() {
+      if (filtro.isNotEmpty) {
+        // Filtra los salones cuyo nombre contiene el texto de búsqueda
+        salonesFiltrados = listaSalones
+            .where((salon) => salon.nombre.toLowerCase().contains(filtro.toLowerCase()))
+            .toList();
+      } else {
+        // Si el campo de búsqueda está vacío, muestra la lista completa
+        salonesFiltrados = List.from(listaSalones);
+      }
+    });
   }
 
   @override
@@ -113,14 +136,8 @@ class _ReservarViewState extends State<ReservarView> {
         children: <Widget>[
           titulo(context),
           prediccionReservas(widget.viewModel.predValue),
-          barraBusqueda(context),
+          barraBusqueda(),
           filtros(),
-          ElevatedButton(
-            onPressed: () {
-              aplicarFiltro(); // Llama al filtro cuando se presiona el botón "Buscar"
-            },
-            child: Text('Buscar'),
-          ),
           salones(context), // Pasa las reservas al widget de salones
         ],
       ),
@@ -149,68 +166,37 @@ class _ReservarViewState extends State<ReservarView> {
       padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 16),
       child: Text(
           "Reservas estimadas para hoy: $predValue",
-          style: const TextStyle(fontSize: 16,
+          style: const TextStyle(
+            fontSize: 16,
             fontFamily: 'ReadexPro',
-            color: Colors.black,)
+            color: Colors.black,
+          )
       ),
     );
   }
 
-  Widget barraBusqueda(context){
+  Widget barraBusqueda() {
     return Container(
       width: 365.0,
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(30.0),
       ),
-      child: const TextField(
-        decoration: InputDecoration(
+      child: TextField(
+        controller: searchController, // Asocia el controlador al campo de texto
+        decoration: const InputDecoration(
           hintText: 'Buscar Aulas',
           prefixIcon: Icon(
-              Icons.search,
-              color: Colors.black),
+            Icons.search,
+            color: Colors.black,
+          ),
           border: InputBorder.none,
           contentPadding: EdgeInsets.all(16.0),
         ),
       ),
     );
   }
-  /*
-  Widget salones(context) {
-    return Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              color: Color(0xFFF1F4F8),
-            ),
-            child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
-                    child: ListView(
-                        padding: EdgeInsets.zero,
-                        primary: false,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        children: [
-                          buildCenteredContainer(context, 'Aula 101', 'Antiguo Pabellón', 'assets/images/aula101.jpg'),
-                          buildCenteredContainer(context, 'Aula 102', 'Antiguo Pabellón', 'assets/images/aula102.jpg'),
-                          buildCenteredContainer(context, 'Aula 103', 'Antiguo Pabellón', 'assets/images/aula103.jpg'),
-                          buildCenteredContainer(context, 'Aula 104', 'Antiguo Pabellón', 'assets/images/aula104.jpg'),
-                        ]
-                    ),
-                  ),
-                ]
-            ),
-          ),
-        ]
-    );
-    */
+
   Widget salones(context) {
     final salonesAMostrar = mostrarSalonesFiltrados ? salonesFiltrados : listaSalones;
 
@@ -224,27 +210,27 @@ class _ReservarViewState extends State<ReservarView> {
               color: Color(0xFFF1F4F8),
             ),
             child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
-                    child: ListView(
-                        padding: EdgeInsets.zero,
-                        primary: false,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        children: salonesAMostrar.map((salon) {
-                          return buildCenteredContainer(
-                            context,
-                            salon.nombre,
-                            salon.pabellon,
-                            salon.imagePath,
-                          );
-                        }).toList(),
-                    ),
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    primary: false,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    children: salonesAMostrar.map((salon) {
+                      return buildCenteredContainer(
+                        context,
+                        salon.nombre,
+                        salon.pabellon,
+                        salon.imagePath,
+                      );
+                    }).toList(),
                   ),
-                ]
+                ),
+              ]
             ),
           ),
         ]
@@ -326,8 +312,6 @@ class _ReservarViewState extends State<ReservarView> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                            // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                             backgroundColor: const Color(0xFF4B39EF),
                             foregroundColor: Colors.white,
                             minimumSize: const Size(113.0, 40.0),
@@ -369,132 +353,171 @@ class _ReservarViewState extends State<ReservarView> {
       // decoration: const BoxDecoration(
       //   color: Colors.white,
       // ),
-      child: Row(
-        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
-          Expanded(
-            // padding: const EdgeInsets.only(left: 16,right: 15),
-            child: InkWell(
-              onTap: () async {
-                final DateTime? dateTime = await showDatePicker(
-                  context: context,
-                  initialDate: selectedDate,
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(3000),
-                );
-                if (dateTime != null) {
-                  setState(() {
-                    selectedDate = dateTime;
-                    textoCalendario = " ${dateTime.year}-${dateTime.month}-${dateTime.day}";
-                  });
-                }
-              },
-              child: Container(
-                width: 170,
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: const Color(0xFFC7C5C5),
-                    width: 2,
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      textoCalendario,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'ReadexPro',
-                        color: Colors.black,
+          Row(
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                // padding: const EdgeInsets.only(left: 16,right: 15),
+                child: InkWell(
+                  onTap: () async {
+                    final DateTime? dateTime = await showDatePicker(
+                      context: context,
+                      initialDate: selectedDate,
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(3000),
+                    );
+                    if (dateTime != null) {
+                      setState(() {
+                        selectedDate = dateTime;
+                        textoCalendario = " ${dateTime.year}-${dateTime.month}-${dateTime.day}";
+                      });
+                    }
+                  },
+                  child: Container(
+                    width: 170,
+                    padding: const EdgeInsets.all(12.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: const Color(0xFFC7C5C5),
+                        width: 2,
                       ),
                     ),
-                    const Icon(
-                      Icons.calendar_today,
-                      color: Colors.black,
-                      size: 24,
-                    ), // Icono a la derecha
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          textoCalendario,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'ReadexPro',
+                            color: Colors.black,
+                          ),
+                        ),
+                        const Icon(
+                          Icons.calendar_today,
+                          color: Colors.black,
+                          size: 24,
+                        ), // Icono a la derecha
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 4.0),
+              Expanded(
+                //width: 180, // Ajusta el ancho del Container para el campo de entrada
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      width: 90,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color(0xFFC7C5C5), // Color del borde
+                          width: 2, // Ancho del borde
+                        ),
+                        borderRadius: BorderRadius.circular(8), // Borde redondeado
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: selectedItemInicio,
+                          items: itemsinicio.map((item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(
+                            item,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'ReadexPro',
+                              color: Colors.black,
+                            ),
+                          ),
+                          )).toList(),
+                          onChanged: (item) {
+                            setState(() {
+                              selectedItemInicio = item!;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 4.0),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      width: 80,
+                      decoration: BoxDecoration(
+                      border: Border.all(
+                      color: const Color(0xFFC7C5C5), // Color del borde
+                      width: 2, // Ancho del borde
+                      ),
+                      borderRadius: BorderRadius.circular(8), // Borde redondeado
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: selectedItemFin,
+                          items: itemsfin.map((item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(
+                            item,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'ReadexPro',
+                              color: Colors.black,
+                            ),
+                          ),
+                          )).toList(),
+                          onChanged: (item) {
+                            setState(() {
+                              selectedItemFin = item!;
+                            });
+                          },
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
-            ),
+            ],
           ),
-          const SizedBox(width: 4.0),
-          Expanded(
-            //width: 180, // Ajusta el ancho del Container para el campo de entrada
-            child: Row(
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  width: 90,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color(0xFFC7C5C5), // Color del borde
-                      width: 2, // Ancho del borde
-                    ),
-                    borderRadius: BorderRadius.circular(8), // Borde redondeado
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: selectedItemInicio,
-                      items: itemsinicio.map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'ReadexPro',
-                            color: Colors.black,
-                          ),
-                        ),
-                      )).toList(),
-                      onChanged: (item) {
-                        setState(() {
-                          selectedItemInicio = item!;
-                        });
-                      },
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 4),
+                child: ElevatedButton(
+                  onPressed: () {
+                    aplicarFiltro(); // Llama al filtro cuando se presiona el botón "Buscar"
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4B39EF),
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size(200.0, 40.0),
+                    elevation: 3,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12), // Bordes redondeados del botón
+                      side: const BorderSide(
+                        color: Colors.transparent, // Color del borde
+                        width: 1, // Ancho del borde
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 4.0),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  width: 80,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color(0xFFC7C5C5), // Color del borde
-                      width: 2, // Ancho del borde
-                    ),
-                    borderRadius: BorderRadius.circular(8), // Borde redondeado
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: selectedItemFin,
-                      items: itemsfin.map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'ReadexPro',
-                            color: Colors.black,
-                          ),
-                        ),
-                      )).toList(),
-                      onChanged: (item) {
-                        setState(() {
-                          selectedItemFin = item!;
-                        });
-                      },
-                    ),
-                  ),
+                  child: const Text('Buscar',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        fontFamily: 'Outfit'
+                    )
+                  )
                 )
-              ],
-            ),
-          ),
-        ],
-      ),
+              )
+            ]
+          )
+        ]
+      )
     );
   }
 }

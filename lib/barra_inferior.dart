@@ -46,7 +46,7 @@ class _MyAppState extends State<MyAppBarra> {
       title: 'Material App',
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xFF4B39EF),
           automaticallyImplyLeading: false,
           // leading: IconButton(
           //   icon: const Icon(
@@ -58,20 +58,29 @@ class _MyAppState extends State<MyAppBarra> {
           //     //context.pop();
           //   },
           // ),
-          title: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              'assets/images/Fondo_Cabecera.png',
-              width: 200,
-              height: 70,
-              fit: BoxFit.cover,
+          title: const Text(
+            'ReservaTech',
+            style: TextStyle(
+              fontSize: 24,
+              fontFamily: 'Outfit',
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
           ),
+          // ClipRRect(
+          //   borderRadius: BorderRadius.circular(8),
+          //   child: Image.asset(
+          //     'assets/images/Fondo_Cabecera.png',
+          //     width: 200,
+          //     height: 70,
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
           actions: [
             IconButton(
               icon: const Icon(
                 Icons.settings,
-                color: Colors.black,
+                color: Colors.white,
                 size: 24,
               ),
               onPressed: () {

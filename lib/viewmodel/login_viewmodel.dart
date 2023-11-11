@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_sm/auth.dart';
+import 'package:proyecto_sm/model/auth_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../barra_inferior.dart';
@@ -79,7 +79,7 @@ class LoginViewModel {
                 escuelaProfesional: data['escuela_profesional'],
                 foto: data['foto']
             );
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => MyAppBarra(userData: userdatos),

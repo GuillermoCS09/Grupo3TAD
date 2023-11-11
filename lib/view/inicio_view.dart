@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:proyecto_sm/auth.dart';
+import 'package:proyecto_sm/model/auth_model.dart';
 import 'package:proyecto_sm/model/user_model.dart';
 import 'package:proyecto_sm/view/misPredicciones_view.dart%20';
 import '../viewmodel/misPredicciones_view_model.dart';
@@ -26,6 +26,7 @@ class Inicio extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const SizedBox(height: 20.0),
             Align(
               alignment: Alignment.center,
               child: Text(
