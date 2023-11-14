@@ -3,7 +3,8 @@ import 'package:rating_dialog/rating_dialog.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:proyecto_sm/model/auth_model.dart';
 import 'package:proyecto_sm/view/mi_informacion_view.dart';
-import 'package:proyecto_sm/pages/mis_reservas.dart';
+import 'package:proyecto_sm/view/mis_reservas_view.dart';
+import 'package:proyecto_sm/viewmodel/mis_reservas_viewmodel.dart';
 import 'package:proyecto_sm/model/user_model.dart';
 import 'package:proyecto_sm/viewmodel/perfil_viewmodel.dart';
 
@@ -21,11 +22,13 @@ class Perfil extends StatefulWidget {
 class _Perfil extends State<Perfil> {
   final unfocusNode = FocusNode();
   bool? switchValue;
+  late final MisReservasViewModel reservarViewModel;
   final FirebaseAuthService _auth = FirebaseAuthService();
 
   @override
   void initState() {
     super.initState();
+    reservarViewModel = MisReservasViewModel(widget.viewModel.userData);
     //switchValue = widget.viewModel.switchValue;
   }
 
@@ -163,7 +166,7 @@ class _Perfil extends State<Perfil> {
                                 Icons.calendar_month,
                                 'Ver mis reservas',
                                 'Historial',
-                                MisReservas(),
+                                MisReservas(viewModel: reservarViewModel),
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_sm/pages/Calendario.dart';
 import 'package:proyecto_sm/viewmodel/reservar_viewmodel.dart';
-import 'package:proyecto_sm/model/reservar_model.dart';
+import 'package:proyecto_sm/model/salon_model.dart';
 import 'package:proyecto_sm/view/calendario_view.dart';
 import 'package:intl/intl.dart';
 
@@ -18,8 +18,8 @@ class ReservarView extends StatefulWidget {
 
 class _ReservarViewState extends State<ReservarView> {
   var predValue = "Cargando..."; // Texto de carga inicial
-  List<Reserva> listaSalones = [];
-  List<Reserva> salonesFiltrados = [];
+  List<Salon> listaSalones = [];
+  List<Salon> salonesFiltrados = [];
 
   List<String> itemsinicio = ['Inicio','8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19'];
   List<String> itemsfin = ['Fin', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
@@ -28,6 +28,7 @@ class _ReservarViewState extends State<ReservarView> {
   String selectedItemFin = "Fin";
   DateTime selectedDate = DateTime.now();
   bool mostrarSalonesFiltrados = false;
+  String formattedSelectedDate = '';
 
   TextEditingController searchController = TextEditingController();
 
@@ -42,7 +43,10 @@ class _ReservarViewState extends State<ReservarView> {
   }
 
   Future<void> obtenerSalones() async {
-    List<Reserva> salones = await ReservarViewModel().getReservas(); // Llama a la función para obtener la lista de salones
+    List<Salon> salones = await ReservarViewModel().getSalones(); // Llama a la función para obtener la lista de salones
+    // formattedSelectedDate = DateFormat('dd/MM/yyyy').format(selectedDate);
+    // print(formattedSelectedDate);
+
     // for (var objeto in salones) {
     //   print('Nombre: ${objeto.nombre}');
     //   for (var disp in objeto.disponibilidades) {
@@ -64,7 +68,9 @@ class _ReservarViewState extends State<ReservarView> {
       final horaInicioSeleccionada = int.tryParse(selectedItemInicio);
       final horaFinSeleccionada = int.tryParse(selectedItemFin);
 
-      print(fechaSeleccionada.toString() + ' ' + diaSemana + ' ' + horaInicioSeleccionada.toString() + ' ' + horaFinSeleccionada.toString());
+      formattedSelectedDate = DateFormat('dd/MM/yyyy').format(selectedDate);
+
+      print(formattedSelectedDate.toString() + ' ' + fechaSeleccionada.toString() + ' ' + diaSemana + ' ' + horaInicioSeleccionada.toString() + ' ' + horaFinSeleccionada.toString());
 
       if (fechaSeleccionada != null &&
           diaSemana != null &&
@@ -372,7 +378,9 @@ class _ReservarViewState extends State<ReservarView> {
                     if (dateTime != null) {
                       setState(() {
                         selectedDate = dateTime;
-                        textoCalendario = " ${dateTime.year}-${dateTime.month}-${dateTime.day}";
+                        formattedSelectedDate = DateFormat('dd/MM/yyyy').format(selectedDate);
+                        textoCalendario = " $formattedSelectedDate";
+                        // textoCalendario = " ${dateTime.year}-${dateTime.month}-${dateTime.day}";
                       });
                     }
                   },

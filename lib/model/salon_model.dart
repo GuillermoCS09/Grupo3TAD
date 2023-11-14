@@ -1,6 +1,6 @@
 import 'package:proyecto_sm/model/disponibilidad_model.dart';
 
-class Reserva {
+class Salon {
   int idSalon;
   String nombre;
   String tipo;
@@ -9,7 +9,7 @@ class Reserva {
   String imagePath;
   List<Disponibilidad> disponibilidades;
 
-  Reserva({
+  Salon({
     required this.idSalon,
     required this.nombre,
     required this.tipo,

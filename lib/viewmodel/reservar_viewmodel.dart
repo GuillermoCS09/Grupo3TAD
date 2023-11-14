@@ -2,8 +2,7 @@ import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:proyecto_sm/api_connection/api_connection.dart';
-import 'package:proyecto_sm/model/reservar_model.dart';
-
+import 'package:proyecto_sm/model/salon_model.dart';
 import '../model/disponibilidad_model.dart';
 
 class ReservarViewModel {
@@ -24,8 +23,8 @@ class ReservarViewModel {
     predValue = parsedValue.round().toString();
   }
 
-  Future<List<Reserva>> getReservas() async {
-    List<Reserva> ListaReservas = [];
+  Future<List<Salon>> getSalones() async {
+    List<Salon> ListaSalones = [];
     final response = await http.get(Uri.parse(API.consultasalones));
 
     if (response.statusCode == 200) {
@@ -36,7 +35,7 @@ class ReservarViewModel {
         for(var salon in salones) {
           List<Disponibilidad> disponibilidades = await getDisponibilidades(int.parse(salon['id_salon']));
 
-          Reserva reserva = Reserva(
+          Salon reserva = Salon(
             idSalon: int.parse(salon['id_salon']),
             nombre: salon['nombre'],
             tipo: salon['tipo_salon'],
@@ -45,7 +44,7 @@ class ReservarViewModel {
             imagePath: salon['imagen'],
             disponibilidades: disponibilidades,
           );
-          ListaReservas.add(reserva);
+          ListaSalones.add(reserva);
         }
       }else {
         // Manejar el caso en el que no se encontraron registros.
@@ -54,7 +53,7 @@ class ReservarViewModel {
       // Manejar errores de conexión.
     }
 
-  return ListaReservas;
+  return ListaSalones;
   }
 
   Future<List<Disponibilidad>> getDisponibilidades(int idSalon) async {

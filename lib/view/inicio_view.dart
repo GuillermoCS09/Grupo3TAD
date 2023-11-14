@@ -3,8 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:proyecto_sm/model/auth_model.dart';
 import 'package:proyecto_sm/model/user_model.dart';
 import 'package:proyecto_sm/view/misPredicciones_view.dart%20';
-import '../viewmodel/misPredicciones_view_model.dart';
-import 'package:proyecto_sm/pages/mis_reservas.dart';
+import 'package:proyecto_sm/viewmodel/misPredicciones_view_model.dart';
+import 'package:proyecto_sm/view/mis_reservas_view.dart';
+import 'package:proyecto_sm/viewmodel/mis_reservas_viewmodel.dart';
 
 class Inicio extends StatelessWidget {
   //Inicio({super.key});
@@ -13,7 +14,8 @@ class Inicio extends StatelessWidget {
   Inicio({required this.userData});
 
   final User? user = FirebaseAuthService().currentUser;
-  final viewModel = misPrediccionViewModel();
+  // final reservarViewModel = MisReservasViewModel();
+  final prediccionViewModel = misPrediccionViewModel();
   //
   // Future<void> signOut() async {
   //   await Auth().signOut();
@@ -21,6 +23,8 @@ class Inicio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MisReservasViewModel reservasViewModel = MisReservasViewModel(userData);
+
     return SingleChildScrollView(
       child: Center(
         child: Column(
@@ -56,9 +60,9 @@ class Inicio extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            buildCenteredContainer('Ver\nmi\nhorario','assets/images/Ver_Horario.jpg',220,142, context, MisReservas()),
+            buildCenteredContainer('Ver\nmi\nhorario','assets/images/Ver_Horario.jpg',220,142, context, MisReservas(viewModel: reservasViewModel)),
             const SizedBox(height: 30),
-            buildCenteredContainer('Ver\npredicción','assets/images/Reservar_Salon.jpg',220,142, context, PrediccionWidget(viewModel: viewModel)),
+            buildCenteredContainer('Ver\npredicción','assets/images/Reservar_Salon.jpg',220,142, context, PrediccionWidget(viewModel: prediccionViewModel)),
           ],
         ),
       ),
