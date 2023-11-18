@@ -4,8 +4,10 @@ import 'package:proyecto_sm/viewmodel/reservar_viewmodel.dart';
 import 'package:proyecto_sm/model/salon_model.dart';
 import 'package:proyecto_sm/view/calendario_view.dart';
 import 'package:intl/intl.dart';
+import 'package:time_range_picker/time_range_picker.dart';
 
 var textoCalendario = "  Escoge tu fecha";
+var textoHorario = "  Escoge tu horario";
 
 class ReservarView extends StatefulWidget {
   final ReservarViewModel viewModel;
@@ -26,9 +28,12 @@ class _ReservarViewState extends State<ReservarView> {
 
   String selectedItemInicio = "Inicio";
   String selectedItemFin = "Fin";
+
   DateTime selectedDate = DateTime.now();
   bool mostrarSalonesFiltrados = false;
   String formattedSelectedDate = '';
+  int? horaInicioSeleccionada;
+  int? horaFinSeleccionada;
 
   TextEditingController searchController = TextEditingController();
 
@@ -36,6 +41,8 @@ class _ReservarViewState extends State<ReservarView> {
   void initState() {
     super.initState();
     obtenerSalones();
+    textoCalendario = "  Escoge tu fecha";
+    textoHorario = "  Escoge tu horario";
 
     searchController.addListener(() {
       aplicarFiltroPorNombre(searchController.text);
@@ -65,13 +72,14 @@ class _ReservarViewState extends State<ReservarView> {
     salonesFiltrados = listaSalones.where((salon) {
       final fechaSeleccionada = selectedDate.toLocal();
       final diaSemana = obtenerDiaSemana(fechaSeleccionada); // Obtiene el día de la semana
-      final horaInicioSeleccionada = int.tryParse(selectedItemInicio);
-      final horaFinSeleccionada = int.tryParse(selectedItemFin);
+      // final horaInicioSeleccionada = int.tryParse(selectedItemInicio);
+      // final horaFinSeleccionada = int.tryParse(selectedItemFin);
 
       formattedSelectedDate = DateFormat('dd/MM/yyyy').format(selectedDate);
 
       print(formattedSelectedDate.toString() + ' ' + fechaSeleccionada.toString() + ' ' + diaSemana + ' ' + horaInicioSeleccionada.toString() + ' ' + horaFinSeleccionada.toString());
-
+      print(horaInicioSeleccionada);
+      print(horaFinSeleccionada);
       if (fechaSeleccionada != null &&
           diaSemana != null &&
           horaInicioSeleccionada != null &&
@@ -84,8 +92,8 @@ class _ReservarViewState extends State<ReservarView> {
 
           // Comprueba si el día de la semana, la hora de inicio y la hora de fin se superponen y si la disponibilidad está marcada como 1 (disponible)
           if (disponibilidad.dia == diaSemana &&
-              horaInicioSeleccionada < horaFinReserva &&
-              horaFinSeleccionada > horaInicioReserva &&
+              horaInicioSeleccionada! < horaFinReserva &&
+              horaFinSeleccionada! > horaInicioReserva &&
               disponibilidad.estado &&
               salon.idSalon == disponibilidad.idSalon) {
             return true; // El salón está disponible en ese horario
@@ -105,7 +113,7 @@ class _ReservarViewState extends State<ReservarView> {
     }
 
     setState(() {
-      if (selectedItemInicio != "Inicio" && selectedItemFin != "Fin") {
+      if (horaInicioSeleccionada != null && horaFinSeleccionada != null) {
         mostrarSalonesFiltrados = true;
       } else {
         mostrarSalonesFiltrados = false; // Resgresa a listaSalones
@@ -312,10 +320,7 @@ class _ReservarViewState extends State<ReservarView> {
                         padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Calendario()),
-                            );
+                            showBorrarReserva(context, aula);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF4B39EF),
@@ -331,7 +336,7 @@ class _ReservarViewState extends State<ReservarView> {
                             ),
                           ),
                           child: const Text(
-                            'Ver detalles',
+                            'Reservar',
                             style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 fontSize: 14,
@@ -348,6 +353,54 @@ class _ReservarViewState extends State<ReservarView> {
           ),
         ),
       ),
+    );
+  }
+
+  showBorrarReserva(BuildContext context, String aula) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0), // Personaliza el radio de los bordes
+          ),
+          backgroundColor: const Color(0xFFEAE7FD),
+          title: const Text('Reservar salón'),
+          content: Text('¿Desea realizar la reserva? etc. $aula \n'
+              '$horaInicioSeleccionada:00 - $horaFinSeleccionada:00 \n'
+              '$formattedSelectedDate'),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+              ),
+              child: const Text('Cancelar', style: TextStyle(color: Color(0xFF4B39EF))),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+              ),
+              child: const Text('Reservar', style: TextStyle(color: Color(0xFF4B39EF))),
+              onPressed: () {
+                // _auth.signOut();
+                // Navigator.of(context).pop();
+                // Navigator.of(context).pushReplacement(
+                //   MaterialPageRoute(
+                //     builder: (context) => LoginAppView(),
+                //   ),
+                // );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -374,6 +427,23 @@ class _ReservarViewState extends State<ReservarView> {
                       initialDate: selectedDate,
                       firstDate: DateTime(2000),
                       lastDate: DateTime(3000),
+                      cancelText: 'Cancelar',
+                      confirmText: 'Aceptar',
+                      builder: (BuildContext context, Widget? child) {
+                        return Theme(
+                          data: ThemeData.light().copyWith(
+                            primaryColor: const Color(0xFF4B39EF),
+                            hintColor: const Color(0xFF4B39EF), // Cambia el color de resalte
+                            colorScheme: const ColorScheme.light(primary: Color(0xFF4B39EF)), // Cambia el esquema de color
+                            dialogTheme: DialogTheme(  // Aquí se establece el borde redondeado del diálogo
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                            ),
+                          ),
+                          child: child!,
+                        );
+                      },
                     );
                     if (dateTime != null) {
                       setState(() {
@@ -418,6 +488,123 @@ class _ReservarViewState extends State<ReservarView> {
               const SizedBox(width: 4.0),
               Expanded(
                 //width: 180, // Ajusta el ancho del Container para el campo de entrada
+                child: InkWell(
+                  onTap: () async {
+                    TimeRange? result = await showTimeRangePicker(
+                      context: context,
+                      start: const TimeOfDay(hour: 10, minute: 0),
+                      end: const TimeOfDay(hour: 20, minute: 0),
+                      interval: const Duration(hours: 1),
+                      minDuration: const Duration(hours: 1),
+                      maxDuration: const Duration(hours: 2),
+                      use24HourFormat: false,
+                      disabledTime: TimeRange(
+                        startTime: const TimeOfDay(hour: 20, minute: 0),
+                        endTime: const TimeOfDay(hour: 8, minute: 0),
+                      ),
+                      disabledColor: Colors.white,
+                      // backgroundWidget: Image.asset('assets/images/aula101.jpg'),
+                      strokeWidth: 8,
+                      strokeColor: const Color(0x804B39EF),//Colors.green.shade500.withOpacity(0.8),
+                      ticks: 8,
+                      ticksLength: 32,
+                      ticksColor: Colors.grey,
+                      labels: [
+                        '12 AM',
+                        '3 AM',
+                        '6 AM',
+                        '9 AM',
+                        '12 PM',
+                        '3 PM',
+                        '6 PM',
+                        '9 PM',
+                      ].asMap().entries.map((e) {
+                        return ClockLabel.fromIndex(
+                            idx: e.key, length: 8, text: e.value);
+                      }).toList(),
+                      labelOffset: 36,
+                      rotateLabels: false,
+                      padding: 64,
+                      labelStyle: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Colors.grey.shade700,
+                      ),
+                      timeTextStyle: const TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                      activeTimeTextStyle: const TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 28,
+                        color: Colors.white,
+                      ),
+                      fromText: Strings.open,
+                      toText: Strings.close,
+                      handlerColor: const Color(0xFF4B39EF), //Colors.green.shade600,
+                      selectedColor: const Color(0xFF6251EF), //Colors.green.shade400,
+                      builder: (BuildContext context, Widget? child){
+                        return Theme(
+                          data: ThemeData.light().copyWith(
+                            primaryColor: const Color(0xFF4B39EF),
+                            hintColor: const Color(0xFF4B39EF), // Cambia el color de resalte
+                            colorScheme: const ColorScheme.light(primary: Color(0xFF4B39EF)), // Cambia el esquema de color
+                            dialogTheme: DialogTheme(  // Aquí se establece el borde redondeado del diálogo
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                            ),
+                          ),
+                          child: child!,
+                        );
+                      },
+                    );
+                    if (result != null) {
+                      print("result " + result.toString());
+                      horaInicioSeleccionada = result.startTime.hour;
+                      horaFinSeleccionada = result.endTime.hour;
+
+                      print("Hora de inicio seleccionada: $horaInicioSeleccionada");
+                      print("Hora de fin seleccionada: $horaFinSeleccionada");
+                    }
+                    if (horaInicioSeleccionada != null && horaFinSeleccionada != null) {
+                      setState(() {
+                        textoHorario = "${horaInicioSeleccionada}:00 - ${horaFinSeleccionada}:00";
+                      });
+                    }
+                  },
+                  child: Container(
+                    width: 170,
+                    padding: const EdgeInsets.all(12.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: const Color(0xFFC7C5C5),
+                        width: 2,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          textoHorario,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'ReadexPro',
+                            color: Colors.black,
+                          ),
+                        ),
+                        const Icon(
+                          Icons.schedule,
+                          color: Colors.black,
+                          size: 24,
+                        ), // Icono a la derecha
+                      ],
+                    ),
+                  ),
+                ),
+                /*
                 child: Row(
                   children: <Widget>[
                     Container(
@@ -487,6 +674,7 @@ class _ReservarViewState extends State<ReservarView> {
                     )
                   ],
                 ),
+                */
               ),
             ],
           ),

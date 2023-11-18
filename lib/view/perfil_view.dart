@@ -394,7 +394,7 @@ class _Perfil extends State<Perfil> {
         style: TextStyle(fontSize: 15),
       ),
       // your app's logo?
-      image: Image.asset('assets/images/logo_unmsm_morado.png', width: 100, height: 100),
+      image: Image.asset('assets/images/logo_reservatech_morado.png', width: 100, height: 100),
       submitButtonText: 'Enviar',
       commentHint: '¡Deja tu comentario!',
       onCancelled: () => print('cancelled'),

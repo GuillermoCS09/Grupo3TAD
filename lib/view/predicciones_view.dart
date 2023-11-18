@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:proyecto_sm/viewmodel/misPredicciones_view_model.dart';
+import 'package:proyecto_sm/viewmodel/predicciones_viewmodel.dart';
 
 class PrediccionWidget extends StatefulWidget {
   //const PrediccionWidget({Key? key, required this.viewModel}) : super(key: key);
@@ -19,7 +19,14 @@ class _PrediccionWidgetState extends State<PrediccionWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Predicciones'),
+        title: const Text(
+          'Predicciones',
+          style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'ReadexPro',
+              fontWeight: FontWeight.bold
+          ),
+        ),
         backgroundColor: const Color(0xFF4B39EF),
       ),
       body: SingleChildScrollView(

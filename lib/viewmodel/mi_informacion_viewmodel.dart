@@ -78,7 +78,6 @@ class MiInformacionViewModel {
           print("Hubo un error al ejecutar los cambios.");
         }
       }
-
     }
   }
 }

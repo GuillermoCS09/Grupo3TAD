@@ -33,7 +33,7 @@ class ReservarViewModel {
       if (data['success']) {
         List<dynamic> salones = data["salones"];
         for(var salon in salones) {
-          List<Disponibilidad> disponibilidades = await getDisponibilidades(int.parse(salon['id_salon']));
+          List<Disponibilidad> disponibilidades = await getDisponibilidades(int.parse(salon['id_salon']), salon['pabellon']);
 
           Salon reserva = Salon(
             idSalon: int.parse(salon['id_salon']),
@@ -56,9 +56,9 @@ class ReservarViewModel {
   return ListaSalones;
   }
 
-  Future<List<Disponibilidad>> getDisponibilidades(int idSalon) async {
+  Future<List<Disponibilidad>> getDisponibilidades(int idSalon, String pabellon) async {
     List<Disponibilidad> ListaDisponibilidades = [];
-    final response = await http.get(Uri.parse(API.consultadisponibilidades + "?id_salon=$idSalon"));
+    final response = await http.get(Uri.parse(API.consultadisponibilidades + "?id_salon=$idSalon&pabellon=$pabellon"));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -69,11 +69,12 @@ class ReservarViewModel {
           bool estado = disponibilidadData['estado'] == 1.toString();
 
           Disponibilidad disponibilidad = Disponibilidad(
+            idSalon: int.parse(disponibilidadData['id_salon']),
+            pabellon: disponibilidadData['pabellon'],
             dia: disponibilidadData['dia'],
             horaInicio: int.parse(disponibilidadData['hora_inicio']),
             horaFin: int.parse(disponibilidadData['hora_fin']),
             estado: estado,
-            idSalon: int.parse(disponibilidadData['id_salon']),
           );
 
           ListaDisponibilidades.add(disponibilidad);

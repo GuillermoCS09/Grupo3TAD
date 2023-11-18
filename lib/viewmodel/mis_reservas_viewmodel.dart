@@ -42,4 +42,22 @@ class MisReservasViewModel {
     }
     return ListaReservas;
   }
+
+  Future<void> updateReserva(int idReserva) async {
+    final response = await http.post(
+      Uri.parse(API.updatereservas),
+      body: {
+        'id_reserva': idReserva.toString()
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      if (data['success']) {
+        print("Información actualizada exitosamente.");
+      }else{
+        print("Hubo un error al ejecutar los cambios.");
+      }
+    }
+  }
 }

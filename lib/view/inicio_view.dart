@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:proyecto_sm/model/auth_model.dart';
 import 'package:proyecto_sm/model/user_model.dart';
-import 'package:proyecto_sm/view/misPredicciones_view.dart%20';
-import 'package:proyecto_sm/viewmodel/misPredicciones_view_model.dart';
+import 'package:proyecto_sm/view/predicciones_view.dart';
+import 'package:proyecto_sm/viewmodel/predicciones_viewmodel.dart';
 import 'package:proyecto_sm/view/mis_reservas_view.dart';
 import 'package:proyecto_sm/viewmodel/mis_reservas_viewmodel.dart';
 
