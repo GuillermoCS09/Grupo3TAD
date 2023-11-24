@@ -24,7 +24,7 @@ class _MyAppState extends State<MyAppBarra> {
   late PerfilViewModel viewModelPerfil;
 
   _MyAppState(this.userData){
-    viewModelReservar = ReservarViewModel();
+    viewModelReservar = ReservarViewModel(userData: userData);
     viewModelPerfil = PerfilViewModel(userData: userData);
   }
 

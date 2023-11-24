@@ -6,4 +6,7 @@ class API{
   static const updateperfil = 'http://192.168.0.101/api/updateperfil.php';
   static const consultareservas = 'http://192.168.0.101/api/consultareservas.php';
   static const updatereservas = 'http://192.168.0.101/api/updatereservas.php';
+  static const insertarreservas = 'http://192.168.0.101/api/insertarreservas.php';
+  static const updatedisponibilidadreservar = 'http://192.168.0.101/api/updatedisponibilidadreservar.php';
+  static const updatedisponibilidadcancelar = 'http://192.168.0.101/api/updatedisponibilidadcancelar.php';
 }

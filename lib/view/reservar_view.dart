@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_sm/pages/Calendario.dart';
 import 'package:proyecto_sm/viewmodel/reservar_viewmodel.dart';
 import 'package:proyecto_sm/model/salon_model.dart';
 import 'package:proyecto_sm/view/calendario_view.dart';
@@ -23,17 +22,21 @@ class _ReservarViewState extends State<ReservarView> {
   List<Salon> listaSalones = [];
   List<Salon> salonesFiltrados = [];
 
-  List<String> itemsinicio = ['Inicio','8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19'];
-  List<String> itemsfin = ['Fin', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
-
-  String selectedItemInicio = "Inicio";
-  String selectedItemFin = "Fin";
+  // List<String> itemsinicio = ['Inicio','8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19'];
+  // List<String> itemsfin = ['Fin', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
+  // String selectedItemInicio = "Inicio";
+  // String selectedItemFin = "Fin";
 
   DateTime selectedDate = DateTime.now();
   bool mostrarSalonesFiltrados = false;
   String formattedSelectedDate = '';
   int? horaInicioSeleccionada;
   int? horaFinSeleccionada;
+
+  String fechaPopup = '';
+  String diaSemana = '';
+  int? horaInicioPopup;
+  int? horaFinPopup;
 
   TextEditingController searchController = TextEditingController();
 
@@ -50,7 +53,7 @@ class _ReservarViewState extends State<ReservarView> {
   }
 
   Future<void> obtenerSalones() async {
-    List<Salon> salones = await ReservarViewModel().getSalones(); // Llama a la función para obtener la lista de salones
+    List<Salon> salones = await ReservarViewModel(userData: widget.viewModel.userData).getSalones(); // Llama a la función para obtener la lista de salones
     // formattedSelectedDate = DateFormat('dd/MM/yyyy').format(selectedDate);
     // print(formattedSelectedDate);
 
@@ -71,7 +74,7 @@ class _ReservarViewState extends State<ReservarView> {
     // Filtra la lista de salones según las selecciones del DatePicker y los Dropdowns
     salonesFiltrados = listaSalones.where((salon) {
       final fechaSeleccionada = selectedDate.toLocal();
-      final diaSemana = obtenerDiaSemana(fechaSeleccionada); // Obtiene el día de la semana
+      diaSemana = obtenerDiaSemana(fechaSeleccionada); // Obtiene el día de la semana
       // final horaInicioSeleccionada = int.tryParse(selectedItemInicio);
       // final horaFinSeleccionada = int.tryParse(selectedItemFin);
 
@@ -96,6 +99,11 @@ class _ReservarViewState extends State<ReservarView> {
               horaFinSeleccionada! > horaInicioReserva &&
               disponibilidad.estado &&
               salon.idSalon == disponibilidad.idSalon) {
+
+            fechaPopup = formattedSelectedDate;
+            horaInicioPopup = horaInicioSeleccionada;
+            horaFinPopup = horaFinSeleccionada;
+
             return true; // El salón está disponible en ese horario
           }
           return false;
@@ -150,7 +158,7 @@ class _ReservarViewState extends State<ReservarView> {
         children: <Widget>[
           titulo(context),
           prediccionReservas(widget.viewModel.predValue),
-          barraBusqueda(),
+          // barraBusqueda(),
           filtros(),
           salones(context), // Pasa las reservas al widget de salones
         ],
@@ -212,7 +220,7 @@ class _ReservarViewState extends State<ReservarView> {
   }
 
   Widget salones(context) {
-    final salonesAMostrar = mostrarSalonesFiltrados ? salonesFiltrados : listaSalones;
+    final salonesAMostrar = mostrarSalonesFiltrados ? salonesFiltrados : []; //listaSalones;
 
     return Column(
         mainAxisSize: MainAxisSize.max,
@@ -237,6 +245,7 @@ class _ReservarViewState extends State<ReservarView> {
                     children: salonesAMostrar.map((salon) {
                       return buildCenteredContainer(
                         context,
+                        salon.idSalon,
                         salon.nombre,
                         salon.pabellon,
                         salon.imagePath,
@@ -252,7 +261,7 @@ class _ReservarViewState extends State<ReservarView> {
 
   }
 
-  Widget buildCenteredContainer(BuildContext context, String aula, String pabellon, String imagePath) {
+  Widget buildCenteredContainer(BuildContext context, int idSalon, String aula, String pabellon, String imagePath) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
       child: Container(
@@ -320,7 +329,7 @@ class _ReservarViewState extends State<ReservarView> {
                         padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                         child: ElevatedButton(
                           onPressed: () {
-                            showBorrarReserva(context, aula);
+                            showHacerReserva(context, idSalon, aula, pabellon);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF4B39EF),
@@ -356,7 +365,7 @@ class _ReservarViewState extends State<ReservarView> {
     );
   }
 
-  showBorrarReserva(BuildContext context, String aula) {
+  showHacerReserva(BuildContext context, int idSalon, String aula, String pabellon) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -366,9 +375,11 @@ class _ReservarViewState extends State<ReservarView> {
           ),
           backgroundColor: const Color(0xFFEAE7FD),
           title: const Text('Reservar salón'),
-          content: Text('¿Desea realizar la reserva? etc. $aula \n'
-              '$horaInicioSeleccionada:00 - $horaFinSeleccionada:00 \n'
-              '$formattedSelectedDate'),
+          content: Text('¿Desea realizar la reserva? etc\n$aula \n$pabellon \n'
+              '$horaInicioPopup:00 - $horaFinPopup:00 \n'
+              '$fechaPopup'),
+              // '$horaInicioSeleccionada:00 - $horaFinSeleccionada:00 \n'
+              // '$formattedSelectedDate'),
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
@@ -396,6 +407,10 @@ class _ReservarViewState extends State<ReservarView> {
                 //     builder: (context) => LoginAppView(),
                 //   ),
                 // );
+
+                widget.viewModel.insertReserva(diaSemana, fechaPopup, horaInicioPopup!, horaFinPopup!, idSalon, pabellon);
+                widget.viewModel.updateDisponibilidad(idSalon, pabellon, diaSemana, horaInicioPopup!, horaFinPopup!);
+                Navigator.of(context).pop();
               },
             ),
           ],

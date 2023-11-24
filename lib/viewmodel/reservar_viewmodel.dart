@@ -4,14 +4,16 @@ import 'dart:convert';
 import 'package:proyecto_sm/api_connection/api_connection.dart';
 import 'package:proyecto_sm/model/salon_model.dart';
 import '../model/disponibilidad_model.dart';
+import '../model/user_model.dart';
 
 class ReservarViewModel {
 
   String predValue = "Cargando...";
   late Interpreter interpreter;
   get reserva => null;
+  final UserData userData;
 
-  ReservarViewModel() {
+  ReservarViewModel({required this.userData}) {
     _loadModelAndRunInference();
   }
 
@@ -87,5 +89,62 @@ class ReservarViewModel {
     }
 
     return ListaDisponibilidades;
+  }
+
+  Future<void> insertReserva(String dia, String fecha, int horaInicio, int horaFin, int idSalon, String pabellon) async {
+    var response = await http.post(
+      Uri.parse(API.insertarreservas),
+      body: {
+        'dia': dia,
+        'fecha': fecha,
+        'hora_inicio': horaInicio.toString(),
+        'hora_fin': horaFin.toString(),
+        'id_salon': idSalon.toString(),
+        'pabellon': pabellon,
+        'codigo_usuario': userData.codigo.toString()
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      if (jsonResponse['success']) {
+        // Éxito en la inserción
+        print('Inserción exitosa');
+      } else {
+        // Manejar error en la inserción
+        print('Error en la inserción: ${jsonResponse['error']}');
+      }
+    } else {
+      // Error en la solicitud HTTP
+      print('Error de conexión: ${response.reasonPhrase}');
+    }
+  }
+
+  Future<void> updateDisponibilidad(int idSalon, String pabellon, String dia, int horaInicio, int horaFin) async {
+    // Realizar la solicitud POST
+    var response = await http.post(
+      Uri.parse(API.updatedisponibilidadreservar),
+      body: {
+        'id_salon': idSalon.toString(),
+        'pabellon': pabellon,
+        'dia': dia,
+        'hora_inicio': horaInicio.toString(),
+        'hora_fin': horaFin.toString()
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      if (jsonResponse['success']) {
+        // Éxito en la actualización
+        print('Actualización exitosa');
+      } else {
+        // Manejar error en la actualización
+        print('Error en la actualización: ${jsonResponse['error']}');
+      }
+    } else {
+      // Error en la solicitud HTTP
+      print('Error de conexión: ${response.reasonPhrase}');
+    }
   }
 }

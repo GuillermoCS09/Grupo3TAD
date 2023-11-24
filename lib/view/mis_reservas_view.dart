@@ -21,6 +21,7 @@ class _MisReservasState extends State<MisReservas> {
   @override
   void initState() {
     super.initState();
+    widget.viewModel.onReservasUpdated = _actualizarReservas;
     obtenerReservas();
   }
 
@@ -34,6 +35,10 @@ class _MisReservasState extends State<MisReservas> {
       listaPasadas = reservasPasadas;
       listaCanceladas = reservasCanceladas;
     });
+  }
+
+  void _actualizarReservas() {
+    obtenerReservas();
   }
 
   @override
@@ -77,7 +82,7 @@ class _MisReservasState extends State<MisReservas> {
   }
 }
 
-Widget aulaReservadaActiva(BuildContext context, int idReserva, String aula, String pabellon, String fecha, String hora, String imagePath, MisReservasViewModel viewModel) {
+Widget aulaReservadaActiva(BuildContext context, int idReserva, int idSalon, String aula, String pabellon, String fecha, String dia, int horaInicio, int horaFin, String imagePath, MisReservasViewModel viewModel) {
   return Padding(
     padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
     child: Container(
@@ -126,10 +131,10 @@ Widget aulaReservadaActiva(BuildContext context, int idReserva, String aula, Str
                         children: [
                           IconButton(
                             iconSize: 20,
-                            icon: Icon(Icons.delete),
-                            color: Color(0xFF57636C),
+                            icon: const Icon(Icons.delete),
+                            color: const Color(0xFF57636C),
                             onPressed: () {
-                              showBorrarReserva(context, viewModel, idReserva);
+                              showBorrarReserva(context, viewModel, idReserva, idSalon, pabellon, dia, horaInicio, horaFin);
                             },
                           ),
                         ],
@@ -161,7 +166,7 @@ Widget aulaReservadaActiva(BuildContext context, int idReserva, String aula, Str
                         ),
                       ),
                       Text(
-                        hora,
+                        '$horaInicio:00 - $horaFin:00',
                         style: const TextStyle(
                           fontFamily: 'ReadexPro',
                           fontSize: 14,
@@ -299,7 +304,7 @@ Widget aulaReservada(String aula, String pabellon, String fecha, String hora, St
   );
 }
 
-showBorrarReserva(BuildContext context, MisReservasViewModel viewModel, int idReserva) {
+showBorrarReserva(BuildContext context, MisReservasViewModel viewModel, int idReserva, int idSalon, String pabellon, String dia, int horaInicio, int horaFin) {
   return showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -331,6 +336,7 @@ showBorrarReserva(BuildContext context, MisReservasViewModel viewModel, int idRe
             child: const Text('Borrar', style: TextStyle(color: Color(0xFF4B39EF))),
             onPressed: () {
               viewModel.updateReserva(idReserva);
+              viewModel.updateDisponibilidad(idSalon, pabellon, dia, horaInicio, horaFin);
               Navigator.of(context).pop();
             },
           ),
@@ -402,10 +408,13 @@ Widget Activas(List<Reserva> listaActivas, BuildContext context, MisReservasView
                             return aulaReservadaActiva(
                               context,
                               reserva.idReserva,
+                              reserva.idSalon,
                               reserva.nombre,
                               reserva.pabellon,
                               reserva.fecha,
-                              '${reserva.horaInicio}:00 - ${reserva.horaFin}:00',
+                              reserva.dia,
+                              reserva.horaInicio,
+                              reserva.horaFin,
                               reserva.imagen,
                               viewModel
                             );
