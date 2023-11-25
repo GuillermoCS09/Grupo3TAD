@@ -9,5 +9,6 @@ class API{
   static const insertarreservas = 'http://192.168.18.10/api/insertarreservas.php';
   static const updatedisponibilidadreservar = 'http://192.168.18.10/api/updatedisponibilidadreservar.php';
   static const updatedisponibilidadcancelar = 'http://192.168.18.10/api/updatedisponibilidadcancelar.php';
+  static const updatevisitas = 'http://192.168.0.101/api/updatevisitas.php';
   static const obtenerdatosprediccion = 'http://192.168.18.10/api/obtenerdatosprediccion.php';
 }

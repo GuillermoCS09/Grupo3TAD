@@ -65,20 +65,24 @@ class LoginViewModel {
         },
       );
       if (response.statusCode == 200) {
-
         print("Respuesta del servidor: ${response.body}");
         final data = json.decode(response.body);
         if (data['success']) {
-            UserData userdatos = UserData(
-                nombre: data['nombre'],
-                apellidoPaterno: data['apellido_paterno'],
-                apellidoMaterno: data['apellido_materno'],
-                ciclo: data['ciclo'],
-                codigo: int.parse(data['codigo_usuario']),
-                correo: data['correo'],
-                escuelaProfesional: data['escuela_profesional'],
-                foto: data['foto']
-            );
+          String fechaActual = obtenerFechaActual();
+
+          // Actualizar el número de visitas
+          await actualizarNumeroVisitas(fechaActual);
+
+          UserData userdatos = UserData(
+              nombre: data['nombre'],
+              apellidoPaterno: data['apellido_paterno'],
+              apellidoMaterno: data['apellido_materno'],
+              ciclo: data['ciclo'],
+              codigo: int.parse(data['codigo_usuario']),
+              correo: data['correo'],
+              escuelaProfesional: data['escuela_profesional'],
+              foto: data['foto']
+          );
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -93,6 +97,30 @@ class LoginViewModel {
     } else {
       showPasswordIncorrectDialog(context);
       print("Ha ocurrido un error");
+    }
+  }
+
+  String obtenerFechaActual() {
+    DateTime ahora = DateTime.now();
+    String dia = ahora.day.toString().padLeft(2, '0');
+    String mes = ahora.month.toString().padLeft(2, '0');
+    String anio = ahora.year.toString();
+
+    return '$dia/$mes/$anio';
+  }
+
+  Future<void> actualizarNumeroVisitas(String fechaActual) async {
+    final datosEntrenamientoResponse = await http.post(
+      Uri.parse(API.updatevisitas),
+      body: {
+        "dia": fechaActual,
+      },
+    );
+    if (datosEntrenamientoResponse.statusCode == 200) {
+      print("Respuesta de DatosEntrenamiento: ${datosEntrenamientoResponse.body}");
+      final datosEntrenamientoData = json.decode(datosEntrenamientoResponse.body);
+    } else {
+      // Manejar errores de conexión con DatosEntrenamiento.
     }
   }
 }
