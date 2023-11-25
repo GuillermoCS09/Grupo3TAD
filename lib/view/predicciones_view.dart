@@ -2,18 +2,38 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_sm/viewmodel/predicciones_viewmodel.dart';
 
+List<double> data = [];
+
 class PrediccionWidget extends StatefulWidget {
-  //const PrediccionWidget({Key? key, required this.viewModel}) : super(key: key);
   final misPrediccionViewModel viewModel;
 
   PrediccionWidget({required this.viewModel});
 
   @override
   _PrediccionWidgetState createState() => _PrediccionWidgetState();
+
 }
 
 class _PrediccionWidgetState extends State<PrediccionWidget> {
-  List<double> data = [30.0, 15.0, 20.0, 30.0, 25.0, 30.0]; // Reservas en el tiempo
+
+  @override
+  void initState() {
+    super.initState();
+    cargarDatos();
+  }
+
+
+  Future<void> cargarDatos() async {
+    misPrediccionViewModel instanciaViewModel = misPrediccionViewModel();
+    List<int> listaDePredicciones = await instanciaViewModel.cargarListaPrediccion();
+
+    setState(() {
+      data = listaDePredicciones.map((valor) => valor.toDouble()).toList();
+    });
+
+    print("los datos son");
+    print(data);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,8 +123,8 @@ class _PrediccionWidgetState extends State<PrediccionWidget> {
                   ),
                   minX: 0, // Minimum x-axis value
                   maxX: data.length.toDouble() - 1, // Maximum x-axis value
-                  minY: 0, // Minimum y-axis value
-                  maxY: 50, // Maximum y-axis value (you can adjust this)
+                  minY: 350, // Minimum y-axis value
+                  maxY: 600, // Maximum y-axis value (you can adjust this)
                   lineBarsData: [
                     LineChartBarData(
                       spots: data.asMap().entries.map((entry) {
