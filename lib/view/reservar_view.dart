@@ -375,9 +375,9 @@ class _ReservarViewState extends State<ReservarView> {
           ),
           backgroundColor: const Color(0xFFEAE7FD),
           title: const Text('Reservar salón'),
-          content: Text('¿Desea realizar la reserva? etc\n$aula \n$pabellon \n'
-              '$horaInicioPopup:00 - $horaFinPopup:00 \n'
-              '$fechaPopup'),
+          content: Text('¿Desea realizar la reserva? \n- $aula \n- $pabellon \n'
+              '- $horaInicioPopup:00 - $horaFinPopup:00\n'
+              '- $fechaPopup'),
               // '$horaInicioSeleccionada:00 - $horaFinSeleccionada:00 \n'
               // '$formattedSelectedDate'),
           actions: <Widget>[

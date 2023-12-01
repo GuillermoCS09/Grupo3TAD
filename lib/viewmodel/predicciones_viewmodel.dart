@@ -61,6 +61,5 @@ class misPrediccionViewModel {
     return listareservas;
   }
 
-
   getReservas() {}
 }

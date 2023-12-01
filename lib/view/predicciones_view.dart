@@ -123,8 +123,8 @@ class _PrediccionWidgetState extends State<PrediccionWidget> {
                   ),
                   minX: 0, // Minimum x-axis value
                   maxX: data.length.toDouble() - 1, // Maximum x-axis value
-                  minY: 350, // Minimum y-axis value
-                  maxY: 600, // Maximum y-axis value (you can adjust this)
+                  minY: 0, // Minimum y-axis value
+                  maxY: 50, // Maximum y-axis value (you can adjust this)
                   lineBarsData: [
                     LineChartBarData(
                       spots: data.asMap().entries.map((entry) {
