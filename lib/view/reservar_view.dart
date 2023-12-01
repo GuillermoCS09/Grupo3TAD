@@ -290,7 +290,7 @@ class _ReservarViewState extends State<ReservarView> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  imagePath,
+                  '/site/wwwroot/images/$imagePath',
                   width: 192,
                   height: 144,
                   fit: BoxFit.cover,
