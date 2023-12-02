@@ -579,9 +579,6 @@ class _ReservarViewState extends State<ReservarView> {
                       print("result " + result.toString());
                       horaInicioSeleccionada = result.startTime.hour;
                       horaFinSeleccionada = result.endTime.hour;
-
-                      print("Hora de inicio seleccionada: $horaInicioSeleccionada");
-                      print("Hora de fin seleccionada: $horaFinSeleccionada");
                     }
                     if (horaInicioSeleccionada != null && horaFinSeleccionada != null) {
                       setState(() {
