@@ -67,27 +67,18 @@ class _MyAppState extends State<MyAppBarra> {
               color: Colors.white,
             ),
           ),
-          // ClipRRect(
-          //   borderRadius: BorderRadius.circular(8),
-          //   child: Image.asset(
-          //     'assets/images/Fondo_Cabecera.png',
-          //     width: 200,
-          //     height: 70,
-          //     fit: BoxFit.cover,
+          // actions: [
+          //   IconButton(
+          //     icon: const Icon(
+          //       Icons.settings,
+          //       color: Colors.white,
+          //       size: 24,
+          //     ),
+          //     onPressed: () {
+          //
+          //     },
           //   ),
-          // ),
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.settings,
-                color: Colors.white,
-                size: 24,
-              ),
-              onPressed: () {
-                // Acción para configuraciones
-              },
-            ),
-          ],
+          // ],
           centerTitle: true,
           elevation: 0,
         ),
