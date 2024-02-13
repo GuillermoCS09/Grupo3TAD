@@ -12,6 +12,8 @@ class misPrediccionViewModel {
     _loadModelAndRunInference();
   }
 
+  API instancia = API.obtenerInstancia();
+
   Future<void> _loadModelAndRunInference() async {
     interpreter = await Interpreter.fromAsset('assets/Modelo.tflite');
     final output = List.filled(1 * 1, 0.0).reshape([1, 1]);
@@ -21,7 +23,8 @@ class misPrediccionViewModel {
   }
 
   Future<List<int>> cargarListaPrediccion() async {
-    final response = await http.get(Uri.parse(API.obtenerdatosprediccion));
+
+    final response = await http.get(Uri.parse(instancia.obtenerdatosprediccion));
     List<int> listareservas = [];
 
     if (response.statusCode == 200) {

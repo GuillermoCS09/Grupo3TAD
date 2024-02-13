@@ -12,6 +12,7 @@ class ReservarViewModel {
   late Interpreter interpreter;
   get reserva => null;
   final UserData userData;
+  API instancia = API.obtenerInstancia();
 
   ReservarViewModel({required this.userData}) {
     _loadModelAndRunInference();
@@ -27,7 +28,8 @@ class ReservarViewModel {
 
   Future<List<Salon>> getSalones() async {
     List<Salon> ListaSalones = [];
-    final response = await http.get(Uri.parse(API.consultasalones));
+
+    final response = await http.get(Uri.parse(instancia.consultasalones));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -60,7 +62,8 @@ class ReservarViewModel {
 
   Future<List<Disponibilidad>> getDisponibilidades(int idSalon, String pabellon) async {
     List<Disponibilidad> ListaDisponibilidades = [];
-    final response = await http.get(Uri.parse(API.consultadisponibilidades + "?id_salon=$idSalon&pabellon=$pabellon"));
+
+    final response = await http.get(Uri.parse(instancia.consultadisponibilidades + "?id_salon=$idSalon&pabellon=$pabellon"));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -92,8 +95,9 @@ class ReservarViewModel {
   }
 
   Future<void> insertReserva(String dia, String fecha, int horaInicio, int horaFin, int idSalon, String pabellon) async {
+
     var response = await http.post(
-      Uri.parse(API.insertarreservas),
+      Uri.parse(instancia.insertarreservas),
       body: {
         'dia': dia,
         'fecha': fecha,
@@ -122,8 +126,9 @@ class ReservarViewModel {
 
   Future<void> updateDisponibilidad(int idSalon, String pabellon, String dia, int horaInicio, int horaFin) async {
     // Realizar la solicitud POST
+
     var response = await http.post(
-      Uri.parse(API.updatedisponibilidadreservar),
+      Uri.parse(instancia.updatedisponibilidadreservar),
       body: {
         'id_salon': idSalon.toString(),
         'pabellon': pabellon,

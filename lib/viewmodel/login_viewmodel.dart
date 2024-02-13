@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_sm/model/auth_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../barra_inferior.dart';
 import '../model/user_model.dart';
 import 'package:http/http.dart' as http;
@@ -16,6 +15,8 @@ class LoginViewModel {
   String errorMessage = '';
 
   static final RegExp _emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@unmsm\.edu\.pe$");
+  // var api = API();
+  API instancia = API.obtenerInstancia();
 
   bool isEmailValid(String email) {
     return _emailRegExp.hasMatch(email.toLowerCase());
@@ -46,7 +47,7 @@ class LoginViewModel {
     );
   }
 
-  Future<void> signIn(BuildContext context) async {
+  Future<void> AdapterSignIn(BuildContext context) async {
     final email = emailController.text;
     final password = passwordController.text;
 
@@ -59,7 +60,7 @@ class LoginViewModel {
     if (user != null) {
       print("Usuario ha iniciado sesión exitosamente");
       final response = await http.post(
-        Uri.parse(API.consultalogin),
+        Uri.parse(instancia.consultalogin),
         body: {
           "correo": user.email,
         },
@@ -72,7 +73,6 @@ class LoginViewModel {
 
           // Actualizar el número de visitas
           await actualizarNumeroVisitas(fechaActual);
-
           UserData userdatos = UserData(
               nombre: data['nombre'],
               apellidoPaterno: data['apellido_paterno'],
@@ -91,7 +91,7 @@ class LoginViewModel {
           );
         } else {
         }
-      }else {
+      } else {
         // Manejar errores de conexión.
       }
     } else {
@@ -110,8 +110,9 @@ class LoginViewModel {
   }
 
   Future<void> actualizarNumeroVisitas(String fechaActual) async {
+
     final datosEntrenamientoResponse = await http.post(
-      Uri.parse(API.updatevisitas),
+      Uri.parse(instancia.updatevisitas),
       body: {
         "dia": fechaActual,
       },

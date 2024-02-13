@@ -54,12 +54,15 @@ class _MisReservasState extends State<MisReservas> {
               style: TextStyle(
                   fontSize: 16,
                   fontFamily: 'ReadexPro',
-                  fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
             ),
             bottom: const TabBar(
                 indicatorColor: Colors.white,
+                unselectedLabelColor: Colors.white,
                 labelStyle: TextStyle(
+                  color: Colors.white,
                   fontFamily: 'ReadexPro',
                 ),
                 tabs: [
@@ -110,8 +113,9 @@ Widget aulaReservadaActiva(BuildContext context, int idReserva, int idSalon, Str
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                'https://desarrollomovilg3.azurewebsites.net/images/$imagePath',
+              child: Image.asset(
+                //'https://desarrollomovilg3.azurewebsites.net/images/$imagePath',
+                'assets/images/$imagePath',
                 width: 192,
                 height: 144,
                 fit: BoxFit.cover,
@@ -212,8 +216,9 @@ Widget aulaReservada(String aula, String pabellon, String fecha, String hora, St
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                'https://desarrollomovilg3.azurewebsites.net/images/$imagePath',
+              child: Image.asset(
+                //'https://desarrollomovilg3.azurewebsites.net/images/$imagePath',
+                'assets/images/$imagePath',
                 width: 192,
                 height: 144,
                 fit: BoxFit.cover,
@@ -260,40 +265,6 @@ Widget aulaReservada(String aula, String pabellon, String fecha, String hora, St
                       color: Color(0xFF57636C),
                     ),
                   ),
-                  // Align(
-                  //   alignment: const AlignmentDirectional(
-                  //       0.00, 0.00),
-                  //   child: Padding(
-                  //     padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                  //     child: ElevatedButton(
-                  //       onPressed: () {
-                  //       },
-                  //       style: ElevatedButton.styleFrom(
-                  //         padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  //         // iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  //         backgroundColor: const Color(0xFF4B39EF),
-                  //         foregroundColor: Colors.white,
-                  //         minimumSize: const Size(113.0, 40.0),
-                  //         elevation: 3,
-                  //         shape: RoundedRectangleBorder(
-                  //           borderRadius: BorderRadius.circular(12), // Bordes redondeados del botón
-                  //           side: const BorderSide(
-                  //             color: Colors.transparent, // Color del borde
-                  //             width: 1, // Ancho del borde
-                  //           ),
-                  //         ),
-                  //       ),
-                  //       child: const Text(
-                  //         'Ver detalles',
-                  //         style: TextStyle(
-                  //             fontWeight: FontWeight.normal,
-                  //             fontSize: 14,
-                  //             fontFamily: 'ReadexPro'
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),

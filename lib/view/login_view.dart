@@ -11,6 +11,11 @@ class LoginAppView extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4B39EF)),
         useMaterial3: true,
+        appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(
+            color: Colors.white, // Establece el color de la flecha de regreso a blanco
+          ),
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: Scaffold( // Agregar un Scaffold o widget de Material como ancestro
@@ -36,13 +41,10 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
 
     return SingleChildScrollView(
       child: Container(
-        // margin: const EdgeInsets.symmetric(horizontal: 50),
         child: Form(
           key: viewModel.formKey,
           child: Column(
             children: <Widget>[
-              //const SizedBox(height: 40),
-              //Center(
               Container(
                 width: double.infinity,
                 height: 350,
@@ -144,7 +146,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (viewModel.formKey.currentState!.validate()) {
-                      viewModel.signIn(context);
+                      viewModel.AdapterSignIn(context);
                     }
                   },
                   style: ElevatedButton.styleFrom(

@@ -261,7 +261,8 @@ class _ReservarViewState extends State<ReservarView> {
 
   }
 
-  Widget buildCenteredContainer(BuildContext context, int idSalon, String aula, String pabellon, String imagePath) {
+  Widget buildCenteredContainer(BuildContext context, int idSalon, String aula,
+      String pabellon, String imagePath) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
       child: Container(
@@ -289,8 +290,8 @@ class _ReservarViewState extends State<ReservarView> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  'https://desarrollomovilg3.azurewebsites.net/images/$imagePath',
+                child: Image.asset(
+                  'assets/images/$imagePath',
                   width: 192,
                   height: 144,
                   fit: BoxFit.cover,
@@ -485,7 +486,7 @@ class _ReservarViewState extends State<ReservarView> {
                         Text(
                           textoCalendario,
                           style: const TextStyle(
-                            fontSize: 14,
+                            fontSize: 13,
                             fontFamily: 'ReadexPro',
                             color: Colors.black,
                           ),
@@ -602,7 +603,7 @@ class _ReservarViewState extends State<ReservarView> {
                         Text(
                           textoHorario,
                           style: const TextStyle(
-                            fontSize: 14,
+                            fontSize: 13,
                             fontFamily: 'ReadexPro',
                             color: Colors.black,
                           ),

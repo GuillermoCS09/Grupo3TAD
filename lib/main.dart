@@ -35,7 +35,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Proyecto Grupo 3',
-      theme: ThemeData(unselectedWidgetColor: Colors.grey[200],),
+      theme: ThemeData(unselectedWidgetColor: Colors.grey[200],
+        appBarTheme: AppBarTheme(
+          iconTheme: IconThemeData(
+            color: Colors.white, // Establece el color de la flecha de regreso a blanco
+          ),
+        ),),
       home: MyAppSplash(),
     );
   }

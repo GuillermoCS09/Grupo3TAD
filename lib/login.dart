@@ -173,7 +173,7 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      _signIn();
+                      // _signIn();
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -209,51 +209,51 @@ class _MyHomePageState extends State<MyHomeLoginApp> {
     );
   }
 
-  void _signIn() async {
-    String email = _controllerEmail.text;
-    String password = _controllerPassword.text;
-
-    User? user = await _auth.signInWithEmailAndPassword(email, password);
-    if(user != null) {
-      print("User is successfully signedIn");
-      final response = await http.post(
-          Uri.parse(API.consultalogin),
-          body: {
-            "correo": user.email,
-          },
-        );
-
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-
-        if (data['success']) {
-          setState(() {
-            UserData userdatos = UserData(
-                nombre: data['nombre'],
-                apellidoPaterno: data['apellido_paterno'],
-                apellidoMaterno: data['apellido_materno'],
-                ciclo: data['ciclo'],
-                codigo: data['codigo'],
-                correo: data['correo'],
-                escuelaProfesional: data['escuela_profesional'],
-                foto: data['foto']
-            );
-          });
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => MyAppBarra(userData: userdatos),
-          ),
-          // (Route<dynamic> route) => false, // Esta función siempre devuelve false, eliminando todas las rutas anteriores.
-        );
-        } else {
-            // Manejar el caso en el que no se encontraron registros.
-        }
-      }else {
-        // Manejar errores de conexión.
-      }
-    }else {
-      print("Some error happened");
-    }
-  }
+  // void _signIn() async {
+  //   String email = _controllerEmail.text;
+  //   String password = _controllerPassword.text;
+  //
+  //   User? user = await _auth.signInWithEmailAndPassword(email, password);
+  //   if(user != null) {
+  //     print("User is successfully signedIn");
+  //     final response = await http.post(
+  //         Uri.parse(API.consultalogin),
+  //         body: {
+  //           "correo": user.email,
+  //         },
+  //       );
+  //
+  //     if (response.statusCode == 200) {
+  //       final data = json.decode(response.body);
+  //
+  //       if (data['success']) {
+  //         setState(() {
+  //           UserData userdatos = UserData(
+  //               nombre: data['nombre'],
+  //               apellidoPaterno: data['apellido_paterno'],
+  //               apellidoMaterno: data['apellido_materno'],
+  //               ciclo: data['ciclo'],
+  //               codigo: data['codigo'],
+  //               correo: data['correo'],
+  //               escuelaProfesional: data['escuela_profesional'],
+  //               foto: data['foto']
+  //           );
+  //         });
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => MyAppBarra(userData: userdatos),
+  //         ),
+  //         // (Route<dynamic> route) => false, // Esta función siempre devuelve false, eliminando todas las rutas anteriores.
+  //       );
+  //       } else {
+  //           // Manejar el caso en el que no se encontraron registros.
+  //       }
+  //     }else {
+  //       // Manejar errores de conexión.
+  //     }
+  //   }else {
+  //     print("Some error happened");
+  //   }
+  // }
 }

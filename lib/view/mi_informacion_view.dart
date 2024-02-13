@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_sm/model/user_model.dart';
 import 'package:proyecto_sm/viewmodel/mi_informacion_viewmodel.dart';
 
+import '../utils/formulario_mediator.dart';
+
 class MiInformacion extends StatefulWidget {
   final UserData userData;
   const MiInformacion({Key? key, required this.userData}) : super(key: key);
@@ -18,13 +20,13 @@ class _MiInformacionState extends State<MiInformacion> {
   void initState() {
     super.initState();
     _viewModel = MiInformacionViewModel(widget.userData);
-    _viewModel.textController1.text = widget.userData.nombre;
-    _viewModel.textController2.text = widget.userData.apellidoPaterno;
-    _viewModel.textController3.text = widget.userData.apellidoMaterno;
-    _viewModel.textController4.text = widget.userData.ciclo;
-    _viewModel.textController5.text = widget.userData.escuelaProfesional;
-    _viewModel.textController6.text = widget.userData.codigo.toString();
-    _viewModel.textController7.text = widget.userData.correo;
+    // _viewModel.textController1.text = widget.userData.nombre;
+    // _viewModel.textController2.text = widget.userData.apellidoPaterno;
+    // _viewModel.textController3.text = widget.userData.apellidoMaterno;
+    // _viewModel.textController4.text = widget.userData.ciclo;
+    // _viewModel.textController5.text = widget.userData.escuelaProfesional;
+    // _viewModel.textController6.text = widget.userData.codigo.toString();
+    // _viewModel.textController7.text = widget.userData.correo;
   }
 
   @override
@@ -40,6 +42,7 @@ class _MiInformacionState extends State<MiInformacion> {
             fontSize: 16,
             fontFamily: 'ReadexPro',
             fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
         actions: const [],
@@ -76,43 +79,43 @@ class _MiInformacionState extends State<MiInformacion> {
                   children: [
                     CampoTexto(
                       context,
-                      _viewModel.textController1,
+                      _viewModel.mediator.textController1,
                       'Nombres',
                       _viewModel.textController1Validator,
                     ),
                     CampoTexto(
                       context,
-                      _viewModel.textController2,
+                      _viewModel.mediator.textController2,
                       'Apellido Paterno',
                       _viewModel.textController2Validator,
                     ),
                     CampoTexto(
                       context,
-                      _viewModel.textController3,
+                      _viewModel.mediator.textController3,
                       'Apellido Materno',
                       _viewModel.textController3Validator,
                     ),
                     CampoTexto(
                       context,
-                      _viewModel.textController4,
+                      _viewModel.mediator.textController4,
                       'Ciclo',
                       _viewModel.textController4Validator,
                     ),
                     CampoTexto(
                       context,
-                      _viewModel.textController5,
+                      _viewModel.mediator.textController5,
                       'Escuela Profesional',
                       _viewModel.textController5Validator,
                     ),
                     CampoTexto(
                       context,
-                      _viewModel.textController6,
+                      _viewModel.mediator.textController6,
                       'Código',
                       _viewModel.textController6Validator,
                     ),
                     CampoTexto(
                       context,
-                      _viewModel.textController7,
+                      _viewModel.mediator.textController7,
                       'Correo institucional',
                       _viewModel.textController7Validator,
                     ),
@@ -166,17 +169,18 @@ class _MiInformacionState extends State<MiInformacion> {
                           padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 16),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                widget.userData.nombre = _viewModel.textController1.text;
-                                widget.userData.apellidoPaterno = _viewModel.textController2.text;
-                                widget.userData.apellidoMaterno = _viewModel.textController3.text;
-                                widget.userData.ciclo = _viewModel.textController4.text;
-                                widget.userData.codigo = int.parse(_viewModel.textController6.text);
-                                widget.userData.correo = _viewModel.textController7.text;
-                                widget.userData.escuelaProfesional = _viewModel.textController5.text;
-                              });
-                              _viewModel.updateUserInformation();
-                              Navigator.pop(context);
+                              if (_viewModel.mediator.isValid()) {
+                                setState(() {
+                                  _viewModel.updateUserInformation();
+                                });
+                                Navigator.pop(context);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Por favor, completa todos los campos correctamente.'),
+                                  ),
+                                );
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
@@ -267,6 +271,7 @@ Widget CampoTexto(BuildContext context, TextEditingController controller, String
               ),
               filled: true,
               fillColor: Colors.white,
+              errorText: validator != null ? validator(controller.text) : null,
             ),
             style: const TextStyle(
               fontSize: 14,

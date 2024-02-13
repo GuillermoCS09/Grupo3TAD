@@ -48,6 +48,7 @@ dependencies:
   intl: ^0.18.1
   time_range: ^1.0.2
   time_range_picker: ^2.2.0
+  xml: ^6.5.0
 
 dev_dependencies:
   flutter_test:

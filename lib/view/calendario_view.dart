@@ -5,9 +5,6 @@ import 'package:proyecto_sm/viewmodel/calendario_viewmodel.dart';
 import 'package:time_range_picker/time_range_picker.dart';
 import '../model/reserva_model.dart'; // Importa el ViewModel
 
-// void main() {
-//   runApp(Calendario());
-// }
 class Strings {
   static const String open = 'Hora Inicio';
   static const String close = 'Hora Fin';
@@ -98,7 +95,8 @@ class Calendario extends StatelessWidget {
           style: TextStyle(
               fontSize: 16,
               fontFamily: 'ReadexPro',
-              fontWeight: FontWeight.bold
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
           ),
         ),
         backgroundColor: const Color(0xFF4B39EF),
@@ -122,17 +120,6 @@ class Calendario extends StatelessWidget {
               ),
             ),
           ),
-          /*
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                onPressed: (){},// => onButton1Pressed(context),
-                child: Text('Button 1'),
-              ),
-            ],
-          ),
-           */
         ],
       ),
     );

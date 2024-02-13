@@ -44,7 +44,8 @@ class _PrediccionWidgetState extends State<PrediccionWidget> {
           style: TextStyle(
               fontSize: 16,
               fontFamily: 'ReadexPro',
-              fontWeight: FontWeight.bold
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
           ),
         ),
         backgroundColor: const Color(0xFF4B39EF),

@@ -126,6 +126,7 @@ Widget buildCenteredContainer(String text, String imagePath, double largo, doubl
                       'Ir ahora',
                       style: TextStyle(
                         fontFamily: 'Outfit',
+                        fontSize: 12.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
