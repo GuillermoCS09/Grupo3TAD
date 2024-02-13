@@ -1,9 +1,8 @@
 # proyecto_sm
 
-A new Flutter project.
-
-Grupo 3
+Grupo 3 TAD
 Integrantes:
+- Chavez Torres, Diego Alonso
 - Cuentas Santaria, Guillermo
 - Remon Chavarria, Luis Angelo
 - Rodriguez Huamani, Lian Miguel
