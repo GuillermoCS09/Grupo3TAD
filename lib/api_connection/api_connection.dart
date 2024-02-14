@@ -18,18 +18,18 @@ class API {
   static API? _instancia;
 
   // URLs
-  final String hostConnect = 'http://192.168.0.101/API/conexion.php';
-  final String consultalogin = 'http://192.168.0.101/API/consultalogin.php';
-  final String consultasalones = 'http://192.168.0.101/API/consultasalones.php';
-  final String consultadisponibilidades = 'http://192.168.0.101/API/consultadisponibilidades.php';
-  final String updateperfil = 'http://192.168.0.101/API/updateperfil.php';
-  final String consultareservas = 'http://192.168.0.101/API/consultareservas.php';
-  final String updatereservas = 'http://192.168.0.101/API/updatereservas.php';
-  final String insertarreservas = 'http://192.168.0.101/API/insertarreservas.php';
-  final String updatedisponibilidadreservar = 'http://192.168.0.101/API/updatedisponibilidadreservar.php';
-  final String updatedisponibilidadcancelar = 'http://192.168.0.101/API/updatedisponibilidadcancelar.php';
-  final String updatevisitas = 'http://192.168.0.101/API/updatevisitas.php';
-  final String obtenerdatosprediccion = 'http://192.168.0.101/API/obtenerdatosprediccion.php';
+  final String hostConnect = 'https://reservatech.azurewebsites.net//conexion.php';
+  final String consultalogin = 'https://reservatech.azurewebsites.net//consultalogin.php';
+  final String consultasalones = 'https://reservatech.azurewebsites.net//consultasalones.php';
+  final String consultadisponibilidades = 'https://reservatech.azurewebsites.net//consultadisponibilidades.php';
+  final String updateperfil = 'https://reservatech.azurewebsites.net//updateperfil.php';
+  final String consultareservas = 'https://reservatech.azurewebsites.net//consultareservas.php';
+  final String updatereservas = 'https://reservatech.azurewebsites.net//updatereservas.php';
+  final String insertarreservas = 'https://reservatech.azurewebsites.net//insertarreservas.php';
+  final String updatedisponibilidadreservar = 'https://reservatech.azurewebsites.net//updatedisponibilidadreservar.php';
+  final String updatedisponibilidadcancelar = 'https://reservatech.azurewebsites.net//updatedisponibilidadcancelar.php';
+  final String updatevisitas = 'https://reservatech.azurewebsites.net//updatevisitas.php';
+  final String obtenerdatosprediccion = 'https://reservatech.azurewebsites.net//obtenerdatosprediccion.php';
 
   // Constructor privado para evitar instanciación directa
   API._();

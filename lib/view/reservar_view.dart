@@ -290,8 +290,9 @@ class _ReservarViewState extends State<ReservarView> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  'assets/images/$imagePath',
+                child: Image.network(
+                  //'assets/images/$imagePath',
+                  'https://reservatech.azurewebsites.net/images/$imagePath',
                   width: 192,
                   height: 144,
                   fit: BoxFit.cover,

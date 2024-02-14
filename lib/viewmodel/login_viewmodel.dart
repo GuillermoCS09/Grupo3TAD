@@ -59,12 +59,14 @@ class LoginViewModel {
     User? user = await _auth.signInWithEmailAndPassword(email, password);
     if (user != null) {
       print("Usuario ha iniciado sesión exitosamente");
+      print(instancia.consultalogin);
       final response = await http.post(
         Uri.parse(instancia.consultalogin),
         body: {
           "correo": user.email,
         },
       );
+      print('aaaaa');
       if (response.statusCode == 200) {
         print("Respuesta del servidor: ${response.body}");
         final data = json.decode(response.body);
@@ -90,9 +92,10 @@ class LoginViewModel {
             ),
           );
         } else {
+          print("Error al obtener los datos");
         }
       } else {
-        // Manejar errores de conexión.
+        print("Error al obtener los datos 2");
       }
     } else {
       showPasswordIncorrectDialog(context);

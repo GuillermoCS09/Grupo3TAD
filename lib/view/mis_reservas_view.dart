@@ -113,9 +113,9 @@ Widget aulaReservadaActiva(BuildContext context, int idReserva, int idSalon, Str
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                //'https://desarrollomovilg3.azurewebsites.net/images/$imagePath',
-                'assets/images/$imagePath',
+              child: Image.network(
+                'https://reservatech.azurewebsites.net/images/$imagePath',
+                //'assets/images/$imagePath',
                 width: 192,
                 height: 144,
                 fit: BoxFit.cover,
@@ -216,9 +216,9 @@ Widget aulaReservada(String aula, String pabellon, String fecha, String hora, St
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                //'https://desarrollomovilg3.azurewebsites.net/images/$imagePath',
-                'assets/images/$imagePath',
+              child: Image.network(
+                'https://reservatech.azurewebsites.net/images/$imagePath',
+                //'assets/images/$imagePath',
                 width: 192,
                 height: 144,
                 fit: BoxFit.cover,
